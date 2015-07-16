@@ -21,7 +21,12 @@
 # the dump to remote server. This script will also deletes the dumps which are
 # older than 3 days. Then it will take the backup of the databases and transfer
 # the dumps to the remote server.
-# NOTE : FEEL FREE TO EDIT FOR YOUR OWN CUSTOMIZED USAGE.
+# NOTE : For automated backup add the following entry of this script to cronjob
+#        Eg. : $ crontab -e
+#              # min hrs dom mon dow   command
+#                45   2   *   *   *    sh /path/to/Script
+#
+#        FEEL FREE TO EDIT FOR YOUR OWN CUSTOMIZED USAGE.
 
 
 cd /home/akshat/MySQLBKP/
