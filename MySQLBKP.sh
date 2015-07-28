@@ -55,8 +55,8 @@ ServerUsername="server"
 ServerBKPDirectory="MyBackup"
 
 #Server Rsync
-echo "======================================================"
+echo "========================================================"
 echo "Server XXX.XXX.XXX.XXX  Database Rsyncing in Progress..."
-echo "======================================================"
+echo "========================================================"
 cd $BACKUPDIR
 rsync -av $BACKUPDIR/$ServerBKPDirectory/ $ServerUsername@$ServerIP:$ServerLoc
