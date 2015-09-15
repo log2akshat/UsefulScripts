@@ -17,6 +17,7 @@
 
 import os
 import csv
+import logging
 import argparse
 import subprocess
 
@@ -29,11 +30,56 @@ def is_valid_directory(parser, arg):
         # File exists so return the directory
         return arg
 
-# Command line options
+## =========> Command line arguments parsing -- starts <========= ##
 parser = argparse.ArgumentParser(description='Batch renaming files utility...')
 parser.add_argument('-s','--source_directory', help='Directory to read input files.', required=True, metavar='<Source Directory>', type=lambda x: is_valid_directory(parser, x))
 parser.add_argument('-f','--filename', help='Desired output file name.', required=True, metavar='<Output file names>')
 args = parser.parse_args()
+## =========> Command line arguments parsing -- ends <========= ##
+
+
+## =========> Logging Configurations -- starts <========= ##
+loggerFile = args.log_file
+loggingStatus = args.logging_onoff
+
+if not loggerFile:
+    Log_File = '/tmp/BatchRenameFiles.log'
+else:
+    Log_File = loggerFile + ".log"
+
+# create logger
+logger = logging.getLogger('BatchRename')
+logger.setLevel(logging.DEBUG)
+
+# Turning logging on or off
+if loggingStatus:
+    if loggingStatus == 'off':
+        logger.disabled = True
+    else:
+        logger.disabled = False
+else:
+    logger.disabled = False
+
+# add a file handler
+fileHandler = logging.FileHandler(Log_File)
+fileHandler.setLevel(logging.DEBUG)
+
+# create console handler and set level to debug
+consoleHandler = logging.StreamHandler()
+consoleHandler.setLevel(logging.DEBUG)
+
+# create formatter
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+
+# add formatter to handlers
+fileHandler.setFormatter(formatter)
+consoleHandler.setFormatter(formatter)
+
+# add ch to logger
+logger.addHandler(fileHandler)
+logger.addHandler(consoleHandler)
+
+## =========> Logging Configurations -- ends <========= ##
 
 filepath = args.source_directory
 outfileName = args.filename
@@ -65,7 +111,8 @@ with open(tmpFile, 'r') as f:
 		fileName = fileName.strip()
                 extName = os.path.basename(fileName).split(".")[1]
 		imgpath = filepath + "/" + fileName
-		print "Renaming " + imgpath + "..."
+		#print "Renaming " + imgpath + "..."
+		logger.info("Renaming file %s" % imgpath)
                 os.rename(imgpath, filepath + "/" + outfileName + " " + str(counter) + "." + extName)
 		i = 0
 		fileName = ""
