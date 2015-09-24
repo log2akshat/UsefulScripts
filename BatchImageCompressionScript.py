@@ -35,6 +35,8 @@ parser.add_argument('-s','--source_directory', help='Directory to read input fil
 parser.add_argument('-t','--target_directory', help='Directory to save output files.', required=True, metavar='<Target Directory>', type=lambda x: is_valid_directory(parser, x))
 parser.add_argument('-q','--quality', help='Quality of the Image to reatin.', required=True, metavar='<Image Quality>')
 parser.add_argument('-f','--filename', help='Desired output file name.', required=True, metavar='<Output file names>')
+parser.add_argument('-l','--log_file', help='Path of the log file.', metavar='<Log File>')
+parser.add_argument('-ls', '--logging_onoff', help='Logging status On/Off', metavar='<Logging on/off>', type=lambda x: is_valid_loggingStatus(parser, x))
 args = parser.parse_args()
 
 ## =========> Command line arguments parsing -- ends <========= ##
