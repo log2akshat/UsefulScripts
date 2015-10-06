@@ -45,7 +45,7 @@ def is_target_directory(arg):
 	
 	
 ## =========> Command line arguments parsing -- starts <========= ##
-parser = argparse.ArgumentParser(description='Batch image conversion utility. For running this program you need to have imagemagick installed om your machine.')
+parser = argparse.ArgumentParser(description='Batch image conversion utility. For running this program you need to have imagemagick installed on your machine.')
 parser.add_argument('-s','--source_directory', help='Directory to read input files.', required=True, metavar='<Source Directory>', type=lambda x: is_valid_directory(parser, x))
 parser.add_argument('-t','--target_directory', help='Directory to save output files.', required=True, metavar='<Target Directory>', type=lambda x: is_target_directory(x))
 parser.add_argument('-q','--quality', help='Quality of the Image to reatin.', required=True, metavar='<Image Quality>')
@@ -136,10 +136,8 @@ def main():
             if i < length:
                 for x in pathRow:
                     fileName = fileName + " " + pathRow[i]
-                    #print "i : " + str(pathRow[i])
                     i = i + 1
             fileName = fileName.strip()
-            #print "pathRow : " + str(fileName) + " :: " + str(pathRow) + " :: " + str(length)
             imgpath = filepath + fileName
             logger.info("Resizing Image : %s.." % imgpath)
             subprocess.call(['convert', imgpath, '-quality', quality, str(targetDir) + '/' + str(outfileName) + ' ' + str(counter) + '.jpg'])
@@ -149,5 +147,4 @@ def main():
 
 
 if __name__ == "__main__":
-    # execute only if run as a script
     main()
