@@ -1,0 +1,1 @@
+ACTION=="add", KERNEL=="sd[a-z][1-9]", SYMLINK+="akshack_%k", RUN+="/home/akshat/Desktop/USBUdev.sh '%E{DEVNAME}' '$env{ID_FS_TYPE}' $kernel"
