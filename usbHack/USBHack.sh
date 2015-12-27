@@ -33,8 +33,9 @@
 #
 #        FEEL FREE TO EDIT FOR YOUR OWN CUSTOMIZED USAGE.
 #
-#
-# SCRIPT:  USBHack.sh ver 1.0, 19-Nov-15
+# Dependencies : Zenity
+# 
+# SCRIPT: USBHack.sh ver 1.0, 19-Nov-15
 # AUTHOR: Akshat Singh
 # PURPOSE: mounting the usb ext, exfat, hfsplus drives by the udev rules.
 
