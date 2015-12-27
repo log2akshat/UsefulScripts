@@ -24,15 +24,16 @@
 # NOTE : The logs from the attached script is generated at the following location:
 #		/tmp/USBUdev.log_TIMESTAMP
 #        
-# This script will create and mount the USB disk at the following location:
+# This script will create a directory with the name of LABEL_NAME and mount the 
+# USB disk at the following location:
 # /media/EXTERNAL_DRIVES/USB_LABELNAME
 #
 # You have to put the udev provided in a seperate file at the following location:
 # /etc/udev/rules.d/ and rename it according to the priority.
 #
 #        FEEL FREE TO EDIT FOR YOUR OWN CUSTOMIZED USAGE.
-
-
+#
+#
 # SCRIPT:  USBHack.sh ver 1.0, 19-Nov-15
 # AUTHOR: Akshat Singh
 # PURPOSE: mounting the usb ext, exfat, hfsplus drives by the udev rules.
