@@ -174,7 +174,7 @@ def main():
             pass
     cwd = os.getcwd()
     os.chdir(cwd)
-    logger.info("Extracting text from the html file.")
+    logger.info("Extracting text from the URL / html file.")
     parseCmd = subprocess.Popen(['python', cwd + '/html2text.py', str(fileAddress())], stdout=subprocess.PIPE,)
     teeCmd = subprocess.Popen(['tee', '-a', str(textFileLocation())], stdin=parseCmd.stdout, stdout=devnull)
     parseCmd.stdout.close()
