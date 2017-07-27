@@ -42,13 +42,20 @@ def is_target_directory(arg):
     else:
         # File exists so return the directory
         return arg
-	
+
+def is_valid_loggingStatus(parser, arg):
+    "Function for checking logging status is valid or not."
+    if not (arg == 'on' or arg == 'off'):
+        parser.error('{} is not a valid input for turning logging on or off! Please specify \"on\" for turning logging on and \"off\" for turning logging off.'.format(arg))
+    else:
+        return arg
+    
 	
 ## =========> Command line arguments parsing -- starts <========= ##
 parser = argparse.ArgumentParser(description='Batch image conversion utility. For running this program you need to have imagemagick installed on your machine.')
 parser.add_argument('-s','--source_directory', help='Directory to read input files.', required=True, metavar='<Source Directory>', type=lambda x: is_valid_directory(parser, x))
 parser.add_argument('-t','--target_directory', help='Directory to save output files.', required=True, metavar='<Target Directory>', type=lambda x: is_target_directory(x))
-parser.add_argument('-q','--quality', help='Quality of the Image to reatin.', required=True, metavar='<Image Quality>')
+parser.add_argument('-q','--quality', help='Quality of the Image to retain.', required=True, metavar='<Image Quality>')
 parser.add_argument('-f','--filename', help='Desired output file name.', required=True, metavar='<Output file names>')
 parser.add_argument('-l','--log_file', help='Path of the log file.', metavar='<Log File>')
 parser.add_argument('-ls', '--logging_onoff', help='Logging status On/Off', metavar='<Logging on/off>', type=lambda x: is_valid_loggingStatus(parser, x))
@@ -56,6 +63,7 @@ args = parser.parse_args()
 
 ## =========> Command line arguments parsing -- ends <========= ##
 
+subprocess.call('clear')
 
 ## =========> Logging Configurations -- starts <========= ##
 loggerFile = args.log_file
