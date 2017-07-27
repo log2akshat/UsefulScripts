@@ -107,6 +107,7 @@ quality = args.quality
 tmpFile = '/tmp/batchIM.txt'
 devnull = open('/dev/null', 'w')
 
+
 def processingFile():
     '''Function to create a temporary file for processing.'''
     file = []
@@ -120,6 +121,7 @@ def processingFile():
     teeCmd = subprocess.Popen(['tee', tmpFile], stdin=sortCmd.stdout, stdout=devnull)
     sortCmd.stdout.close()
     teeCmd.communicate()
+
 
 def main():
     processingFile()
