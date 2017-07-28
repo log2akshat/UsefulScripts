@@ -14,13 +14,17 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+
 import os
+import time
+import errno
 import shutil
 import logging
 import argparse
-import platform
 import subprocess
+from datetime import datetime
 from argparse import RawTextHelpFormatter
+
 
 # Command line argument validation functions...
 def is_valid_directory(parser, arg):
@@ -60,7 +64,7 @@ def is_valid_loggingStatus(parser, arg):
         return arg
 
 ## =========> Command line arguments parsing -- starts <========= ##
-parser = argparse.ArgumentParser(description='[Purpose - This script is useful in a situation where we want to run a compression only on specific camera make but not on others and later want to do some manual image processing using tools like gimp on some camera make images and also at the same time we also want to maintain the sequence of the images based on their capturing time not based on the image modification.]\n\n\n***********************************\n\nBatch Image Manager is an advaced version of the Batch Image Compression utility. For running this program you need to have exif tool and imagemagick installed on your machine. This program is used for mixing the various images taken from different camera make based on their capturing time in ascending order and rename each image on thir unix timestamp if the --filename is not provided on the command line.\n\nIf compression option is selected as OFF then this script wil not create any sub-directories based on camera make just it will arrange the pictures based on their capturing time. \n\n\n\t', formatter_class=RawTextHelpFormatter)
+parser = argparse.ArgumentParser(description='[Purpose - This script is useful in a situation where we want to run a compression only on specific camera make but not on others and later want to do some manual image processing using tools like gimp on some camera make images and also at the same time we also want to maintain the sequence of the images based on their capturing time not based on the image modification.]\n\n\n**********************************************************************\nThis script will copy the images from the specified directory and all of its sub-directory to the target directory. The target directory will be the provided on the command line argument; but the final destination will be targetDir/CameraManufacurer__CameraModel/unixTimeStamp_CameraMake.JPG\nn**********************************************************************\nBatch Image Manager is an advaced version of the Batch Image Compression utility. For running this program you need to have exif tool and imagemagick installed on your machine. This program is used for mixing the various images taken from different camera make based on their capturing time in ascending order and rename each image on thir unix timestamp.\n\nIf compression option is selected as OFF then this script wil not create any sub-directories based on camera make just it will arrange the pictures based on their capturing time. \n\n\n\t', formatter_class=RawTextHelpFormatter)
 parser.add_argument('-i', '--info', help='Information about the Camera make and Model', metavar='<Camera Information>')
 parser.add_argument('-s','--source_directory', help='Directory to read input files.', required=True, metavar='<Source Directory>', type=lambda x: is_valid_directory(parser, x))
 parser.add_argument('-t','--target_directory', help='Directory to save output files.', required=True, metavar='<Target Directory>', type=lambda x: is_target_directory(x))
@@ -126,6 +130,38 @@ compQuality = args.compressionQuality
 tmpFile = '/tmp/batchIMv2.txt'
 devnull = open('/dev/null', 'w')
 
+                
+
+def timestampQuery(imageName):
+    '''Function for returning the Image capturing time unix timestamp'''
+    exifCmd = subprocess.Popen(['exif', '-x', imageName],stdout=subprocess.PIPE)
+    grepCmd = subprocess.Popen(['grep', 'Date_and_Time__Original'], stdin=exifCmd.stdout, stdout=subprocess.PIPE)
+    cutCmd1 = subprocess.Popen(['cut', '-d', '>', '-f2'], stdin=grepCmd.stdout, stdout=subprocess.PIPE)
+    cutCmd2 = subprocess.Popen(['cut', '-d', '<', '-f1'], stdin=cutCmd1.stdout, stdout=subprocess.PIPE)
+    cutCmd1.stdout.close()
+    captureTime = cutCmd2.communicate()[0].split("\n")[0]
+    #print captureTime
+    formatTime = datetime.strptime(captureTime, "%Y:%m:%d %H:%M:%S")
+    return int(time.mktime(formatTime.timetuple()))
+
+
+def camMakeQuery(imageName):
+    '''Function for returning the camera Make and Model'''
+    exifCmd = subprocess.Popen(['exif', '-x', imageName],stdout=subprocess.PIPE)
+    grepCmd = subprocess.Popen(['grep', 'Manufacturer'], stdin=exifCmd.stdout, stdout=subprocess.PIPE)
+    cutCmd1 = subprocess.Popen(['cut', '-d', '>', '-f2'], stdin=grepCmd.stdout, stdout=subprocess.PIPE)
+    cutCmd2 = subprocess.Popen(['cut', '-d', '<', '-f1'], stdin=cutCmd1.stdout, stdout=subprocess.PIPE)
+    cutCmd1.stdout.close()
+    camManufacturer = cutCmd2.communicate()[0].split("\n")[0]
+    exifCmdModel = subprocess.Popen(['exif', '-x', imageName],stdout=subprocess.PIPE)
+    grepCmdModel = subprocess.Popen(['grep', 'Model'], stdin=exifCmdModel.stdout, stdout=subprocess.PIPE)
+    cutCmd1Model = subprocess.Popen(['cut', '-d', '>', '-f2'], stdin=grepCmdModel.stdout, stdout=subprocess.PIPE)
+    cutCmd2Model = subprocess.Popen(['cut', '-d', '<', '-f1'], stdin=cutCmd1Model.stdout, stdout=subprocess.PIPE)
+    cutCmd1Model.stdout.close()
+    camModel = cutCmd2Model.communicate()[0].split("\n")[0]
+    camDir = camManufacturer + "__" + camModel
+    return camDir
+
 
 
 def copyAllImages(srcDir):
@@ -134,11 +170,23 @@ def copyAllImages(srcDir):
         # Copy all files.
         for filename in filenames:
             imageName = os.path.join(dirnames, filename)
-            print imageName
-            shutil.copy2(imageName, targetDir)
+            #print imageName
+            unixTimeStamp = timestampQuery(imageName)
+            camera = camMakeQuery(imageName)
+            imgDestination = targetDir + "/" + camera
+            ## Create destination directory if not present
+            try:
+                os.makedirs(imgDestination)
+            except OSError as e:
+                if e.errno != errno.EEXIST:
+                    raise
+            ## Start copying and renaming
+            finalImage = imgDestination + "/" + str(unixTimeStamp) + "_" + camera + ".JPG"
+            logger.info("Copying and Renaming Image : %s to %s" % (imageName, finalImage))
+            shutil.copy2(imageName, finalImage)
 
-
-
+            
+    
 def main():
     ## Start execution of the main program
     copyAllImages(sourceDir)
