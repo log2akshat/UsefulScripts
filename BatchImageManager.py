@@ -210,7 +210,7 @@ def main():
     if compression == 'off':
         copyAllImages(sourceDir)
     else:
-        #copyAllImages(sourceDir)
+        copyAllImages(sourceDir)
         validateUserCompressionInput()
         
     
