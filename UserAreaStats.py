@@ -16,13 +16,8 @@
 
 
 import os
-import time
-import errno
-import shutil
 import logging
 import argparse
-import subprocess
-from datetime import datetime
 from argparse import RawTextHelpFormatter
 
 
