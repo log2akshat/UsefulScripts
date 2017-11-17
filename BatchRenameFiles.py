@@ -115,7 +115,7 @@ with open(tmpFile, 'r') as f:
 		imgpath = filepath + "/" + fileName
 		#print "Renaming " + imgpath + "..."
 		logger.info("Renaming file %s" % imgpath)
-                os.rename(imgpath, filepath + "/" + outfileName + " " + str(counter) + "." + extName)
+                os.rename(imgpath, filepath + "/" + outfileName + " (" + str(counter) + ")." + extName)
 		i = 0
 		fileName = ""
 		counter = counter + 1
