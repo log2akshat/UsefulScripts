@@ -18,6 +18,7 @@
 import os
 import logging
 import argparse
+import platform
 import subprocess
 from argparse import RawTextHelpFormatter
 
@@ -103,7 +104,11 @@ def srcDir():
     srcDir = ""
     if args.source_directory:
         srcDir = args.source_directory
-    else:
+    elif platform.system() == "Darwin":
+        logger.info("Operating System detected : Mac")
+        srcDir = "/Users"
+    elif platform.system() == "Linux":
+	logger.info("Operating System detected : Mac")
         srcDir = "/home"
     return srcDir
 
@@ -122,10 +127,13 @@ def main():
     inactiveAccounts = []
     sourceDir = srcDir()
     logger.info("Source directory : %s", sourceDir)
-    if sourceDir == "/home":
+    if (sourceDir == '/Users' or sourceDir == '/home'):
         users = os.listdir(sourceDir)
         for i in range(len(users)):
-            scanDir = "/home/" + users[i] + "/public_html"
+	    if platform.system() == "Darwin":
+            	scanDir = "/Users/" + users[i] + "/public_html"
+	    elif platform.system() == "Linux":
+            	scanDir = "/home/" + users[i] + "/public_html"
             if os.path.exists(scanDir):
                  totalFiles = numOfFiles(scanDir)
                  if totalFiles == 0:
