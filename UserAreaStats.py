@@ -147,7 +147,7 @@ def main():
         print "Inactive accounts : " + str(inactiveAccounts)
         print "Active accounts : " + str(activeAccounts)
     else:
-        logger.info("##############################\n\nNumber of directories and files in %s directory is/are : %s\n\n", sourceDir, numOfFiles(sourceDir))
+        logger.info("Number of directories and files in %s directory is/are : %s\n\n", sourceDir, numOfFiles(sourceDir))
         
     
 
