@@ -19,15 +19,12 @@
 #    Script for tailing the logs specified in the
 #    configuration file.
 
-
 import os
 import sys
 import argparse
 import ConfigParser
 from subprocess import call
 from argparse import RawTextHelpFormatter
-
-
 
 ## =========> Argument Parsing -- starts <========= ##
 
@@ -48,9 +45,7 @@ args = parser.parse_args()
 
 ## =========> Argument Parsing -- ends <========= ##
 
-
 InputConfigFile = os.path.abspath(args.config_file)
-
 
 ## Function for building the command
 def cmndBuilder():
@@ -63,7 +58,6 @@ def cmndBuilder():
     return tailcmnd
 
 
-
 ## Start execution of the main program
 def main():
     cmd = str(cmndBuilder()).strip()
@@ -74,20 +68,6 @@ def main():
         call(['tail ' + cmd], shell=True)
 
 
-
 # Executing the script.
 if __name__ == "__main__":
     main()
-
-
-
-
-
-
-
-
-
-
-
-
-    
