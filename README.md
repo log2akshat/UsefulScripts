@@ -32,6 +32,8 @@ _**optional arguments:**_
 *   -ls `<Logging on/off>`, `--logging_onoff` <Logging on/off>
                         Logging status On/Off
 
+***
+
 ### 2.BatchRenameFiles.py
 
 **usage:** BatchRenameFiles.py
