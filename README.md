@@ -5,7 +5,13 @@ This repo contains some useful scripts which is used for easing day to day tasks
 ### 1. BatchImageCompressionScript.py
 
 **usage:** BatchImageCompressionScript.py 
-
+>        [-h] 
+>        [-s <Source Directory> ]
+>        [ -t <Target Directory> ]
+>        [ -q <Image Quality> ]
+>        [ -f <Output file names> ]  
+>        [-l <Log File>]
+>        [-ls <Logging on/off>]
 
 _Batch image conversion utility. For running this program you need to have_
 _imagemagick installed on your machine._
