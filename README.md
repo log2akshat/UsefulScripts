@@ -5,13 +5,6 @@ This repo contains some useful scripts which is used for easing day to day tasks
 ### 1. BatchImageCompressionScript.py
 
 **usage:** BatchImageCompressionScript.py 
->        [-h] 
->        [-s <Source Directory> ]
->        [ -t <Target Directory> ]
->        [ -q <Image Quality> ]
->        [-f <Output file names>] 
->        [-l <Log File>]
->        [-ls <Logging on/off>]
 
 
 _Batch image conversion utility. For running this program you need to have_
@@ -51,6 +44,30 @@ _**optional arguments:**_
                           Directory to read input files.
 *   -f `<Output file names>`, `--filename` <Output file names>
                         Desired output file name.
+*   -l `<Log File>`, `--log_file` <Log File>
+                        Path of the log file.
+*   -ls `<Logging on/off>`, `--logging_onoff` <Logging on/off>
+                        Logging status On/Off
+  
+***
+  
+### 3.BatchMP3Converter.py
+**usage:** BatchMP3Converter.py
+>        [-h] 
+>        [-s <Source Directory> ]
+>        [ -t <Target Directory> ]
+>        [-l <Log File>]
+>        [-ls <Logging on/off>]
+
+_Batch mp4 to mp3 conversion utility. For running this program you need to have_
+_FFMPEG with mp3 codecs installed on your machine._
+
+_**optional arguments:**_
+ *   -h, `--help`            show this help message and exit
+*   -s `<Source Directory>`, `--source_directory` <Source Directory>
+                          Directory to read input files.
+*   -t `<Target Directory>`, `--target_directory` <Target Directory>
+                         Directory to save output files.
 *   -l `<Log File>`, `--log_file` <Log File>
                         Path of the log file.
 *   -ls `<Logging on/off>`, `--logging_onoff` <Logging on/off>
