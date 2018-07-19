@@ -5,13 +5,13 @@ This repo contains some useful scripts which is used for easing day to day tasks
 ### 1. BatchImageCompressionScript.py
 
 **usage:** BatchImageCompressionScript.py 
->        [-h] 
->        [-s <Source Directory> ]
+>        [ -h ] 
+>        [ -s <Source Directory> ]
 >        [ -t <Target Directory> ]
 >        [ -q <Image Quality> ]
 >        [ -f <Output file names> ]  
->        [-l <Log File>]
->        [-ls <Logging on/off>]
+>        [ -l <Log File> ]
+>        [ -ls <Logging on/off> ]
 
 _Batch image conversion utility. For running this program you need to have_
 _imagemagick installed on your machine._
@@ -33,14 +33,14 @@ _**optional arguments:**_
 
 ***
 
-### 2.BatchRenameFiles.py
+### 2. BatchRenameFiles.py
 
 **usage:** BatchRenameFiles.py
->        [-h] 
->        [-s <Source Directory> ]
+>        [ -h ] 
+>        [ -s <Source Directory> ]
 >        [ -f <Output file names> ]
->        [-l <Log File>]
->        [-ls <Logging on/off>]
+>        [ -l <Log File> ]
+>        [ -ls <Logging on/off> ]
 
 _Batch renaming files utility_
 
@@ -57,13 +57,13 @@ _**optional arguments:**_
   
 ***
   
-### 3.BatchMP3Converter.py
+### 3. BatchMP3Converter.py
 **usage:** BatchMP3Converter.py
->        [-h] 
->        [-s <Source Directory> ]
+>        [ -h ] 
+>        [  -s <Source Directory> ]
 >        [ -t <Target Directory> ]
->        [-l <Log File>]
->        [-ls <Logging on/off>]
+>        [ -l <Log File> ]
+>        [ -ls <Logging on/off> ]
 
 _Batch mp4 to mp3 conversion utility. For running this program you need to have_
 _FFMPEG with mp3 codecs installed on your machine._
@@ -74,6 +74,43 @@ _**optional arguments:**_
                           Directory to read input files.
 *   -t `<Target Directory>`, `--target_directory` <Target Directory>
                          Directory to save output files.
+*   -l `<Log File>`, `--log_file` <Log File>
+                        Path of the log file.
+*   -ls `<Logging on/off>`, `--logging_onoff` <Logging on/off>
+                        Logging status On/Off
+
+
+*** 
+
+### 4. BatchImageManager.py -h
+**usage:** BatchImageManager.py 
+>        [ -h ] 
+>        [ -i <Camera Information> ]
+>        [ -s <Source Directory> ]  
+>        [ -t <Target Directory> ]
+>        [ -cmp <Compression on/off> ]
+>        [ -clq <CameraMake_#ImageQuality Eg.: Canon100D_#90> ]
+>        [ -l <Log File> ]
+>        [ -ls <Logging on/off> ]
+
+[***Purpose*** - This script is useful in a situation where we want to run a compression only on specific camera make but not on others and later want to do some manual image processing using tools like gimp on some camera make images and also at the same time we also want to maintain the sequence of the images based on their capturing time not based on the image modification.]
+
+This script will copy the images from the specified directory and all of its sub-directory to the target directory. The target directory will be the provided on the command line argument; but the final destination will be targetDir/CameraManufacurer__CameraModel/unixTimeStamp_CameraMake.JPG
+
+Batch Image Manager is an advaced version of the Batch Image Compression utility. For running this program you need to have exif tool and imagemagick installed on your machine. This program is used for mixing the various images taken from different camera make based on their capturing time in ascending order and rename each image on thir unix timestamp.
+
+If compression option is selected as OFF then this script wil not create any sub-directories based on camera make just it will arrange the pictures based on their capturing time. 
+
+_**optional arguments:**_
+*   -h, `--help`            show this help message and exit
+*   -s `<Source Directory>`, `--source_directory` <Source Directory>
+                         Directory to read input files.
+*   -t `<Target Directory>`, `--target_directory` <Target Directory>
+                         Directory to save output files.
+*   -cmp `<Compression on/off>`, `--compression` <Compression on/off>
+                         Compression On/Off
+*   -clq `<CameraMake_#ImageQuality Eg.: Canon100D_#90>`, `--compressionQuality` <CameraMake_#ImageQuality Eg.: Canon100D_#90>
+                         Quality of the Image to retain for specific Camera make [Image Quality range is 1-100].
 *   -l `<Log File>`, `--log_file` <Log File>
                         Path of the log file.
 *   -ls `<Logging on/off>`, `--logging_onoff` <Logging on/off>
