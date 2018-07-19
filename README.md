@@ -31,55 +31,6 @@ _**optional arguments:**_
 *   -ls `<Logging on/off>`, `--logging_onoff` <Logging on/off>
                         Logging status On/Off
 
-***
-
-### 2. BatchRenameFiles.py
-
-**usage:** BatchRenameFiles.py
->        [ -h ] 
->        [ -s <Source Directory> ]
->        [ -f <Output file names> ]
->        [ -l <Log File> ]
->        [ -ls <Logging on/off> ]
-
-_Batch renaming files utility_
-
-_**optional arguments:**_
-*   -h, `--help`            show this help message and exit
-*   -s `<Source Directory>`, `--source_directory` <Source Directory>
-                          Directory to read input files.
-*   -f `<Output file names>`, `--filename` <Output file names>
-                        Desired output file name.
-*   -l `<Log File>`, `--log_file` <Log File>
-                        Path of the log file.
-*   -ls `<Logging on/off>`, `--logging_onoff` <Logging on/off>
-                        Logging status On/Off
-  
-***
-  
-### 3. BatchMP3Converter.py
-**usage:** BatchMP3Converter.py
->        [ -h ] 
->        [  -s <Source Directory> ]
->        [ -t <Target Directory> ]
->        [ -l <Log File> ]
->        [ -ls <Logging on/off> ]
-
-_Batch mp4 to mp3 conversion utility. For running this program you need to have_
-_FFMPEG with mp3 codecs installed on your machine._
-
-_**optional arguments:**_
- *   -h, `--help`            show this help message and exit
-*   -s `<Source Directory>`, `--source_directory` <Source Directory>
-                          Directory to read input files.
-*   -t `<Target Directory>`, `--target_directory` <Target Directory>
-                         Directory to save output files.
-*   -l `<Log File>`, `--log_file` <Log File>
-                        Path of the log file.
-*   -ls `<Logging on/off>`, `--logging_onoff` <Logging on/off>
-                        Logging status On/Off
-
-
 *** 
 
 ### 4. BatchImageManager.py -h
@@ -111,6 +62,54 @@ _**optional arguments:**_
                          Compression On/Off
 *   -clq `<CameraMake_#ImageQuality Eg.: Canon100D_#90>`, `--compressionQuality` <CameraMake_#ImageQuality Eg.: Canon100D_#90>
                          Quality of the Image to retain for specific Camera make [Image Quality range is 1-100].
+*   -l `<Log File>`, `--log_file` <Log File>
+                        Path of the log file.
+*   -ls `<Logging on/off>`, `--logging_onoff` <Logging on/off>
+                        Logging status On/Off
+  
+***
+  
+### 3. BatchMP3Converter.py
+**usage:** BatchMP3Converter.py
+>        [ -h ] 
+>        [  -s <Source Directory> ]
+>        [ -t <Target Directory> ]
+>        [ -l <Log File> ]
+>        [ -ls <Logging on/off> ]
+
+_Batch mp4 to mp3 conversion utility. For running this program you need to have_
+_FFMPEG with mp3 codecs installed on your machine._
+
+_**optional arguments:**_
+ *   -h, `--help`            show this help message and exit
+*   -s `<Source Directory>`, `--source_directory` <Source Directory>
+                          Directory to read input files.
+*   -t `<Target Directory>`, `--target_directory` <Target Directory>
+                         Directory to save output files.
+*   -l `<Log File>`, `--log_file` <Log File>
+                        Path of the log file.
+*   -ls `<Logging on/off>`, `--logging_onoff` <Logging on/off>
+                        Logging status On/Off
+  
+  ***
+
+### 4. BatchRenameFiles.py
+
+**usage:** BatchRenameFiles.py
+>        [ -h ] 
+>        [ -s <Source Directory> ]
+>        [ -f <Output file names> ]
+>        [ -l <Log File> ]
+>        [ -ls <Logging on/off> ]
+
+_Batch renaming files utility_
+
+_**optional arguments:**_
+*   -h, `--help`            show this help message and exit
+*   -s `<Source Directory>`, `--source_directory` <Source Directory>
+                          Directory to read input files.
+*   -f `<Output file names>`, `--filename` <Output file names>
+                        Desired output file name.
 *   -l `<Log File>`, `--log_file` <Log File>
                         Path of the log file.
 *   -ls `<Logging on/off>`, `--logging_onoff` <Logging on/off>
