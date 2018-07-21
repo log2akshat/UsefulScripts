@@ -145,4 +145,3 @@ def DBDump():
 # Executing the script. 
 if __name__ == "__main__":
     DBDump()
-~                         
