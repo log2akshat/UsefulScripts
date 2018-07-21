@@ -100,7 +100,7 @@ logger.addHandler(consoleHandler)
 
 ## =========> Logging Configurations -- ends <========= ##
 
-srcDir = args.source_directory
+srcDir = os.path.join(args.source_directory, '')
 targetDir = args.target_directory
 
 
@@ -109,7 +109,7 @@ def mp3Conversion(songPath, conversionPath, songName):
     song = conversionPath + "/" +  songName + ".mp3"
     logger.info("Going to convert %s song.." % song)
     cmd = subprocess.Popen(['ffmpeg', '-i', songPath, '-codec:a', 'libmp3lame', '-qscale:a', '2', conversionPath + "/" + songName + '.mp3'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-    tee = subprocess.Popen(['tee', Log_File], stdin=cmd.stdout)
+    tee = subprocess.Popen(['tee', '-a', Log_File], stdin=cmd.stdout)
     cmd.stdout.close()
     tee.communicate()
 
@@ -129,8 +129,6 @@ def allFilePaths():
 def main():
     slashCount = 0
     conversionPath = ""
-    subPaths = []
-    songPath = []
     srcDirModified = srcDir
     for audioSongPath in allFilePaths():
         songName =  os.path.basename(audioSongPath).split(".mp4")[0]
