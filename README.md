@@ -113,4 +113,32 @@ _**optional arguments:**_
 *   -l `<Log File>`, `--log_file` <Log File>
                         Path of the log file.
 *   -ls `<Logging on/off>`, `--logging_onoff` <Logging on/off>
-                        Logging status On/Off
+
+
+
+  ***
+
+### 5. DebianTMSParser.py
+
+**usage:** DebianTMSParser.py 
+>        [ -h ]
+>        [ -f <HTML File> ]
+>        [ -u <URL> ]
+>        [ -t <Text File Path> ]
+>        [ -l <Log File> ]
+>        [ -ls <Logging on/off> ]
+
+_HTML File parser utility for parsing Debian Testing migration 
+summary packages._
+
+_**optional arguments:**_
+*   -h, `--help`            show this help message and exit
+*   -f `<<HTML File>`, `--file` <HTML File>
+                          Path of HTML file.
+*   -u `<URL>`, `--url_path` <URL>
+                        URL of HTML file.
+*   -t `<Text File Path>`, ` --textFile_path` <Text File Path>
+                               Path of the text file.
+*   -l `<Log File>`, `--log_file` <Log File>
+                        Path of the log file.
+*   -ls `<Logging on/off>`, `--logging_onoff` <Logging on/off>
