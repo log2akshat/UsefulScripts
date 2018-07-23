@@ -133,7 +133,7 @@ summary packages._
 
 _**optional arguments:**_
 *   -h, `--help`            show this help message and exit
-*   -f `<<HTML File>`, `--file` <HTML File>
+*   -f `<HTML File>`, `--file` <HTML File>
                           Path of HTML file.
 *   -u `<URL>`, `--url_path` <URL>
                         URL of HTML file.
