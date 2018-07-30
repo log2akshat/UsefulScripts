@@ -28,15 +28,14 @@
 #
 #        FEEL FREE TO EDIT FOR YOUR OWN CUSTOMIZED USAGE.
 
-
-cd /home/akshat/MySQLBKP/
+BACKUPDIR="/home/akshat/MySQLBKP"
+cd $BACKUPDIR
 find . -name '*' -mtime +3 -exec rm -R {} \;
 
 SUFFIX=`date +%d-%m-%Y`
 DBUSER="root"
 DBHOST="localhost"
 DBPASS='password'
-BACKUPDIR="/home/akshat/MySQLBKP"
 
 DBS=`mysql -u$DBUSER -h$DBHOST -p$DBPASS -e"show databases"`
 
