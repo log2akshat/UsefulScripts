@@ -142,3 +142,24 @@ _**optional arguments:**_
 *   -l `<Log File>`, `--log_file` <Log File>
                         Path of the log file.
 *   -ls `<Logging on/off>`, `--logging_onoff` <Logging on/off>
+
+
+  ***
+
+### 6. MySQLTracker.py
+
+**usage:** MySQLTracker.py
+>        [ -h ]
+>        [ -d <Database Name> ]
+>        [ -l <Log File> ]
+>        [ -ls <Logging on/off> ]
+
+_list the status of the MySQL and shows the processlist of the given database_
+
+_**optional arguments:**_
+*   -h, `--help`            show this help message and exit
+*   -f `<Database Name>`, `--database_name` <Database Name>
+                             MANDATORY : Name of the database..
+*   -l `<Log File>`, `--log_file` <Log File>
+                        Path of the log file.
+*   -ls `<Logging on/off>`, `--logging_onoff` <Logging on/off>
