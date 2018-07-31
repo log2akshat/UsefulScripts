@@ -154,7 +154,7 @@ _**optional arguments:**_
 >        [ -l <Log File> ]
 >        [ -ls <Logging on/off> ]
 
-_list the status of the MySQL and shows the processlist of the given database_
+_List the status of the MySQL and shows the processlist of the given database._
 
 _**optional arguments:**_
 *   -h, `--help`            show this help message and exit
