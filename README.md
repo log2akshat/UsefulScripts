@@ -163,3 +163,24 @@ _**optional arguments:**_
 *   -l `<Log File>`, `--log_file` <Log File>
                         Path of the log file.
 *   -ls `<Logging on/off>`, `--logging_onoff` <Logging on/off>
+
+
+  ***
+
+### 7. MySQLTracker.py
+
+**usage:** UserAreaStats.py
+>        [ -h ]
+>        [ -s <Source Directory> ]
+>        [ -l <Log File> ]
+>        [ -ls <Logging on/off> ]
+
+_This script is useful for finding the number of files in a given directory and if the source directory is not specified on the CLI then it will give the number of files in the public__html user area and also tells if a user does not have public__html directory._
+
+_**optional arguments:**_
+*   -h, `--help`            show this help message and exit
+*   -s `<Source Directory>`, `--source_directory` <Source Directory>
+                             MANDATORY : Name of the database..
+*   -l `<Log File>`, `--log_file` <Log File>
+                        Directory to read input files.
+*   -ls `<Logging on/off>`, `--logging_onoff` <Logging on/off>
