@@ -17,7 +17,7 @@ _Batch image conversion utility. For running this program you need to have_
 _imagemagick installed on your machine._
 
 _**optional arguments:**_
-*   -h, `--help`            show this help message and exit
+*   -h `--help`            show this help message and exit
 *   -s `<Source Directory>`, `--source_directory` <Source Directory>
                           Directory to read input files.
 *   -t `<Target Directory>`, `--target_directory` <Target Directory>
@@ -53,7 +53,7 @@ Batch Image Manager is an advaced version of the Batch Image Compression utility
 If compression option is selected as OFF then this script wil not create any sub-directories based on camera make just it will arrange the pictures based on their capturing time. 
 
 _**optional arguments:**_
-*   -h, `--help`            show this help message and exit
+*   -h `--help`            show this help message and exit
 *   -s `<Source Directory>`, `--source_directory` <Source Directory>
                          Directory to read input files.
 *   -t `<Target Directory>`, `--target_directory` <Target Directory>
@@ -81,7 +81,7 @@ _Batch mp4 to mp3 conversion utility. For running this program you need to have_
 _FFMPEG with mp3 codecs installed on your machine._
 
 _**optional arguments:**_
- *   -h, `--help`            show this help message and exit
+ *   -h `--help`            show this help message and exit
 *   -s `<Source Directory>`, `--source_directory` <Source Directory>
                           Directory to read input files.
 *   -t `<Target Directory>`, `--target_directory` <Target Directory>
@@ -105,7 +105,7 @@ _**optional arguments:**_
 _Batch renaming files utility_
 
 _**optional arguments:**_
-*   -h, `--help`            show this help message and exit
+*   -h `--help`            show this help message and exit
 *   -s `<Source Directory>`, `--source_directory` <Source Directory>
                           Directory to read input files.
 *   -f `<Output file names>`, `--filename` <Output file names>
@@ -132,7 +132,7 @@ _HTML File parser utility for parsing Debian Testing migration
 summary packages._
 
 _**optional arguments:**_
-*   -h, `--help`            show this help message and exit
+*   -h `--help`            show this help message and exit
 *   -f `<HTML File>`, `--file` <HTML File>
                           Path of HTML file.
 *   -u `<URL>`, `--url_path` <URL>
@@ -157,7 +157,7 @@ _**optional arguments:**_
 _List the status of the MySQL and shows the processlist of the given database._
 
 _**optional arguments:**_
-*   -h, `--help`            show this help message and exit
+*   -h `--help`            show this help message and exit
 *   -f `<Database Name>`, `--database_name` <Database Name>
                              MANDATORY : Name of the database..
 *   -l `<Log File>`, `--log_file` <Log File>
@@ -178,7 +178,7 @@ _**optional arguments:**_
 _This script is useful for finding the number of files in a given directory and if the source directory is not specified on the CLI then it will give the number of files in the public__html user area and also tells if a user does not have public__html directory._
 
 _**optional arguments:**_
-*   -h, `--help`            show this help message and exit
+*   -h `--help`            show this help message and exit
 *   -s `<Source Directory>`, `--source_directory` <Source Directory>
                              MANDATORY : Name of the database..
 *   -l `<Log File>`, `--log_file` <Log File>
