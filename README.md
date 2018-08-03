@@ -167,7 +167,7 @@ _**optional arguments:**_
 
   ***
 
-### 7. MySQLTracker.py
+### 7. UserAreaStats.py
 
 **usage:** UserAreaStats.py
 >        [ -h ]
