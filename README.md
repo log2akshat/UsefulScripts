@@ -175,7 +175,9 @@ _**optional arguments:**_
 >        [ -l <Log File> ]
 >        [ -ls <Logging on/off> ]
 
-_This script is useful for finding the number of files in a given directory and if the source directory is not specified on the CLI then it will give the number of files in the public__html user area and also tells if a user does not have public__html directory._
+_This script is useful for finding the number of files in a given directory and if the source directory_
+_is not specified on the CLI then it will give the number of files in the public__html user area and also_
+_tells if a user does not have public__html directory._
 
 _**optional arguments:**_
 *   -h `--help`            show this help message and exit
