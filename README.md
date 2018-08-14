@@ -188,6 +188,8 @@ _**optional arguments:**_
 *   -ls `<Logging on/off>`, `--logging_onoff` <Logging on/off>
 
 
+  ***
+
 ### 8. redeploy.sh
 
 _This script will redeploy all the docker containers of Zimbra_
