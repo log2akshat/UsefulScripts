@@ -1,5 +1,5 @@
 # UsefulScripts
-This repo contains some useful scripts which is used for easing day to day tasks.
+This repo contains some useful scripts which are used for easing and automate the day to day tasks.
 
 
 ### 1. BatchImageCompressionScript.py
