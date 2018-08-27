@@ -22,6 +22,7 @@ username = args.username
 num_of_users = int(args.number_of_users)
 
 def create_user():
+    """Function for creating users"""
     for i in range(num_of_users):
         if (i == num_of_users-1):
             print username + str(i) + ",test123," + username + str(0)
