@@ -1,5 +1,7 @@
 # !/bin/python
 
+"""Script for creating specified number of users for Zimbra mailbox."""
+
 import argparse
 
 # Command line argument validation functions...
