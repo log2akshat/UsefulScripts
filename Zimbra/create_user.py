@@ -20,6 +20,7 @@ parser.add_argument('-n','--number_of_users', help='Number of users to be create
 args = parser.parse_args()
 ## =========> Command line arguments parsing -- ends <========= ##
 
+# Arguments parsing
 username = args.username
 num_of_users = int(args.number_of_users)
 
