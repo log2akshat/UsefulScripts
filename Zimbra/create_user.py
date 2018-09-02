@@ -33,7 +33,6 @@ def create_user():
             print username + str(i) + ",test123," + username + str(i+1)
 
 
-# Start execution of the main program
 def main():
    """Main Function"""
    create_user()
