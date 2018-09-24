@@ -199,6 +199,7 @@ _This script will redeploy all the docker containers of Zimbra_
 
 ### 9. zimbra/create_user.py
 
+_This script will create the required number of users for Zimbra perf harness test_
 
  ***
 
