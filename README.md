@@ -201,5 +201,8 @@ _This script will redeploy all the docker containers of Zimbra_
 
 _This script will create the required number of users for Zimbra perf harness test with the specified format_
 
+Format:
+user1,password,usern
+
  ***
 
