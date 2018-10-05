@@ -14,6 +14,7 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+'''Script for finding the number of files in a given directory and if the source directory is not specified on the CLI then it will give the number of files in the public_html user area and also tells if a user does not have public_html directory.'''
 
 import os
 import logging
@@ -31,7 +32,7 @@ def is_valid_directory(parser, arg):
     else:
         # File exists so return the directory
         return arg
-    
+ 
 
 def is_valid_loggingStatus(parser, arg):
     "Function for checking logging status is valid or not."
@@ -42,8 +43,8 @@ def is_valid_loggingStatus(parser, arg):
 
 ## =========> Command line arguments parsing -- starts <========= ##
 parser = argparse.ArgumentParser(description='Purpose - This script is useful for finding the number of files in a given directory and if the source directory is not specified on the CLI then it will give the number of files in the public_html user area and also tells if a user does not have public_html directory.', formatter_class=RawTextHelpFormatter)
-parser.add_argument('-s','--source_directory', help='Directory to read input files.', metavar='<Source Directory>', type=lambda x: is_valid_directory(parser, x))
-parser.add_argument('-l','--log_file', help='Path of the log file.', metavar='<Log File>')
+parser.add_argument('-s', '--source_directory', help='Directory to read input files.', metavar='<Source Directory>', type=lambda x: is_valid_directory(parser, x))
+parser.add_argument('-l', '--log_file', help='Path of the log file.', metavar='<Log File>')
 parser.add_argument('-ls', '--logging_onoff', help='Logging status On/Off', metavar='<Logging on/off>', type=lambda x: is_valid_loggingStatus(parser, x))
 args = parser.parse_args()
 
@@ -95,59 +96,59 @@ logger.addHandler(consoleHandler)
 
 ## =========> Logging Configurations -- ends <========= ##
 
-sourceDir = args.source_directory
+source_dir = args.source_directory
 devnull = open('/dev/null', 'w')
                 
 
-def srcDir():
+def src_dir():
     '''Function for returning the source directory'''
-    srcDir = ""
+    src_dir = ""
     if args.source_directory:
-        srcDir = args.source_directory
+        src_dir = args.source_directory
     elif platform.system() == "Darwin":
         logger.info("Operating System detected : Mac")
-        srcDir = "/Users"
+        src_dir = "/Users"
     elif platform.system() == "Linux":
 	logger.info("Operating System detected : Mac")
-        srcDir = "/home"
-    return srcDir
+        src_dir = "/home"
+    return src_dir
 
 
-def numOfFiles(srcDir):
-    '''Function to return number of directories and files in a given directory.'''
-    listAll = os.listdir(srcDir)
+def numOfFiles(src_dir):
+    '''Function to return number of files 
+       and directories in a specified directory.'''
+    listAll = os.listdir(src_dir)
     return len(listAll)
-
 
 
 def main():
     ## Start execution of the main program
-    unusedAccounts = []
-    activeAccounts = []
-    inactiveAccounts = []
-    sourceDir = srcDir()
-    logger.info("Source directory : %s", sourceDir)
-    if (sourceDir == '/Users' or sourceDir == '/home'):
-        users = os.listdir(sourceDir)
+    unused_accounts = []
+    active_accounts = []
+    inactive_accounts = []
+    source_dir = src_dir()
+    logger.info("Source directory : %s", source_dir)
+    if (source_dir == '/Users' or source_dir == '/home'):
+        users = os.listdir(source_dir)
         for i in range(len(users)):
 	    if platform.system() == "Darwin":
-            	scanDir = "/Users/" + users[i] + "/public_html"
+            	scan_dir = "/Users/" + users[i] + "/public_html"
 	    elif platform.system() == "Linux":
-            	scanDir = "/home/" + users[i] + "/public_html"
-            if os.path.exists(scanDir):
-                 totalFiles = numOfFiles(scanDir)
+            	scan_dir = "/home/" + users[i] + "/public_html"
+            if os.path.exists(scan_dir):
+                 totalFiles = numOfFiles(scan_dir)
                  if totalFiles == 0:
-                     inactiveAccounts.append(users[i])
+                     inactive_accounts.append(users[i])
                  else:
-                     activeAccounts.append(users[i])
+                     active_accounts.append(users[i])
             else:
                 logger.info("public_html directory for the user %s does not exists.", users[i])
-                unusedAccounts.append(users[i]) 
-        print "Unused accounts : " + str(unusedAccounts)
-        print "Inactive accounts : " + str(inactiveAccounts)
-        print "Active accounts : " + str(activeAccounts)
+                unused_accounts.append(users[i]) 
+        print "Unused accounts : " + str(unused_accounts)
+        print "Inactive accounts : " + str(inactive_accounts)
+        print "Active accounts : " + str(active_accounts)
     else:
-        logger.info("Number of directories and files in %s directory is/are : %s\n\n", sourceDir, numOfFiles(sourceDir))
+        logger.info("Number of directories and files in %s directory is/are : %s\n\n", source_dir, numOfFiles(source_dir))
         
     
 
