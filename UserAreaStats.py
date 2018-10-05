@@ -150,7 +150,6 @@ def main():
         logger.info("Number of directories and files in %s directory is/are : %s\n\n", SOURCE_DIR, num_of_files(SOURCE_DIR))
 
 
-
 # Executing the script.
 if __name__ == "__main__":
     main()
