@@ -34,7 +34,7 @@ def is_valid_directory(parser, arg):
         return arg
  
 
-def is_valid_loggingStatus(parser, arg):
+def is_valid_logging_status(parser, arg):
     "Function for checking logging status is valid or not."
     if not (arg == 'on' or arg == 'off'):
         parser.error('{} is not a valid input for turning logging on or off! Please specify \"on\" for turning logging on and \"off\" for turning logging off.'.format(arg))
@@ -45,7 +45,7 @@ def is_valid_loggingStatus(parser, arg):
 parser = argparse.ArgumentParser(description='Purpose - This script is useful for finding the number of files in a given directory and if the source directory is not specified on the CLI then it will give the number of files in the public_html user area and also tells if a user does not have public_html directory.', formatter_class=RawTextHelpFormatter)
 parser.add_argument('-s', '--source_directory', help='Directory to read input files.', metavar='<Source Directory>', type=lambda x: is_valid_directory(parser, x))
 parser.add_argument('-l', '--log_file', help='Path of the log file.', metavar='<Log File>')
-parser.add_argument('-ls', '--logging_onoff', help='Logging status On/Off', metavar='<Logging on/off>', type=lambda x: is_valid_loggingStatus(parser, x))
+parser.add_argument('-ls', '--logging_onoff', help='Logging status On/Off', metavar='<Logging on/off>', type=lambda x: is_valid_logging_status(parser, x))
 args = parser.parse_args()
 
 
@@ -54,13 +54,13 @@ args = parser.parse_args()
 subprocess.call('clear')
 
 ## =========> Logging Configurations -- starts <========= ##
-loggerFile = args.log_file
+LOGGER_FILE = args.log_file
 loggingStatus = args.logging_onoff
 
-if not loggerFile:
-    Log_File = '/tmp/DirStats.log'
+if not LOGGER_FILE:
+    LOG_FILE = '/tmp/DirStats.log'
 else:
-    Log_File = loggerFile + ".log"
+    LOG_FILE = LOGGER_FILE + ".log"
 
 # create logger
 logger = logging.getLogger('DirStats')
@@ -76,7 +76,7 @@ else:
     logger.disabled = False
 
 # add a file handler
-fileHandler = logging.FileHandler(Log_File)
+fileHandler = logging.FileHandler(LOG_FILE)
 fileHandler.setLevel(logging.DEBUG)
 
 # create console handler and set level to debug
@@ -96,9 +96,8 @@ logger.addHandler(consoleHandler)
 
 ## =========> Logging Configurations -- ends <========= ##
 
-source_dir = args.source_directory
-devnull = open('/dev/null', 'w')
-                
+SOURCE_DIR = args.source_directory
+
 
 def src_dir():
     '''Function for returning the source directory'''
@@ -109,16 +108,16 @@ def src_dir():
         logger.info("Operating System detected : Mac")
         src_dir = "/Users"
     elif platform.system() == "Linux":
-	logger.info("Operating System detected : Mac")
+        logger.info("Operating System detected : Mac")
         src_dir = "/home"
     return src_dir
 
 
-def numOfFiles(src_dir):
-    '''Function to return number of files 
+def num_of_files(src_dir):
+    '''Function to return number of files
        and directories in a specified directory.'''
-    listAll = os.listdir(src_dir)
-    return len(listAll)
+    list_all = os.listdir(src_dir)
+    return len(list_all)
 
 
 def main():
@@ -126,32 +125,32 @@ def main():
     unused_accounts = []
     active_accounts = []
     inactive_accounts = []
-    source_dir = src_dir()
-    logger.info("Source directory : %s", source_dir)
-    if (source_dir == '/Users' or source_dir == '/home'):
-        users = os.listdir(source_dir)
+    SOURCE_DIR = src_dir()
+    logger.info("Source directory : %s", SOURCE_DIR)
+    if (SOURCE_DIR == '/Users' or SOURCE_DIR == '/home'):
+        users = os.listdir(SOURCE_DIR)
         for i in range(len(users)):
-	    if platform.system() == "Darwin":
-            	scan_dir = "/Users/" + users[i] + "/public_html"
-	    elif platform.system() == "Linux":
-            	scan_dir = "/home/" + users[i] + "/public_html"
+            if platform.system() == "Darwin":
+                scan_dir = "/Users/" + users[i] + "/public_html"
+            elif platform.system() == "Linux":
+                scan_dir = "/home/" + users[i] + "/public_html"
             if os.path.exists(scan_dir):
-                 totalFiles = numOfFiles(scan_dir)
-                 if totalFiles == 0:
-                     inactive_accounts.append(users[i])
-                 else:
-                     active_accounts.append(users[i])
+                total_files = num_of_files(scan_dir)
+                if total_files == 0:
+                    inactive_accounts.append(users[i])
+                else:
+                    active_accounts.append(users[i])
             else:
                 logger.info("public_html directory for the user %s does not exists.", users[i])
-                unused_accounts.append(users[i]) 
+                unused_accounts.append(users[i])
         print "Unused accounts : " + str(unused_accounts)
         print "Inactive accounts : " + str(inactive_accounts)
         print "Active accounts : " + str(active_accounts)
     else:
-        logger.info("Number of directories and files in %s directory is/are : %s\n\n", source_dir, numOfFiles(source_dir))
-        
-    
+        logger.info("Number of directories and files in %s directory is/are : %s\n\n", SOURCE_DIR, num_of_files(SOURCE_DIR))
 
-# Executing the script. 
+
+
+# Executing the script.
 if __name__ == "__main__":
     main()
