@@ -18,9 +18,9 @@
 
 import os
 import logging
-import argparse
 import platform
 import subprocess
+import argparse
 from argparse import RawTextHelpFormatter
 
 
@@ -42,11 +42,11 @@ def is_valid_logging_status(parser, arg):
         return arg
 
 ## =========> Command line arguments parsing -- starts <========= ##
-parser = argparse.ArgumentParser(description='Purpose - This script is useful for finding the number of files in a given directory and if the source directory is not specified on the CLI then it will give the number of files in the public_html user area and also tells if a user does not have public_html directory.', formatter_class=RawTextHelpFormatter)
-parser.add_argument('-s', '--source_directory', help='Directory to read input files.', metavar='<Source Directory>', type=lambda x: is_valid_directory(parser, x))
-parser.add_argument('-l', '--log_file', help='Path of the log file.', metavar='<Log File>')
-parser.add_argument('-ls', '--logging_onoff', help='Logging status On/Off', metavar='<Logging on/off>', type=lambda x: is_valid_logging_status(parser, x))
-args = parser.parse_args()
+PARSER = argparse.ArgumentParser(description='Purpose - This script is useful for finding the number of files in a given directory and if the source directory is not specified on the CLI then it will give the number of files in the public_html user area and also tells if a user does not have public_html directory.', formatter_class=RawTextHelpFormatter)
+PARSER.add_argument('-s', '--source_directory', help='Directory to read input files.', metavar='<Source Directory>', type=lambda x: is_valid_directory(PARSER, x))
+PARSER.add_argument('-l', '--log_file', help='Path of the log file.', metavar='<Log File>')
+PARSER.add_argument('-ls', '--logging_onoff', help='Logging status On/Off', metavar='<Logging on/off>', type=lambda x: is_valid_logging_status(PARSER, x))
+ARGS = PARSER.parse_args()
 
 
 ## =========> Command line arguments parsing -- ends <========= ##
@@ -54,8 +54,8 @@ args = parser.parse_args()
 subprocess.call('clear')
 
 ## =========> Logging Configurations -- starts <========= ##
-LOGGER_FILE = args.log_file
-loggingStatus = args.logging_onoff
+LOGGER_FILE = ARGS.log_file
+LOGGING_STATUS = ARGS.logging_onoff
 
 if not LOGGER_FILE:
     LOG_FILE = '/tmp/DirStats.log'
@@ -63,52 +63,52 @@ else:
     LOG_FILE = LOGGER_FILE + ".log"
 
 # create logger
-logger = logging.getLogger('DirStats')
-logger.setLevel(logging.DEBUG)
+LOGGER = logging.getLogger('DirStats')
+LOGGER.setLevel(logging.DEBUG)
 
 # Turning logging on or off
-if loggingStatus:
-    if loggingStatus == 'off':
-        logger.disabled = True
+if LOGGING_STATUS:
+    if LOGGING_STATUS == 'off':
+        LOGGER.disabled = True
     else:
-        logger.disabled = False
+        LOGGER.disabled = False
 else:
-    logger.disabled = False
+    LOGGER.disabled = False
 
 # add a file handler
-fileHandler = logging.FileHandler(LOG_FILE)
-fileHandler.setLevel(logging.DEBUG)
+FILE_HANDLER = logging.FileHandler(LOG_FILE)
+FILE_HANDLER.setLevel(logging.DEBUG)
 
 # create console handler and set level to debug
-consoleHandler = logging.StreamHandler()
-consoleHandler.setLevel(logging.DEBUG)
+CONSOLE_HANDLER = logging.StreamHandler()
+CONSOLE_HANDLER.setLevel(logging.DEBUG)
 
 # create formatter
-formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+FORMATTER = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 
 # add formatter to handlers
-fileHandler.setFormatter(formatter)
-consoleHandler.setFormatter(formatter)
+FILE_HANDLER.setFormatter(FORMATTER)
+CONSOLE_HANDLER.setFormatter(FORMATTER)
 
 # add ch to logger
-logger.addHandler(fileHandler)
-logger.addHandler(consoleHandler)
+LOGGER.addHandler(FILE_HANDLER)
+LOGGER.addHandler(CONSOLE_HANDLER)
 
 ## =========> Logging Configurations -- ends <========= ##
 
-SOURCE_DIR = args.source_directory
+SOURCE_DIR = ARGS.source_directory
 
 
 def src_dir():
     '''Function for returning the source directory'''
     src_dir = ""
-    if args.source_directory:
-        src_dir = args.source_directory
+    if ARGS.source_directory:
+        src_dir = ARGS.source_directory
     elif platform.system() == "Darwin":
-        logger.info("Operating System detected : Mac")
+        LOGGER.info("Operating System detected : Mac")
         src_dir = "/Users"
     elif platform.system() == "Linux":
-        logger.info("Operating System detected : Mac")
+        LOGGER.info("Operating System detected : Mac")
         src_dir = "/home"
     return src_dir
 
@@ -126,7 +126,7 @@ def main():
     active_accounts = []
     inactive_accounts = []
     SOURCE_DIR = src_dir()
-    logger.info("Source directory : %s", SOURCE_DIR)
+    LOGGER.info("Source directory : %s", SOURCE_DIR)
     if (SOURCE_DIR == '/Users' or SOURCE_DIR == '/home'):
         users = os.listdir(SOURCE_DIR)
         for i in range(len(users)):
@@ -141,13 +141,13 @@ def main():
                 else:
                     active_accounts.append(users[i])
             else:
-                logger.info("public_html directory for the user %s does not exists.", users[i])
+                LOGGER.info("public_html directory for the user %s does not exists.", users[i])
                 unused_accounts.append(users[i])
         print "Unused accounts : " + str(unused_accounts)
         print "Inactive accounts : " + str(inactive_accounts)
         print "Active accounts : " + str(active_accounts)
     else:
-        logger.info("Number of directories and files in %s directory is/are : %s\n\n", SOURCE_DIR, num_of_files(SOURCE_DIR))
+        LOGGER.info("Number of directories and files in %s directory is/are : %s\n\n", SOURCE_DIR, num_of_files(SOURCE_DIR))
 
 
 # Executing the script.
