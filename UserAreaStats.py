@@ -99,11 +99,11 @@ LOGGER.addHandler(CONSOLE_HANDLER)
 SOURCE_DIR = ARGS.source_directory
 
 
-def src_dir():
+def source_dir():
     '''Function for returning the source directory'''
     src_dir = ""
-    if ARGS.source_directory:
-        src_dir = ARGS.source_directory
+    if SOURCE_DIR:
+        src_dir = SOURCE_DIR
     elif platform.system() == "Darwin":
         LOGGER.info("Operating System detected : Mac")
         src_dir = "/Users"
@@ -113,10 +113,10 @@ def src_dir():
     return src_dir
 
 
-def num_of_files(src_dir):
+def num_of_files(source_dir):
     '''Function to return number of files
        and directories in a specified directory.'''
-    list_all = os.listdir(src_dir)
+    list_all = os.listdir(source_dir)
     return len(list_all)
 
 
@@ -125,7 +125,7 @@ def main():
     unused_accounts = []
     active_accounts = []
     inactive_accounts = []
-    SOURCE_DIR = src_dir()
+    SOURCE_DIR = source_dir()
     LOGGER.info("Source directory : %s", SOURCE_DIR)
     if (SOURCE_DIR == '/Users' or SOURCE_DIR == '/home'):
         users = os.listdir(SOURCE_DIR)
