@@ -32,7 +32,7 @@ def is_valid_directory(parser, arg):
     else:
         # File exists so return the directory
         return arg
- 
+
 
 def is_valid_logging_status(parser, arg):
     "Function for checking logging status is valid or not."
@@ -121,7 +121,7 @@ def num_of_files(source_dir):
 
 
 def main():
-    ## Start execution of the main program
+    '''Start execution of the main program.'''
     unused_accounts = []
     active_accounts = []
     inactive_accounts = []
