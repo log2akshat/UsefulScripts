@@ -148,17 +148,17 @@ logger.addHandler(consoleHandler)
 def parseText():
     # Function to parse the text
     # cat filename | awk 'f;/------/{f=1}' | sed '/--/q' | head -n-2 | awk '{print $1}' | paste -d" " -s
-    catCmd = subprocess.Popen(['cat', str(textFileLocation())], stdout=subprocess.PIPE,)
-    awkCmd = subprocess.Popen(['awk', 'f;/------/{f=1}'], stdin=catCmd.stdout, stdout=subprocess.PIPE,)
-    sedCmd = subprocess.Popen(['sed', '/--/q'], stdin=awkCmd.stdout, stdout=subprocess.PIPE,)
-    headCmd = subprocess.Popen(['head', '-n-2'], stdin=sedCmd.stdout, stdout=subprocess.PIPE,)
-    awkCol = subprocess.Popen(['awk', '{print $1}'], stdin=headCmd.stdout, stdout=subprocess.PIPE,)
-    pasteCmd = subprocess.Popen(['paste', '-d ', '-s'], stdin=awkCol.stdout, stdout=subprocess.PIPE,)
-    awkCol.stdout.close()
-    parsedText = pasteCmd.communicate()[0].strip()
-    print parsedText
-    if parsedText:
-        return parsedText
+    cat_cmd = subprocess.Popen(['cat', str(textFileLocation())], stdout=subprocess.PIPE,)
+    awk_cmd = subprocess.Popen(['awk', 'f;/------/{f=1}'], stdin=cat_cmd.stdout, stdout=subprocess.PIPE,)
+    sed_cmd = subprocess.Popen(['sed', '/--/q'], stdin=awk_cmd.stdout, stdout=subprocess.PIPE,)
+    head_cmd = subprocess.Popen(['head', '-n-2'], stdin=sed_cmd.stdout, stdout=subprocess.PIPE,)
+    awk_col = subprocess.Popen(['awk', '{print $1}'], stdin=head_cmd.stdout, stdout=subprocess.PIPE,)
+    paste_cmd = subprocess.Popen(['paste', '-d ', '-s'], stdin=awk_col.stdout, stdout=subprocess.PIPE,)
+    awk_col.stdout.close()
+    parsed_text = paste_cmd.communicate()[0].strip()
+    print parsed_text
+    if parsed_text:
+        return parsed_text
     else:
         return
 
