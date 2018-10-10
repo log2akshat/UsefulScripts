@@ -170,7 +170,7 @@ def main():
         except OSError, e:
             print ("Error : %s - %s." % (e.filename, e.strerror))
             logger.error("Error : %s - %s" % (e.filename, e.strerror))
-            pass
+ 
     cwd = os.getcwd()
     os.chdir(cwd)
     logger.info("Extracting text from the URL / html file.")
