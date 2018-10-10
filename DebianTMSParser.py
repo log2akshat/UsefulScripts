@@ -158,8 +158,6 @@ def parseText():
     print parsed_text
     if parsed_text:
         return parsed_text
-    else:
-        return
 
 
 def main():
