@@ -25,7 +25,6 @@ import urllib2
 import logging
 import argparse
 import subprocess
-import html2text
 
 # Command line argument validation functions...
 def is_valid_file(parser, arg):
