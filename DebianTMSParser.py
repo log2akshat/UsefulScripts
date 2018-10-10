@@ -21,12 +21,11 @@
 
 import os
 import sys
-import html2text
 import urllib2
 import logging
 import argparse
 import subprocess
-from urllib import pathname2url, url2pathname
+import html2text
 
 # Command line argument validation functions...
 def is_valid_file(parser, arg):
