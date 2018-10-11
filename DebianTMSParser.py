@@ -67,11 +67,11 @@ parser.add_argument('-u','--url_path', help='URL of HTML file.', metavar='<URL>'
 parser.add_argument('-t','--textFile_path', help='Path of the text file.', metavar='<Text File Path>')
 parser.add_argument('-l','--log_file', help='Path of the log file.', metavar='<Log File>')
 parser.add_argument('-ls', '--logging_onoff', help='Logging status On/Off', metavar='<Logging on/off>', type=lambda x: is_valid_loggingStatus(parser, x))
-args = parser.parse_args()
+ARGS = parser.parse_args()
 
-HTMLFile = args.file_path
-urlPattern = args.url_path
-textFile = args.textFile_path
+HTMLFile = ARGS.file_path
+urlPattern = ARGS.url_path
+textFile = ARGS.textFile_path
 devnull =  open('/dev/null', 'w')
 
 if str(HTMLFile) == "None" and str(urlPattern) == "None":
@@ -84,7 +84,7 @@ def fileAddress():
         URL = HTMLFile
     elif urlPattern != None:
         URL = urlPattern
-    logger.debug("URL : %s" % str(URL))
+    LOGGER.debug("URL : %s" % str(URL))
     return URL
 
 def textFileLocation():
@@ -93,53 +93,52 @@ def textFileLocation():
         textFileLoc = textFile
     else:
         textFileLoc = '/tmp/TestingMigrationSummary.txt'
-    logger.debug("Temporary File : %s" % str(textFileLoc))
+    LOGGER.debug("Temporary File : %s" % str(textFileLoc))
     return textFileLoc
 
 ## =========> Command line arguments parsing -- ends <========= ##
 
 
 ## =========> Logging Configurations -- starts <========= ##
-loggerFile = args.log_file
-loggingStatus = args.logging_onoff
+LOGGER_FILE = ARGS.log_file
+LOGGING_STATUS = ARGS.logging_onoff
 
-if not loggerFile:
-    Log_File = '/tmp/HTMLParser.log'
+if not LOGGER_FILE:
+    LOG_FILE = '/tmp/DirStats.log'
 else:
-    Log_File = loggerFile + ".log"
+    LOG_FILE = LOGGER_FILE + ".log"
 
 # create logger
-logger = logging.getLogger('HTMLParser')
-logger.setLevel(logging.DEBUG)
+LOGGER = logging.getLogger('DirStats')
+LOGGER.setLevel(logging.DEBUG)
 
 # Turning logging on or off
-if loggingStatus:
-    if loggingStatus == 'off':
-        logger.disabled = True
+if LOGGING_STATUS:
+    if LOGGING_STATUS == 'off':
+        LOGGER.disabled = True
     else:
-        logger.disabled = False
+        LOGGER.disabled = False
 else:
-    logger.disabled = False
+    LOGGER.disabled = False
 
 # add a file handler
-fileHandler = logging.FileHandler(Log_File)
-fileHandler.setLevel(logging.DEBUG)
+FILE_HANDLER = logging.FileHandler(LOG_FILE)
+FILE_HANDLER.setLevel(logging.DEBUG)
 
 # create console handler and set level to debug
-consoleHandler = logging.StreamHandler()
-consoleHandler.setLevel(logging.DEBUG)
+CONSOLE_HANDLER = logging.StreamHandler()
+CONSOLE_HANDLER.setLevel(logging.DEBUG)
 
 # create formatter
-formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+FORMATTER = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 
 # add formatter to handlers
-fileHandler.setFormatter(formatter)
-consoleHandler.setFormatter(formatter)
+FILE_HANDLER.setFormatter(FORMATTER)
+CONSOLE_HANDLER.setFormatter(FORMATTER)
 
 # add ch to logger
-logger.addHandler(fileHandler)
-logger.addHandler(consoleHandler)
-
+LOGGER.addHandler(FILE_HANDLER)
+LOGGER.addHandler(CONSOLE_HANDLER)
 ## =========> Logging Configurations -- ends <========= ##
 
 
@@ -166,18 +165,18 @@ def main():
             os.remove(str(textFileLocation()))
         except OSError, e:
             print ("Error : %s - %s." % (e.filename, e.strerror))
-            logger.error("Error : %s - %s" % (e.filename, e.strerror))
+            LOGGER.error("Error : %s - %s" % (e.filename, e.strerror))
  
     cwd = os.getcwd()
     os.chdir(cwd)
-    logger.info("Extracting text from the URL / html file.")
+    LOGGER.info("Extracting text from the URL / html file.")
     parseCmd = subprocess.Popen(['python', cwd + '/html2text.py', str(fileAddress())], stdout=subprocess.PIPE,)
     teeCmd = subprocess.Popen(['tee', '-a', str(textFileLocation())], stdin=parseCmd.stdout, stdout=devnull)
     parseCmd.stdout.close()
     teeCmd.communicate()
-    logger.info("Extracting of text completed from the html file.")
+    LOGGER.info("Extracting of text completed from the html file.")
     #os.system("%s/html2text.py %s" % (cwd, str(fileAddress())))
-    logger.info("Going to parse the text.")
+    LOGGER.info("Going to parse the text.")
     parseText()
 
 
