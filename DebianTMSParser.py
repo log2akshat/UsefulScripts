@@ -163,17 +163,17 @@ def main():
     if os.path.exists(str(textFileLocation())):
         try:
             os.remove(str(textFileLocation()))
-        except OSError, e:
-            print ("Error : %s - %s." % (e.filename, e.strerror))
-            LOGGER.error("Error : %s - %s" % (e.filename, e.strerror))
+        except OSError, exception:
+            print ("Error : %s - %s." % (exception.filename, exception.strerror))
+            LOGGER.error("Error : %s - %s" % (exception.filename, exception.strerror))
  
     cwd = os.getcwd()
     os.chdir(cwd)
     LOGGER.info("Extracting text from the URL / html file.")
-    parseCmd = subprocess.Popen(['python', cwd + '/html2text.py', str(fileAddress())], stdout=subprocess.PIPE,)
-    teeCmd = subprocess.Popen(['tee', '-a', str(textFileLocation())], stdin=parseCmd.stdout, stdout=devnull)
-    parseCmd.stdout.close()
-    teeCmd.communicate()
+    parse_cmd = subprocess.Popen(['python', cwd + '/html2text.py', str(fileAddress())], stdout=subprocess.PIPE,)
+    tee_cmd = subprocess.Popen(['tee', '-a', str(textFileLocation())], stdin=parse_cmd.stdout, stdout=devnull)
+    parse_cmd.stdout.close()
+    tee_cmd.communicate()
     LOGGER.info("Extracting of text completed from the html file.")
     #os.system("%s/html2text.py %s" % (cwd, str(fileAddress())))
     LOGGER.info("Going to parse the text.")
