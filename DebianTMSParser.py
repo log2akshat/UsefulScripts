@@ -79,13 +79,13 @@ if str(HTMLFile) == "None" and str(urlPattern) == "None":
     sys.exit()
 
 def fileAddress():
-    URL = ""
+    url = ""
     if HTMLFile != None:
-        URL = HTMLFile
+        url = HTMLFile
     elif urlPattern != None:
-        URL = urlPattern
-    LOGGER.debug("URL : %s" % str(URL))
-    return URL
+        url = urlPattern
+    LOGGER.debug("URL : %s" % str(url))
+    return url
 
 def text_file_location():
     text_file_loc = ""
