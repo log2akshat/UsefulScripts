@@ -64,14 +64,14 @@ def is_valid_loggingStatus(parser, arg):
 parser = argparse.ArgumentParser(description='HTML File parser utility for parsing Debian Testing migration summary packages.')
 parser.add_argument('-f','--file_path', help='Path of HTML file.', metavar='<HTML File>', type=lambda x: is_valid_file(parser, x))
 parser.add_argument('-u','--url_path', help='URL of HTML file.', metavar='<URL>', type=lambda x: is_valid_url(parser, x))
-parser.add_argument('-t','--textFile_path', help='Path of the text file.', metavar='<Text File Path>')
+parser.add_argument('-t','--text_file_path', help='Path of the text file.', metavar='<Text File Path>')
 parser.add_argument('-l','--log_file', help='Path of the log file.', metavar='<Log File>')
 parser.add_argument('-ls', '--logging_onoff', help='Logging status On/Off', metavar='<Logging on/off>', type=lambda x: is_valid_loggingStatus(parser, x))
 ARGS = parser.parse_args()
 
 HTMLFile = ARGS.file_path
 urlPattern = ARGS.url_path
-textFile = ARGS.textFile_path
+text_file = ARGS.text_file_path
 devnull =  open('/dev/null', 'w')
 
 if str(HTMLFile) == "None" and str(urlPattern) == "None":
@@ -87,14 +87,14 @@ def fileAddress():
     LOGGER.debug("URL : %s" % str(URL))
     return URL
 
-def textFileLocation():
-    textFileLoc = ""
-    if textFile != None:
-        textFileLoc = textFile
+def text_file_location():
+    text_file_loc = ""
+    if text_file != None:
+        text_file_loc = text_file
     else:
-        textFileLoc = '/tmp/TestingMigrationSummary.txt'
-    LOGGER.debug("Temporary File : %s" % str(textFileLoc))
-    return textFileLoc
+        text_file_loc = '/tmp/TestingMigrationSummary.txt'
+    LOGGER.debug("Temporary File : %s" % str(text_file_loc))
+    return text_file_loc
 
 ## =========> Command line arguments parsing -- ends <========= ##
 
@@ -145,7 +145,7 @@ LOGGER.addHandler(CONSOLE_HANDLER)
 def parseText():
     # Function to parse the text
     # cat filename | awk 'f;/------/{f=1}' | sed '/--/q' | head -n-2 | awk '{print $1}' | paste -d" " -s
-    cat_cmd = subprocess.Popen(['cat', str(textFileLocation())], stdout=subprocess.PIPE,)
+    cat_cmd = subprocess.Popen(['cat', str(text_file_location())], stdout=subprocess.PIPE,)
     awk_cmd = subprocess.Popen(['awk', 'f;/------/{f=1}'], stdin=cat_cmd.stdout, stdout=subprocess.PIPE,)
     sed_cmd = subprocess.Popen(['sed', '/--/q'], stdin=awk_cmd.stdout, stdout=subprocess.PIPE,)
     head_cmd = subprocess.Popen(['head', '-n-2'], stdin=sed_cmd.stdout, stdout=subprocess.PIPE,)
@@ -160,9 +160,9 @@ def parseText():
 
 def main():
     # Delete the old file if exists
-    if os.path.exists(str(textFileLocation())):
+    if os.path.exists(str(text_file_location())):
         try:
-            os.remove(str(textFileLocation()))
+            os.remove(str(text_file_location()))
         except OSError, exception:
             print ("Error : %s - %s." % (exception.filename, exception.strerror))
             LOGGER.error("Error : %s - %s" % (exception.filename, exception.strerror))
@@ -171,7 +171,7 @@ def main():
     os.chdir(cwd)
     LOGGER.info("Extracting text from the URL / html file.")
     parse_cmd = subprocess.Popen(['python', cwd + '/html2text.py', str(fileAddress())], stdout=subprocess.PIPE,)
-    tee_cmd = subprocess.Popen(['tee', '-a', str(textFileLocation())], stdin=parse_cmd.stdout, stdout=devnull)
+    tee_cmd = subprocess.Popen(['tee', '-a', str(text_file_location())], stdin=parse_cmd.stdout, stdout=devnull)
     parse_cmd.stdout.close()
     tee_cmd.communicate()
     LOGGER.info("Extracting of text completed from the html file.")
