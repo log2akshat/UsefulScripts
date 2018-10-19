@@ -69,28 +69,30 @@ PARSER.add_argument('-l', '--log_file', help='Path of the log file.', metavar='<
 PARSER.add_argument('-ls', '--logging_onoff', help='Logging status On/Off', metavar='<Logging on/off>', type=lambda x: is_valid_loggingStatus(PARSER, x))
 ARGS = PARSER.parse_args()
 
-HTMLFile = ARGS.file_path
-urlPattern = ARGS.url_path
-text_file = ARGS.text_file_path
-dev_null = open('/dev/null', 'w')
+HTML_FILE = ARGS.file_path
+URL_PATTERN = ARGS.url_path
+TEXT_FILE = ARGS.text_file_path
+DEV_NULL = open('/dev/null', 'w')
 
-if str(HTMLFile) == "None" and str(urlPattern) == "None":
+if str(HTML_FILE) == "None" and str(URL_PATTERN) == "None":
     os.system("python " + sys.argv[0] + " -h")
     sys.exit()
 
+
 def fileAddress():
     url = ""
-    if HTMLFile != None:
-        url = HTMLFile
-    elif urlPattern != None:
-        url = urlPattern
+    if HTML_FILE != None:
+        url = HTML_FILE
+    elif URL_PATTERN != None:
+        url = URL_PATTERN
     LOGGER.debug("URL : %s" % str(url))
     return url
 
+
 def text_file_location():
     text_file_loc = ""
-    if text_file != None:
-        text_file_loc = text_file
+    if TEXT_FILE != None:
+        text_file_loc = TEXT_FILE
     else:
         text_file_loc = '/tmp/TestingMigrationSummary.txt'
     LOGGER.debug("Temporary File : %s" % str(text_file_loc))
@@ -171,7 +173,7 @@ def main():
     os.chdir(cwd)
     LOGGER.info("Extracting text from the URL / html file.")
     parse_cmd = subprocess.Popen(['python', cwd + '/html2text.py', str(fileAddress())], stdout=subprocess.PIPE,)
-    tee_cmd = subprocess.Popen(['tee', '-a', str(text_file_location())], stdin=parse_cmd.stdout, stdout=dev_null)
+    tee_cmd = subprocess.Popen(['tee', '-a', str(text_file_location())], stdin=parse_cmd.stdout, stdout=DEV_NULL)
     parse_cmd.stdout.close()
     tee_cmd.communicate()
     LOGGER.info("Extracting of text completed from the html file.")
