@@ -166,7 +166,6 @@ def main():
         try:
             os.remove(str(text_file_location()))
         except OSError, exception:
-            print ("Error : %s - %s." % (exception.filename, exception.strerror))
             LOGGER.error("Error : %s - %s" % (exception.filename, exception.strerror))
 
     cwd = os.getcwd()
