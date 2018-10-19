@@ -19,6 +19,8 @@
 ##   Date : 17 July 2015 (v1.0)
 ##   Dependency Needed : html2text (http://www.aaronsw.com/2002/html2text/)
 
+"""HTML File parser utility for parsing Debian Testing migration summary packages."""
+
 import os
 import sys
 import urllib2
@@ -80,6 +82,7 @@ if str(HTML_FILE) == "None" and str(URL_PATTERN) == "None":
 
 
 def fileAddress():
+    """Function for evaluating the source of url."""
     url = ""
     if HTML_FILE != None:
         url = HTML_FILE
@@ -90,6 +93,7 @@ def fileAddress():
 
 
 def text_file_location():
+    """Function for evaluating the path of the text file."""
     text_file_loc = ""
     if TEXT_FILE != None:
         text_file_loc = TEXT_FILE
@@ -145,7 +149,7 @@ LOGGER.addHandler(CONSOLE_HANDLER)
 
 
 def parseText():
-    # Function to parse the text
+    """Function to parse the text."""
     # cat filename | awk 'f;/------/{f=1}' | sed '/--/q' | head -n-2 | awk '{print $1}' | paste -d" " -s
     cat_cmd = subprocess.Popen(['cat', str(text_file_location())], stdout=subprocess.PIPE,)
     awk_cmd = subprocess.Popen(['awk', 'f;/------/{f=1}'], stdin=cat_cmd.stdout, stdout=subprocess.PIPE,)
@@ -161,7 +165,8 @@ def parseText():
 
 
 def main():
-    # Delete the old file if exists
+    """Main function""" 
+    # Delete the old file if exists.
     if os.path.exists(str(text_file_location())):
         try:
             os.remove(str(text_file_location()))
