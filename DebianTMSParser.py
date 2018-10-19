@@ -61,18 +61,18 @@ def is_valid_loggingStatus(parser, arg):
         return arg
 
 ## =========> Command line arguments parsing -- starts <========= ##
-parser = argparse.ArgumentParser(description='HTML File parser utility for parsing Debian Testing migration summary packages.')
-parser.add_argument('-f','--file_path', help='Path of HTML file.', metavar='<HTML File>', type=lambda x: is_valid_file(parser, x))
-parser.add_argument('-u','--url_path', help='URL of HTML file.', metavar='<URL>', type=lambda x: is_valid_url(parser, x))
-parser.add_argument('-t','--text_file_path', help='Path of the text file.', metavar='<Text File Path>')
-parser.add_argument('-l','--log_file', help='Path of the log file.', metavar='<Log File>')
-parser.add_argument('-ls', '--logging_onoff', help='Logging status On/Off', metavar='<Logging on/off>', type=lambda x: is_valid_loggingStatus(parser, x))
-ARGS = parser.parse_args()
+PARSER = argparse.ArgumentParser(description='HTML File parser utility for parsing Debian Testing migration summary packages.')
+PARSER.add_argument('-f', '--file_path', help='Path of HTML file.', metavar='<HTML File>', type=lambda x: is_valid_file(PARSER, x))
+PARSER.add_argument('-u', '--url_path', help='URL of HTML file.', metavar='<URL>', type=lambda x: is_valid_url(PARSER, x))
+PARSER.add_argument('-t', '--text_file_path', help='Path of the text file.', metavar='<Text File Path>')
+PARSER.add_argument('-l', '--log_file', help='Path of the log file.', metavar='<Log File>')
+PARSER.add_argument('-ls', '--logging_onoff', help='Logging status On/Off', metavar='<Logging on/off>', type=lambda x: is_valid_loggingStatus(PARSER, x))
+ARGS = PARSER.parse_args()
 
 HTMLFile = ARGS.file_path
 urlPattern = ARGS.url_path
 text_file = ARGS.text_file_path
-devnull =  open('/dev/null', 'w')
+dev_null = open('/dev/null', 'w')
 
 if str(HTMLFile) == "None" and str(urlPattern) == "None":
     os.system("python " + sys.argv[0] + " -h")
@@ -166,12 +166,12 @@ def main():
         except OSError, exception:
             print ("Error : %s - %s." % (exception.filename, exception.strerror))
             LOGGER.error("Error : %s - %s" % (exception.filename, exception.strerror))
- 
+
     cwd = os.getcwd()
     os.chdir(cwd)
     LOGGER.info("Extracting text from the URL / html file.")
     parse_cmd = subprocess.Popen(['python', cwd + '/html2text.py', str(fileAddress())], stdout=subprocess.PIPE,)
-    tee_cmd = subprocess.Popen(['tee', '-a', str(text_file_location())], stdin=parse_cmd.stdout, stdout=devnull)
+    tee_cmd = subprocess.Popen(['tee', '-a', str(text_file_location())], stdin=parse_cmd.stdout, stdout=dev_null)
     parse_cmd.stdout.close()
     tee_cmd.communicate()
     LOGGER.info("Extracting of text completed from the html file.")
