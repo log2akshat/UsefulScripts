@@ -33,9 +33,7 @@ def is_valid_file(parser, arg):
     "Function for checking file exists or not."
     if not os.path.isfile(arg):
         parser.error('The file {} does not exist!'.format(arg))
-    else:
-        # File exists so return the filename
-        return arg
+    return arg
 
 def is_valid_url(parser, arg):
     "Function for checking url exists or not."
@@ -59,8 +57,7 @@ def is_valid_loggingStatus(parser, arg):
     "Function for checking logging status is valid or not."
     if not (arg == 'on' or arg == 'off'):
         parser.error('{} is not a valid input for turning logging on or off! Please specify \"on\" for turning logging on and \"off\" for turning logging off.'.format(arg))
-    else:
-        return arg
+    return arg
 
 ## =========> Command line arguments parsing -- starts <========= ##
 PARSER = argparse.ArgumentParser(description='HTML File parser utility for parsing Debian Testing migration summary packages.')
@@ -159,13 +156,12 @@ def parseText():
     paste_cmd = subprocess.Popen(['paste', '-d ', '-s'], stdin=awk_col.stdout, stdout=subprocess.PIPE,)
     awk_col.stdout.close()
     parsed_text = paste_cmd.communicate()[0].strip()
-    print parsed_text
     if parsed_text:
         return parsed_text
 
 
 def main():
-    """Main function""" 
+    """Main function"""
     # Delete the old file if exists.
     if os.path.exists(str(text_file_location())):
         try:
