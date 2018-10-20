@@ -53,7 +53,7 @@ def is_valid_url(parser, arg):
         return arg
 
 
-def is_valid_loggingStatus(parser, arg):
+def is_valid_logging_status(parser, arg):
     "Function for checking logging status is valid or not."
     if not (arg == 'on' or arg == 'off'):
         parser.error('{} is not a valid input for turning logging on or off! Please specify \"on\" for turning logging on and \"off\" for turning logging off.'.format(arg))
@@ -65,7 +65,7 @@ PARSER.add_argument('-f', '--file_path', help='Path of HTML file.', metavar='<HT
 PARSER.add_argument('-u', '--url_path', help='URL of HTML file.', metavar='<URL>', type=lambda x: is_valid_url(PARSER, x))
 PARSER.add_argument('-t', '--text_file_path', help='Path of the text file.', metavar='<Text File Path>')
 PARSER.add_argument('-l', '--log_file', help='Path of the log file.', metavar='<Log File>')
-PARSER.add_argument('-ls', '--logging_onoff', help='Logging status On/Off', metavar='<Logging on/off>', type=lambda x: is_valid_loggingStatus(PARSER, x))
+PARSER.add_argument('-ls', '--logging_onoff', help='Logging status On/Off', metavar='<Logging on/off>', type=lambda x: is_valid_logging_status(PARSER, x))
 ARGS = PARSER.parse_args()
 
 HTML_FILE = ARGS.file_path
@@ -78,7 +78,7 @@ if str(HTML_FILE) == "None" and str(URL_PATTERN) == "None":
     sys.exit()
 
 
-def fileAddress():
+def file_address():
     """Function for evaluating the source of url."""
     url = ""
     if HTML_FILE != None:
@@ -145,7 +145,7 @@ LOGGER.addHandler(CONSOLE_HANDLER)
 ## =========> Logging Configurations -- ends <========= ##
 
 
-def parseText():
+def parse_text():
     """Function to parse the text."""
     # cat filename | awk 'f;/------/{f=1}' | sed '/--/q' | head -n-2 | awk '{print $1}' | paste -d" " -s
     cat_cmd = subprocess.Popen(['cat', str(text_file_location())], stdout=subprocess.PIPE,)
@@ -172,14 +172,14 @@ def main():
     cwd = os.getcwd()
     os.chdir(cwd)
     LOGGER.info("Extracting text from the URL / html file.")
-    parse_cmd = subprocess.Popen(['python', cwd + '/html2text.py', str(fileAddress())], stdout=subprocess.PIPE,)
+    parse_cmd = subprocess.Popen(['python', cwd + '/html2text.py', str(file_address())], stdout=subprocess.PIPE,)
     tee_cmd = subprocess.Popen(['tee', '-a', str(text_file_location())], stdin=parse_cmd.stdout, stdout=DEV_NULL)
     parse_cmd.stdout.close()
     tee_cmd.communicate()
     LOGGER.info("Extracting of text completed from the html file.")
-    #os.system("%s/html2text.py %s" % (cwd, str(fileAddress())))
+    #os.system("%s/html2text.py %s" % (cwd, str(file_address())))
     LOGGER.info("Going to parse the text.")
-    parseText()
+    parse_text()
 
 
 if __name__ == "__main__":
