@@ -29,17 +29,14 @@ def is_valid_directory(parser, arg):
     "Function for checking specfied directory exists or not."
     if not os.path.isdir(arg):
         parser.error('The directory {} does not exist!'.format(arg))
-    else:
-        # File exists so return the directory
-        return arg
+    return arg
 
 
 def is_valid_logging_status(parser, arg):
     "Function for checking logging status is valid or not."
     if not (arg == 'on' or arg == 'off'):
         parser.error('{} is not a valid input for turning logging on or off! Please specify \"on\" for turning logging on and \"off\" for turning logging off.'.format(arg))
-    else:
-        return arg
+    return arg
 
 ## =========> Command line arguments parsing -- starts <========= ##
 PARSER = argparse.ArgumentParser(description='Purpose - This script is useful for finding the number of files in a given directory and if the source directory is not specified on the CLI then it will give the number of files in the public_html user area and also tells if a user does not have public_html directory.', formatter_class=RawTextHelpFormatter)
