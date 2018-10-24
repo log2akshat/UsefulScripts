@@ -110,10 +110,10 @@ def source_dir():
     return src_dir
 
 
-def num_of_files(source_dir):
+def num_of_files(source_directory):
     '''Function to return number of files
        and directories in a specified directory.'''
-    list_all = os.listdir(source_dir)
+    list_all = os.listdir(source_directory)
     return len(list_all)
 
 
