@@ -36,7 +36,7 @@ parser.add_argument('-s', '--source_directory', help='Directory to read input fi
 parser.add_argument('-f', '--filename', help='Desired output file name.', required=True, metavar='<Output file names>')
 parser.add_argument('-l', '--log_file', help='Path of the log file.', metavar='<Log File>')
 parser.add_argument('-ls', '--logging_onoff', help='Logging status On/Off', metavar='<Logging on/off>', type=lambda x: is_valid_loggingStatus(parser, x))
-args = parser.parse_args()
+ARGS = parser.parse_args()
 ## =========> Command line arguments parsing -- ends <========= ##
 
 
@@ -83,8 +83,8 @@ LOGGER.addHandler(CONSOLE_HANDLER)
 
 ## =========> Logging Configurations -- ends <========= ##
 
-filepath = args.source_directory
-outfileName = args.filename
+filepath = ARGS.source_directory
+outfileName = ARGS.filename
 tmpFile = '/tmp/renameIM.txt'
 devnull = open('/dev/null', 'w')
 
