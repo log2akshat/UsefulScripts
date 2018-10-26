@@ -114,7 +114,7 @@ with open(tmpFile, 'r') as f:
                 extName = os.path.basename(fileName).split(".")[1]
 		imgpath = filepath + "/" + fileName
 		#print "Renaming " + imgpath + "..."
-		logger.info("Renaming file %s" % imgpath)
+		LOGGER.info("Renaming file %s" % imgpath)
                 os.rename(imgpath, filepath + "/" + outfileName + " (" + str(counter) + ")." + extName)
 		i = 0
 		fileName = ""
