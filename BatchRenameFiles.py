@@ -31,12 +31,18 @@ def is_valid_directory(parser, arg):
         # File exists so return the directory
         return arg
 
+def is_valid_logging_status(parser, arg):
+    "Function for checking logging status is valid or not."
+    if not (arg == 'on' or arg == 'off'):
+        parser.error('{} is not a valid input for turning logging on or off! Please specify \"on\" for turning logging on and \"off\" for turning logging off.'.format(arg))
+    return arg
+
 ## =========> Command line arguments parsing -- starts <========= ##
 parser = argparse.ArgumentParser(description='Batch renaming files utility...')
 parser.add_argument('-s', '--source_directory', help='Directory to read input files.', required=True, metavar='<Source Directory>', type=lambda x: is_valid_directory(parser, x))
 parser.add_argument('-f', '--filename', help='Desired output file name.', required=True, metavar='<Output file names>')
 parser.add_argument('-l', '--log_file', help='Path of the log file.', metavar='<Log File>')
-parser.add_argument('-ls', '--logging_onoff', help='Logging status On/Off', metavar='<Logging on/off>', type=lambda x: is_valid_loggingStatus(parser, x))
+parser.add_argument('-ls', '--logging_onoff', help='Logging status On/Off', metavar='<Logging on/off>', type=lambda x: is_valid_logging_status(parser, x))
 ARGS = parser.parse_args()
 ## =========> Command line arguments parsing -- ends <========= ##
 
