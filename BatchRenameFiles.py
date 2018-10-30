@@ -97,7 +97,7 @@ devnull = open('/dev/null', 'w')
 
 file = []
 # ls | sort --version-sort -f
-filterCall = subprocess.Popen(['ls', filepath],stdout=subprocess.PIPE)
+filterCall = subprocess.Popen(['ls', filepath], stdout=subprocess.PIPE)
 sortCmd = subprocess.Popen(['sort', '--version-sort', '-f'], stdin=filterCall.stdout, stdout=subprocess.PIPE)
 teeCmd = subprocess.Popen(['tee', tmpFile], stdin=sortCmd.stdout, stdout=devnull)
 sortCmd.stdout.close()
