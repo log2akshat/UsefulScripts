@@ -36,12 +36,12 @@ def is_valid_logging_status(parser, arg):
     return arg
 
 ## =========> Command line arguments parsing -- starts <========= ##
-parser = argparse.ArgumentParser(description='Batch renaming files utility...')
-parser.add_argument('-s', '--source_directory', help='Directory to read input files.', required=True, metavar='<Source Directory>', type=lambda x: is_valid_directory(parser, x))
-parser.add_argument('-f', '--filename', help='Desired output file name.', required=True, metavar='<Output file names>')
-parser.add_argument('-l', '--log_file', help='Path of the log file.', metavar='<Log File>')
-parser.add_argument('-ls', '--logging_onoff', help='Logging status On/Off', metavar='<Logging on/off>', type=lambda x: is_valid_logging_status(parser, x))
-ARGS = parser.parse_args()
+PARSER = argparse.ArgumentParser(description='Batch renaming files utility...')
+PARSER.add_argument('-s', '--source_directory', help='Directory to read input files.', required=True, metavar='<Source Directory>', type=lambda x: is_valid_directory(PARSER, x))
+PARSER.add_argument('-f', '--filename', help='Desired output file name.', required=True, metavar='<Output file names>')
+PARSER.add_argument('-l', '--log_file', help='Path of the log file.', metavar='<Log File>')
+PARSER.add_argument('-ls', '--logging_onoff', help='Logging status On/Off', metavar='<Logging on/off>', type=lambda x: is_valid_logging_status(PARSER, x))
+ARGS = PARSER.parse_args()
 ## =========> Command line arguments parsing -- ends <========= ##
 
 
