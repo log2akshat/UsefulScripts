@@ -88,25 +88,25 @@ LOGGER.addHandler(CONSOLE_HANDLER)
 
 ## =========> Logging Configurations -- ends <========= ##
 
-filepath = ARGS.source_directory
-outfileName = ARGS.filename
-tmpFile = '/tmp/renameIM.txt'
-devnull = open('/dev/null', 'w')
+FILEPATH = ARGS.source_directory
+OUT_FILENAME = ARGS.filename
+TMP_FILE = '/tmp/renameIM.txt'
+DEVNULL = open('/dev/null', 'w')
 
-file = []
+FILE = []
 # ls | sort --version-sort -f
-filterCall = subprocess.Popen(['ls', filepath], stdout=subprocess.PIPE)
-sortCmd = subprocess.Popen(['sort', '--version-sort', '-f'], stdin=filterCall.stdout, stdout=subprocess.PIPE)
-teeCmd = subprocess.Popen(['tee', tmpFile], stdin=sortCmd.stdout, stdout=devnull)
-sortCmd.stdout.close()
+filter_call = subprocess.Popen(['ls', FILEPATH], stdout=subprocess.PIPE)
+sort_cmd = subprocess.Popen(['sort', '--version-sort', '-f'], stdin=filter_call.stdout, stdout=subprocess.PIPE)
+tee_cmd = subprocess.Popen(['tee', TMP_FILE], stdin=sort_cmd.stdout, stdout=DEVNULL)
+sort_cmd.stdout.close()
 subprocess.call(['cat', 'tmpfile'])
 
 i = 0
 counter = 1
 fileName = ""
-pathfile = open(tmpFile, 'r')
-file = pathfile.read().splitlines()
-with open(tmpFile, 'r') as f:
+pathfile = open(TMP_FILE, 'r')
+FILE = pathfile.read().splitlines()
+with open(TMP_FILE, 'r') as f:
 	reader = csv.reader(f, delimiter=' ')
 	for row in reader:
 		pathRow = row[0:]
@@ -117,10 +117,10 @@ with open(tmpFile, 'r') as f:
 				i = i + 1
 		fileName = fileName.strip()
                 extName = os.path.basename(fileName).split(".")[1]
-		imgpath = filepath + "/" + fileName
+		imgpath = FILEPATH + "/" + fileName
 		#print "Renaming " + imgpath + "..."
 		LOGGER.info("Renaming file %s", imgpath)
-                os.rename(imgpath, filepath + "/" + outfileName + " (" + str(counter) + ")." + extName)
+                os.rename(imgpath, FILEPATH + "/" + OUT_FILENAME + " (" + str(counter) + ")." + extName)
 		i = 0
 		fileName = ""
 		counter = counter + 1
