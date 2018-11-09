@@ -95,15 +95,18 @@ DEVNULL = open('/dev/null', 'w')
 
 FILE = []
 # ls | sort --version-sort -f
-filter_call = subprocess.Popen(['ls', FILEPATH], stdout=subprocess.PIPE)
-sort_cmd = subprocess.Popen(['sort', '--version-sort', '-f'], stdin=filter_call.stdout, stdout=subprocess.PIPE)
-tee_cmd = subprocess.Popen(['tee', TMP_FILE], stdin=sort_cmd.stdout, stdout=DEVNULL)
-sort_cmd.stdout.close()
-subprocess.call(['cat', 'tmpfile'])
+def tmp_file():
+    filter_call = subprocess.Popen(['ls', FILEPATH], stdout=subprocess.PIPE)
+    sort_cmd = subprocess.Popen(['sort', '--version-sort', '-f'], stdin=filter_call.stdout, stdout=subprocess.PIPE)
+    tee_cmd = subprocess.Popen(['tee', TMP_FILE], stdin=sort_cmd.stdout, stdout=DEVNULL)
+    sort_cmd.stdout.close()
+    subprocess.call(['cat', 'tmpfile'])
+
 
 i = 0
 counter = 1
 fileName = ""
+tmp_file()
 pathfile = open(TMP_FILE, 'r')
 FILE = pathfile.read().splitlines()
 with open(TMP_FILE, 'r') as f:
