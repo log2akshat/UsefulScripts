@@ -98,7 +98,7 @@ FILE = []
 def tmp_file():
     filter_call = subprocess.Popen(['ls', FILEPATH], stdout=subprocess.PIPE)
     sort_cmd = subprocess.Popen(['sort', '--version-sort', '-f'], stdin=filter_call.stdout, stdout=subprocess.PIPE)
-    tee_cmd = subprocess.Popen(['tee', TMP_FILE], stdin=sort_cmd.stdout, stdout=DEVNULL)
+    subprocess.Popen(['tee', TMP_FILE], stdin=sort_cmd.stdout, stdout=DEVNULL)
     sort_cmd.stdout.close()
     subprocess.call(['cat', 'tmpfile'])
 
