@@ -93,7 +93,6 @@ OUT_FILENAME = ARGS.filename
 TMP_FILE = '/tmp/renameIM.txt'
 DEVNULL = open('/dev/null', 'w')
 
-FILE = []
 # ls | sort --version-sort -f
 def tmp_file():
     filter_call = subprocess.Popen(['ls', FILEPATH], stdout=subprocess.PIPE)
@@ -107,26 +106,24 @@ def main():
     '''Start execution of the main program.'''
     i = 0
     counter = 1
-    fileName = ""
+    file_name = ""
     tmp_file()
-    pathfile = open(TMP_FILE, 'r')
-    FILE = pathfile.read().splitlines()
-    with open(TMP_FILE, 'r') as f:
-        reader = csv.reader(f, delimiter=' ')
+    with open(TMP_FILE, 'r') as open_file:
+        reader = csv.reader(open_file, delimiter=' ')
         for row in reader:
-            pathRow = row[0:]
-            length = len(pathRow)
+            path_row = row[0:]
+            length = len(path_row)
             if i < length:
-                for x in pathRow:
-                    fileName = fileName + " " + pathRow[i]
+                for fpath in path_row:
+                    file_name = file_name + " " + path_row[i]
                     i = i + 1
-            fileName = fileName.strip()
-            extName = os.path.basename(fileName).split(".")[1]
-            imgpath = FILEPATH + "/" + fileName
+            file_name = file_name.strip()
+            ext_name = os.path.basename(file_name).split(".")[1]
+            imgpath = FILEPATH + "/" + file_name
             LOGGER.info("Renaming file %s", imgpath)
-            os.rename(imgpath, FILEPATH + "/" + OUT_FILENAME + " (" + str(counter) + ")." + extName)
+            os.rename(imgpath, FILEPATH + "/" + OUT_FILENAME + " (" + str(counter) + ")." + ext_name)
             i = 0
-            fileName = ""
+            file_name = ""
             counter = counter + 1
 
 
