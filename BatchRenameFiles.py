@@ -103,26 +103,33 @@ def tmp_file():
     subprocess.call(['cat', 'tmpfile'])
 
 
-i = 0
-counter = 1
-fileName = ""
-tmp_file()
-pathfile = open(TMP_FILE, 'r')
-FILE = pathfile.read().splitlines()
-with open(TMP_FILE, 'r') as f:
-    reader = csv.reader(f, delimiter=' ')
-    for row in reader:
-        pathRow = row[0:]
-        length = len(pathRow)
-        if i < length:
-            for x in pathRow:
-                fileName = fileName + " " + pathRow[i]
-                i = i + 1
-        fileName = fileName.strip()
-        extName = os.path.basename(fileName).split(".")[1]
-        imgpath = FILEPATH + "/" + fileName
-        LOGGER.info("Renaming file %s", imgpath)
-        os.rename(imgpath, FILEPATH + "/" + OUT_FILENAME + " (" + str(counter) + ")." + extName)
-        i = 0
-        fileName = ""
-        counter = counter + 1
+def main():
+    '''Start execution of the main program.'''
+    i = 0
+    counter = 1
+    fileName = ""
+    tmp_file()
+    pathfile = open(TMP_FILE, 'r')
+    FILE = pathfile.read().splitlines()
+    with open(TMP_FILE, 'r') as f:
+        reader = csv.reader(f, delimiter=' ')
+        for row in reader:
+            pathRow = row[0:]
+            length = len(pathRow)
+            if i < length:
+                for x in pathRow:
+                    fileName = fileName + " " + pathRow[i]
+                    i = i + 1
+            fileName = fileName.strip()
+            extName = os.path.basename(fileName).split(".")[1]
+            imgpath = FILEPATH + "/" + fileName
+            LOGGER.info("Renaming file %s", imgpath)
+            os.rename(imgpath, FILEPATH + "/" + OUT_FILENAME + " (" + str(counter) + ")." + extName)
+            i = 0
+            fileName = ""
+            counter = counter + 1
+
+
+# Executing the script.
+if __name__ == "__main__":
+    main()
