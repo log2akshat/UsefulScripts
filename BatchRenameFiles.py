@@ -115,7 +115,7 @@ def main():
             path_row = row[0:]
             length = len(path_row)
             if i < length:
-                for fpath in path_row:
+                for var in path_row:
                     file_name = file_name + " " + path_row[i]
                     i = i + 1
             file_name = file_name.strip()
