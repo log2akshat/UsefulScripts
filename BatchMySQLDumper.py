@@ -35,10 +35,8 @@ DB_HOST = 'localhost'
 DB_USER = 'root'
 DB_USER_PASSWORD = 'XXXXXXXXXXX'
 
-connection = MySQLdb.connect(
-                host = DB_HOST,
-                user = DB_USER,
-                passwd = DB_USER_PASSWORD)  # create the connection
+# Create the connection
+connection = MySQLdb.connect(host=DB_HOST, user=DB_USER, passwd=DB_USER_PASSWORD)
 
 cursor = connection.cursor()     # get the cursor
 cursor.execute("SHOW DATABASES")
@@ -62,7 +60,7 @@ def is_valid_loggingStatus(parser, arg):
 
 ## =========> Command line arguments parsing -- starts <========= ##
 parser = argparse.ArgumentParser(description='*********************************************************************************************************\n********************** |MySQLDumper - MySQL DB Dumping Utility.| **********************\n*********************************************************************************************************\n\n* This script will do the following task.\n\n* It will take the databse dump of the databases define in the array and save it in the deind directory.', formatter_class=RawTextHelpFormatter)
-parser.add_argument('-l','--log_file', help='Path of the log file.', metavar='<Log File>')
+parser.add_argument('-l', '--log_file', help='Path of the log file.', metavar='<Log File>')
 parser.add_argument('-ls', '--logging_onoff', help='Logging status On/Off', metavar='<Logging on/off>', type=lambda x: is_valid_loggingStatus(parser, x))
 args = parser.parse_args()
 
