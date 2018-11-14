@@ -62,60 +62,59 @@ def is_valid_loggingStatus(parser, arg):
 parser = argparse.ArgumentParser(description='*********************************************************************************************************\n********************** |MySQLDumper - MySQL DB Dumping Utility.| **********************\n*********************************************************************************************************\n\n* This script will do the following task.\n\n* It will take the databse dump of the databases define in the array and save it in the deind directory.', formatter_class=RawTextHelpFormatter)
 parser.add_argument('-l', '--log_file', help='Path of the log file.', metavar='<Log File>')
 parser.add_argument('-ls', '--logging_onoff', help='Logging status On/Off', metavar='<Logging on/off>', type=lambda x: is_valid_loggingStatus(parser, x))
-args = parser.parse_args()
+ARGS = parser.parse_args()
 
 ## =========> Command line arguments parsing -- ends <========= ##
 
 ## =========> Logging Configurations -- starts <========= ##
-loggerFile = args.log_file
-loggingStatus = args.logging_onoff
+LOGGER_FILE = ARGS.log_file
+LOGGING_STATUS = ARGS.logging_onoff
 
-logDirectory = "/var/log/"
+LOG_DIRECTORY = "/var/log/"
 
-if not loggerFile:
-    if not os.path.exists(logDirectory):
+if not LOGGER_FILE:
+    if not os.path.exists(LOG_DIRECTORY):
         os.makedirs(logDirectory)
-    Log_File = logDirectory + 'MySQLDumper.log'
+    LOG_FILE = '/tmp/MySQLDumper.log'
 else:
-    Log_File = loggerFile + ".log"
+    LOG_FILE = LOGGER_FILE + ".log"
 
 # create logger
-logger = logging.getLogger('MySQLDumper')
-logger.setLevel(logging.DEBUG)
+LOGGER = logging.getLogger('MySQLDumper')
+LOGGER.setLevel(logging.DEBUG)
 
 # Turning logging on or off
-if loggingStatus:
-    if loggingStatus == 'off':
-        logger.disabled = True
+if LOGGING_STATUS:
+    if LOGGING_STATUS == 'off':
+        LOGGER.disabled = True
     else:
-        logger.disabled = False
+        LOGGER.disabled = False
 else:
-    logger.disabled = False
+    LOGGER.disabled = False
 
 # add a file handler
-fileHandler = logging.FileHandler(Log_File)
-fileHandler.setLevel(logging.DEBUG)
+FILE_HANDLER = logging.FileHandler(LOG_FILE)
+FILE_HANDLER.setLevel(logging.DEBUG)
 
 # create console handler and set level to debug
-consoleHandler = logging.StreamHandler()
-consoleHandler.setLevel(logging.DEBUG)
+CONSOLE_HANDLER = logging.StreamHandler()
+CONSOLE_HANDLER.setLevel(logging.DEBUG)
 
 # create formatter
-formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+FORMATTER = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 
 # add formatter to handlers
-fileHandler.setFormatter(formatter)
-consoleHandler.setFormatter(formatter)
+FILE_HANDLER.setFormatter(FORMATTER)
+CONSOLE_HANDLER.setFormatter(FORMATTER)
 
 # add ch to logger
-logger.addHandler(fileHandler)
-logger.addHandler(consoleHandler)
+LOGGER.addHandler(FILE_HANDLER)
+LOGGER.addHandler(CONSOLE_HANDLER)
 
 ## =========> Logging Configurations -- ends <========= ##
 
-
 # Checking if backup directory already exists or not; if not it will create it.
-logger.info("Creating backup directory at %s..", BACKUPAREA)
+LOGGER.info("Creating backup directory at %s..", BACKUPAREA)
 if not os.path.exists(BACKUPAREA):
     os.makedirs(BACKUPAREA)
 
@@ -124,20 +123,20 @@ if not os.path.exists(BACKUPAREA):
 def DBDump():
     # Function for taking the database backups.
     for db in range(len(DB_NAMES)):
-        logger.info("Taking Backup of : %s database..", DB_NAMES[db])
+        LOGGER.info("Taking Backup of : %s database..", DB_NAMES[db])
         dumpcmd = "mysqldump -u " + DB_USER + " -h" + DB_HOST + " -p'" + DB_USER_PASSWORD + "' " + DB_NAMES[db] + " > " + BACKUPAREA + "/" + DB_NAMES[db] + ".sql"
         try:
             os.system(dumpcmd)
         except MySQLdb.Error as e:
-             logger.error('MySQL Error:' % e)
-    logger.info("Backup Finished.")
+             LOGGER.error('MySQL Error:' % e)
+    LOGGER.info("Backup Finished.")
     subprocess.call(['tar', 'zcvf', BACKUPAREA+".tar.gz", BACKUPAREA])
     try:
         shutil.rmtree(BACKUPAREA)
     except shutil.Error as e:
-        logger.error('Error in moving archive : %s' % e)
+        LOGGER.error('Error in moving archive : %s' % e)
     except IOError as e: # If source or destination doesn't exist
-        logger.error('IOError : %s' % e.strerror)
+        LOGGER.error('IOError : %s' % e.strerror)
 
 
 # Executing the script. 
