@@ -23,12 +23,11 @@
 import os
 import time
 import shutil
-import MySQLdb
 import logging
-import datetime
-import argparse
 import subprocess
+import argparse
 from argparse import RawTextHelpFormatter
+import MySQLdb
 
 # MySQL Credentials
 DB_HOST = 'localhost'
