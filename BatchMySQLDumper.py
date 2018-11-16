@@ -54,8 +54,7 @@ def is_valid_logging_status(parser, arg):
     "Function for checking logging status is valid or not."
     if not (arg == 'on' or arg == 'off'):
         parser.error('{} is not a valid input for turning logging on or off! Please specify \"on\" for turning logging on and \"off\" for turning logging off.'.format(arg))
-    else:
-        return arg
+    return arg
 
 ## =========> Command line arguments parsing -- starts <========= ##
 PARSER = argparse.ArgumentParser(description='*********************************************************************************************************\n********************** |MySQLDumper - MySQL DB Dumping Utility.| **********************\n*********************************************************************************************************\n\n* This script will do the following task.\n\n* It will take the databse dump of the databases define in the array and save it in the deind directory.', formatter_class=RawTextHelpFormatter)
