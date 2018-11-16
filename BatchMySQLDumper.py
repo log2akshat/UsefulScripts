@@ -50,7 +50,7 @@ BACKUP_DEST = '/Backup/BACKUPS/MySQLDUMPS/'
 TIMESTAMP = time.strftime('%d-%m-%Y_%H:%M:%S')
 BACKUPAREA = BACKUP_DEST + TIMESTAMP
 
-def is_valid_loggingStatus(parser, arg):
+def is_valid_logging_status(parser, arg):
     "Function for checking logging status is valid or not."
     if not (arg == 'on' or arg == 'off'):
         parser.error('{} is not a valid input for turning logging on or off! Please specify \"on\" for turning logging on and \"off\" for turning logging off.'.format(arg))
@@ -58,10 +58,10 @@ def is_valid_loggingStatus(parser, arg):
         return arg
 
 ## =========> Command line arguments parsing -- starts <========= ##
-parser = argparse.ArgumentParser(description='*********************************************************************************************************\n********************** |MySQLDumper - MySQL DB Dumping Utility.| **********************\n*********************************************************************************************************\n\n* This script will do the following task.\n\n* It will take the databse dump of the databases define in the array and save it in the deind directory.', formatter_class=RawTextHelpFormatter)
-parser.add_argument('-l', '--log_file', help='Path of the log file.', metavar='<Log File>')
-parser.add_argument('-ls', '--logging_onoff', help='Logging status On/Off', metavar='<Logging on/off>', type=lambda x: is_valid_loggingStatus(parser, x))
-ARGS = parser.parse_args()
+PARSER = argparse.ArgumentParser(description='*********************************************************************************************************\n********************** |MySQLDumper - MySQL DB Dumping Utility.| **********************\n*********************************************************************************************************\n\n* This script will do the following task.\n\n* It will take the databse dump of the databases define in the array and save it in the deind directory.', formatter_class=RawTextHelpFormatter)
+PARSER.add_argument('-l', '--log_file', help='Path of the log file.', metavar='<Log File>')
+PARSER.add_argument('-ls', '--logging_onoff', help='Logging status On/Off', metavar='<Logging on/off>', type=lambda x: is_valid_logging_status(PARSER, x))
+ARGS = PARSER.parse_args()
 
 ## =========> Command line arguments parsing -- ends <========= ##
 
