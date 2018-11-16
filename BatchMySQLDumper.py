@@ -72,7 +72,7 @@ LOG_DIRECTORY = "/var/log/"
 
 if not LOGGER_FILE:
     if not os.path.exists(LOG_DIRECTORY):
-        os.makedirs(logDirectory)
+        os.makedirs(LOG_DIRECTORY)
     LOG_FILE = '/tmp/MySQLDumper.log'
 else:
     LOG_FILE = LOGGER_FILE + ".log"
