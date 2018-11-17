@@ -126,15 +126,15 @@ def DBDump():
         try:
             os.system(dumpcmd)
         except MySQLdb.Error as e:
-             LOGGER.error('MySQL Error:' % e)
+             LOGGER.error('MySQL Error:', e)
     LOGGER.info("Backup Finished.")
     subprocess.call(['tar', 'zcvf', BACKUPAREA+".tar.gz", BACKUPAREA])
     try:
         shutil.rmtree(BACKUPAREA)
     except shutil.Error as e:
-        LOGGER.error('Error in moving archive : %s' % e)
+        LOGGER.error('Error in moving archive : %s', e)
     except IOError as e: # If source or destination doesn't exist
-        LOGGER.error('IOError : %s' % e.strerror)
+        LOGGER.error('IOError : %s', e.strerror)
 
 
 # Executing the script. 
