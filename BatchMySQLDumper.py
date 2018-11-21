@@ -37,13 +37,13 @@ DB_USER = 'root'
 DB_USER_PASSWORD = 'XXXXXXXXXXX'
 
 # Create the connection
-connection = MySQLdb.connect(host=DB_HOST, user=DB_USER, passwd=DB_USER_PASSWORD)
+CONNECTION = MySQLdb.connect(host=DB_HOST, user=DB_USER, passwd=DB_USER_PASSWORD)
 
-cursor = connection.cursor()     # get the cursor
-cursor.execute("SHOW DATABASES")
+CURSOR = CONNECTION.cursor()     # get the cursor
+CURSOR.execute("SHOW DATABASES")
 
 DB_NAMES = []
-for (databaseName,) in cursor:
+for (databaseName,) in CURSOR:
     if not (databaseName == 'mysql' or databaseName == 'information_schema' or databaseName == 'performance_schema'):
         DB_NAMES.append(databaseName)
 
