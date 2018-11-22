@@ -1,0 +1,68 @@
+ARG DOCKER_REPO_NS
+ARG DOCKER_BUILD_TAG
+FROM ${DOCKER_REPO_NS}/zmc-base:${DOCKER_BUILD_TAG}
+
+WORKDIR /tmp
+RUN apt-get install -y zimbra-mta
+RUN curl -k -L -O https://docker.zimbra.com.s3.amazonaws.com/staf/STAF3426-setup-linux-amd64-NoJVM.bin
+
+# special post install fixes
+# FIXME:
+# 1. AMAVISD refuses to start if myhostname does not have [.] in its FQDN
+# 2. After the services are started and are all up on the mta, zmconfigd is processing
+#    some ldap update and ends up leaving amavisd in a funky state; that is, the following
+#    are left not running: amavisd, zmamavisdctl. Details:
+# Host zmc-mta
+#         amavis                  Stopped
+#                 amavisd is not running.
+#         antispam                Stopped
+#                 zmamavisdctl is not running
+#         antivirus               Stopped
+#                 zmamavisdctl is not running
+#         archiving               Stopped
+#                 amavisd is not running.
+#                 zmamavisdctl is not running
+#         mta                     Running
+#         opendkim                Running
+#         stats                   Running
+#         zmconfigd               Running
+#
+Run sed -i -e 's/\(^[$]myhostname = \)\(.\)@@/\1\2localhost\2; #/' /opt/zimbra/conf/amavisd.conf.in && \
+    sed -i.bck -e 's/RESTART antivirus amavis mta/RESTART antivirus/' /opt/zimbra/conf/zmconfigd.cf
+
+WORKDIR /opt/zimbra
+COPY common/Zimbra/TaskDispatch.pm common/lib/perl5/Zimbra/TaskDispatch.pm
+COPY common/Zimbra/DockerLib.pm common/lib/perl5/Zimbra/DockerLib.pm
+COPY common/healthcheck.py healthcheck.py
+COPY common/logtailer.py logtailer.py
+COPY mta/entry-point.pl entry-point.pl
+RUN chmod +x entry-point.pl \
+    && chmod +x healthcheck.py \
+    && chmod +x logtailer.py
+RUN perl -c entry-point.pl
+
+USER zimbra
+RUN /opt/zimbra/bin/zmlocalconfig -e allow_unauthed_ping=true
+
+USER root
+ENV JAVA_HOME /opt/zimbra/common/lib/jvm/java/jre/bin
+ENV PATH "$PATH:$JAVA_HOME"
+WORKDIR /tmp
+RUN chmod +x STAF3426-setup-linux-amd64-NoJVM.bin \
+    && ./STAF3426-setup-linux-amd64-NoJVM.bin -i silent \
+    -DACCEPT_LICENSE=1 \
+    -DCHOSEN_INSTALL_SET=Custom \
+    -DCHOSEN_INSTALL_FEATURE_LIST=STAF,ExtSvcs,Langs,Codepage \
+    && echo /usr/local/staf/lib > /etc/ld.so.conf.d/zzz-staf.conf \
+    && ldconfig
+ENV PATH "/usr/local/staf/bin:$PATH"
+RUN /usr/local/staf/startSTAFProc.sh \
+    && sleep 10 \
+    && /usr/local/staf/bin/staf local ping ping \
+    && /usr/local/staf/bin/staf local trust set default level 5
+
+USER zimbra
+WORKDIR /opt/zimbra
+
+ENTRYPOINT ./entry-point.pl
+EXPOSE 25 465 587
