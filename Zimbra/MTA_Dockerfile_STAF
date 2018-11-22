@@ -61,7 +61,6 @@ RUN /usr/local/staf/startSTAFProc.sh \
     && /usr/local/staf/bin/staf local ping ping \
     && /usr/local/staf/bin/staf local trust set default level 5
 
-USER zimbra
 WORKDIR /opt/zimbra
 
 ENTRYPOINT ./entry-point.pl
