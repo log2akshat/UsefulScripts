@@ -53,7 +53,6 @@ RUN /usr/local/staf/startSTAFProc.sh \
     && /usr/local/staf/bin/staf local trust set default level 5
 
 WORKDIR /opt/zimbra
-USER zimbra
 
 ENTRYPOINT ./entry-point.pl
 EXPOSE 110 143 993 995 80 443 8080 8443 7071 7073
