@@ -120,7 +120,7 @@ if not os.path.exists(BACKUPAREA):
 
 
 # Start taking the databases backup..
-def DBDump():
+def db_dump():
     """Function for taking the database backups."""
     for db in range(len(DB_NAMES)):
         LOGGER.info("Taking Backup of : %s database..", DB_NAMES[db])
@@ -141,4 +141,4 @@ def DBDump():
 
 # Executing the script. 
 if __name__ == "__main__":
-    DBDump()
+    db_dump()
