@@ -122,21 +122,21 @@ if not os.path.exists(BACKUPAREA):
 # Start taking the databases backup..
 def db_dump():
     """Function for taking the database backups."""
-    for db in range(len(DB_NAMES)):
-        LOGGER.info("Taking Backup of : %s database..", DB_NAMES[db])
-        dumpcmd = "mysqldump -u " + DB_USER + " -h" + DB_HOST + " -p'" + DB_USER_PASSWORD + "' " + DB_NAMES[db] + " > " + BACKUPAREA + "/" + DB_NAMES[db] + ".sql"
+    for database in range(len(DB_NAMES)):
+        LOGGER.info("Taking Backup of : %s database..", DB_NAMES[database])
+        dump_cmd = "mysqldump -u " + DB_USER + " -h" + DB_HOST + " -p'" + DB_USER_PASSWORD + "' " + DB_NAMES[database] + " > " + BACKUPAREA + "/" + DB_NAMES[database] + ".sql"
         try:
-            os.system(dumpcmd)
-        except MySQLdb.Error as e:
-             LOGGER.error('MySQL Error: %s', e)
+            os.system(dump_cmd)
+        except MySQLdb.Error as exp:
+             LOGGER.error('MySQL Error: %s', exp)
     LOGGER.info("Backup Finished.")
     subprocess.call(['tar', 'zcvf', BACKUPAREA+".tar.gz", BACKUPAREA])
     try:
         shutil.rmtree(BACKUPAREA)
-    except shutil.Error as e:
-        LOGGER.error('Error in moving archive : %s', e)
-    except IOError as e: # If source or destination doesn't exist
-        LOGGER.error('IOError : %s', e.strerror)
+    except shutil.Error as exp:
+        LOGGER.error('Error in moving archive : %s', exp)
+    except IOError as exp: # If source or destination doesn't exist
+        LOGGER.error('IOError : %s', exp.strerror)
 
 
 # Executing the script. 
