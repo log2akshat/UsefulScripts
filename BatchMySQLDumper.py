@@ -139,6 +139,6 @@ def db_dump():
         LOGGER.error('IOError : %s', exp.strerror)
 
 
-# Executing the script. 
+# Executing the script.
 if __name__ == "__main__":
     db_dump()
