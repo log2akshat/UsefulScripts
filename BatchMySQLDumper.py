@@ -128,7 +128,7 @@ def db_dump():
         try:
             os.system(dump_cmd)
         except MySQLdb.Error as exp:
-             LOGGER.error('MySQL Error: %s', exp)
+            LOGGER.error('MySQL Error: %s', exp)
     LOGGER.info("Backup Finished.")
     subprocess.call(['tar', 'zcvf', BACKUPAREA+".tar.gz", BACKUPAREA])
     try:
