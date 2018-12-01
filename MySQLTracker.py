@@ -24,7 +24,6 @@
 import os
 import time
 import logging
-import datetime
 import argparse
 import subprocess
 from argparse import RawTextHelpFormatter
