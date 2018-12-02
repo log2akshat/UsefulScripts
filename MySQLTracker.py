@@ -36,18 +36,17 @@ DB_USER_PASSWORD = 'topSecret'
 
 TIMESTAMP = time.strftime('%d-%m-%Y_%H:%M:%S')
 
-def is_valid_loggingStatus(parser, arg):
+def is_valid_logging_status(parser, arg):
     "Function for checking logging status is valid or not."
     if not (arg == 'on' or arg == 'off'):
         parser.error('{} is not a valid input for turning logging on or off! Please specify \"on\" for turning logging on and \"off\" for turning logging off.'.format(arg))
-    else:
-        return arg
+    return arg
 
 ## =========> Command line arguments parsing -- starts <========= ##
 parser = argparse.ArgumentParser(description='*********************************************************************************************************\n********************** |MySQLTracker - MySQL Tracking Utility.| **********************\n*********************************************************************************************************\n\n* This script will do the following task.\n\n* It will list the status of the MySQL and shows the processlist of the given database.', formatter_class=RawTextHelpFormatter)
 parser.add_argument('-d','--database_name', help='MANDATORY : Name of the database.', required=True, metavar='<Database Name>')
 parser.add_argument('-l','--log_file', help='Path of the log file.', metavar='<Log File>')
-parser.add_argument('-ls', '--logging_onoff', help='Logging status On/Off', metavar='<Logging on/off>', type=lambda x: is_valid_loggingStatus(parser, x))
+parser.add_argument('-ls', '--logging_onoff', help='Logging status On/Off', metavar='<Logging on/off>', type=lambda x: is_valid_logging_status(parser, x))
 args = parser.parse_args()
 
 ## =========> Command line arguments parsing -- ends <========= ##
