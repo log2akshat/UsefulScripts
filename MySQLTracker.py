@@ -44,8 +44,8 @@ def is_valid_logging_status(parser, arg):
 
 ## =========> Command line arguments parsing -- starts <========= ##
 parser = argparse.ArgumentParser(description='*********************************************************************************************************\n********************** |MySQLTracker - MySQL Tracking Utility.| **********************\n*********************************************************************************************************\n\n* This script will do the following task.\n\n* It will list the status of the MySQL and shows the processlist of the given database.', formatter_class=RawTextHelpFormatter)
-parser.add_argument('-d','--database_name', help='MANDATORY : Name of the database.', required=True, metavar='<Database Name>')
-parser.add_argument('-l','--log_file', help='Path of the log file.', metavar='<Log File>')
+parser.add_argument('-d', '--database_name', help='MANDATORY : Name of the database.', required=True, metavar='<Database Name>')
+parser.add_argument('-l', '--log_file', help='Path of the log file.', metavar='<Log File>')
 parser.add_argument('-ls', '--logging_onoff', help='Logging status On/Off', metavar='<Logging on/off>', type=lambda x: is_valid_logging_status(parser, x))
 args = parser.parse_args()
 
