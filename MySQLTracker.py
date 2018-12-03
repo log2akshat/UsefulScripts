@@ -54,50 +54,49 @@ args = parser.parse_args()
 dbName = args.database_name
 
 ## =========> Logging Configurations -- starts <========= ##
-loggerFile = args.log_file
-loggingStatus = args.logging_onoff
+LOGGER_FILE = ARGS.log_file
+LOGGING_STATUS = ARGS.logging_onoff
 
-logDirectory = "/var/log/"
+LOG_DIRECTORY = "/var/log/"
 
-if not loggerFile:
-    if not os.path.exists(logDirectory):
-        os.makedirs(logDirectory)
-    Log_File = logDirectory + 'MySQLTracker.log'
+if not LOGGER_FILE:
+    if not os.path.exists(LOG_DIRECTORY):
+        os.makedirs(LOG_DIRECTORY)
+    LOG_FILE = LOG_DIRECTORY + 'MySQLTracker.log'
 else:
-    Log_File = loggerFile + ".log"
+    LOG_FILE = LOGGER_FILE + ".log"
 
 # create logger
-logger = logging.getLogger('MySQLTracker')
-logger.setLevel(logging.DEBUG)
+LOGGER = logging.getLogger('MySQLTracker')
+LOGGER.setLevel(logging.DEBUG)
 
 # Turning logging on or off
-if loggingStatus:
-    if loggingStatus == 'off':
-        logger.disabled = True
+if LOGGING_STATUS:
+    if LOGGING_STATUS == 'off':
+        LOGGER.disabled = True
     else:
-        logger.disabled = False
+        LOGGER.disabled = False
 else:
-    logger.disabled = False
+    LOGGER.disabled = False
 
 # add a file handler
-fileHandler = logging.FileHandler(Log_File)
-fileHandler.setLevel(logging.DEBUG)
+FILE_HANDLER = logging.FileHandler(LOG_FILE)
+FILE_HANDLER.setLevel(logging.DEBUG)
 
 # create console handler and set level to debug
-consoleHandler = logging.StreamHandler()
-consoleHandler.setLevel(logging.DEBUG)
+CONSOLE_HANDLER = logging.StreamHandler()
+CONSOLE_HANDLER.setLevel(logging.DEBUG)
 
 # create formatter
-formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+FORMATTER = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 
 # add formatter to handlers
-fileHandler.setFormatter(formatter)
-consoleHandler.setFormatter(formatter)
+FILE_HANDLER.setFormatter(FORMATTER)
+CONSOLE_HANDLER.setFormatter(FORMATTER)
 
 # add ch to logger
-logger.addHandler(fileHandler)
-logger.addHandler(consoleHandler)
-
+LOGGER.addHandler(FILE_HANDLER)
+LOGGER.addHandler(CONSOLE_HANDLER)
 ## =========> Logging Configurations -- ends <========= ##
 
 subprocess.call(["clear"])
