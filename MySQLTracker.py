@@ -103,7 +103,7 @@ subprocess.call(["clear"])
 
 # Function to show the processes of the given database.
 def showProcessList():
-    logger.debug("Showinng current connections on MySQL..")
+    LOGGER.debug("Showinng current connections on MySQL..")
     mysqlCmd = subprocess.Popen(["mysqladmin -u " + DB_USER + " -h" + DBHOST + " -p'" + DB_USER_PASSWORD + "' processlist"], shell=True, stdout=subprocess.PIPE,)
     grepCmd = subprocess.Popen(['grep', dbName], stdin=mysqlCmd.stdout, stdout=subprocess.PIPE,)
     mysqlCmd.stdout.close()
