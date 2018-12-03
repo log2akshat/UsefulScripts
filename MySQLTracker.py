@@ -47,11 +47,11 @@ parser = argparse.ArgumentParser(description='**********************************
 parser.add_argument('-d', '--database_name', help='MANDATORY : Name of the database.', required=True, metavar='<Database Name>')
 parser.add_argument('-l', '--log_file', help='Path of the log file.', metavar='<Log File>')
 parser.add_argument('-ls', '--logging_onoff', help='Logging status On/Off', metavar='<Logging on/off>', type=lambda x: is_valid_logging_status(parser, x))
-args = parser.parse_args()
+ARGS = parser.parse_args()
 
 ## =========> Command line arguments parsing -- ends <========= ##
 
-dbName = args.database_name
+dbName = ARGS.database_name
 
 ## =========> Logging Configurations -- starts <========= ##
 LOGGER_FILE = ARGS.log_file
