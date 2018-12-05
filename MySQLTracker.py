@@ -43,15 +43,15 @@ def is_valid_logging_status(parser, arg):
     return arg
 
 ## =========> Command line arguments parsing -- starts <========= ##
-parser = argparse.ArgumentParser(description='*********************************************************************************************************\n********************** |MySQLTracker - MySQL Tracking Utility.| **********************\n*********************************************************************************************************\n\n* This script will do the following task.\n\n* It will list the status of the MySQL and shows the processlist of the given database.', formatter_class=RawTextHelpFormatter)
-parser.add_argument('-d', '--database_name', help='MANDATORY : Name of the database.', required=True, metavar='<Database Name>')
-parser.add_argument('-l', '--log_file', help='Path of the log file.', metavar='<Log File>')
-parser.add_argument('-ls', '--logging_onoff', help='Logging status On/Off', metavar='<Logging on/off>', type=lambda x: is_valid_logging_status(parser, x))
-ARGS = parser.parse_args()
+PARSER = argparse.ArgumentParser(description='*********************************************************************************************************\n********************** |MySQLTracker - MySQL Tracking Utility.| **********************\n*********************************************************************************************************\n\n* This script will do the following task.\n\n* It will list the status of the MySQL and shows the processlist of the given database.', formatter_class=RawTextHelpFormatter)
+PARSER.add_argument('-d', '--database_name', help='MANDATORY : Name of the database.', required=True, metavar='<Database Name>')
+PARSER.add_argument('-l', '--log_file', help='Path of the log file.', metavar='<Log File>')
+PARSER.add_argument('-ls', '--logging_onoff', help='Logging status On/Off', metavar='<Logging on/off>', type=lambda x: is_valid_logging_status(PARSER, x))
+ARGS = PARSER.parse_args()
 
 ## =========> Command line arguments parsing -- ends <========= ##
 
-dbName = ARGS.database_name
+DB_NAME = ARGS.database_name
 
 ## =========> Logging Configurations -- starts <========= ##
 LOGGER_FILE = ARGS.log_file
@@ -105,7 +105,7 @@ subprocess.call(["clear"])
 def showProcessList():
     LOGGER.debug("Showinng current connections on MySQL..")
     mysqlCmd = subprocess.Popen(["mysqladmin -u " + DB_USER + " -h" + DBHOST + " -p'" + DB_USER_PASSWORD + "' processlist"], shell=True, stdout=subprocess.PIPE,)
-    grepCmd = subprocess.Popen(['grep', dbName], stdin=mysqlCmd.stdout, stdout=subprocess.PIPE,)
+    grepCmd = subprocess.Popen(['grep', DB_NAME], stdin=mysqlCmd.stdout, stdout=subprocess.PIPE,)
     mysqlCmd.stdout.close()
     currentProcesses = str(grepCmd.communicate()[0]).strip()
     print("+-----+------+-------------------+----------+---------+-------+-------+------------------+----------+")
