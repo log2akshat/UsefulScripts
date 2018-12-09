@@ -108,9 +108,9 @@ def show_process_list():
     grepCmd = subprocess.Popen(['grep', DB_NAME], stdin=mysqlCmd.stdout, stdout=subprocess.PIPE,)
     mysqlCmd.stdout.close()
     currentProcesses = str(grepCmd.communicate()[0]).strip()
-    print("+-----+------+-------------------+----------+---------+-------+-------+------------------+----------+")
-    print("| Id  | User | Host              | db       | Command | Time  | State | Info             | Progress |")
-    print("+-----+------+-------------------+----------+---------+-------+-------+------------------+----------+")
+    print "+-----+------+-------------------+----------+---------+-------+-------+------------------+----------+"
+    print "| Id  | User | Host              | db       | Command | Time  | State | Info             | Progress |"
+    print "+-----+------+-------------------+----------+---------+-------+-------+------------------+----------+"
     print currentProcesses + "\n"
     
 
@@ -120,9 +120,9 @@ def MySQL_status():
     # Function for taking the database backups.
     #dumpcmd = "mysqladmin -u " + DB_USER + " -h" + DBHOST + " -p'" + DB_USER_PASSWORD + "' status extended-status "
     dumpcmd = "mysqladmin -u " + DB_USER + " -h" + DBHOST + " -p'" + DB_USER_PASSWORD + "' status "
-    print("\n\n+----------+------+-------------------+------------- MySQL STATUS - STARTS ---------+------------+------------+------------------+----------+")
+    print "\n\n+----------+------+-------------------+------------- MySQL STATUS - STARTS ---------+------------+------------+------------------+----------+"
     os.system(dumpcmd)
-    print("+----------+------+-------------------+------------- MySQL STATUS - ENDS -----------+------------+------------+------------------+----------+\n\n")
+    print "+----------+------+-------------------+------------- MySQL STATUS - ENDS -----------+------------+------------+------------------+----------+\n\n"
     show_process_list()
 
 
