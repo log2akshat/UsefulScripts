@@ -112,7 +112,6 @@ def show_process_list():
     print "| Id  | User | Host              | db       | Command | Time  | State | Info             | Progress |"
     print "+-----+------+-------------------+----------+---------+-------+-------+------------------+----------+"
     print currentProcesses + "\n"
-    
 
 
 # Start taking the databases backup..
