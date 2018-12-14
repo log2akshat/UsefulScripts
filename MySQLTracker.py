@@ -125,6 +125,6 @@ def MySQL_status():
     show_process_list()
 
 
-# Executing the script. 
+# Executing the script.
 if __name__ == "__main__":
     MySQL_status()
