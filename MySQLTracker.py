@@ -26,8 +26,8 @@
 import os
 import time
 import logging
-import argparse
 import subprocess
+import argparse
 from argparse import RawTextHelpFormatter
 
 # MySQL Credentials
