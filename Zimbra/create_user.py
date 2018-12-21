@@ -30,7 +30,7 @@ def is_valid_directory(parser, arg):
         return arg
 
 ## =========> Command line arguments parsing -- starts <========= ##
-parser = argparse.ArgumentParser(description='Batch renaming files utility...')
+parser = argparse.ArgumentParser(description='User generation utility...')
 parser.add_argument('-u','--username', help='Pattern of the username.', required=True, metavar='<Username>')
 parser.add_argument('-n','--number_of_users', help='Number of users to be created.', required=True, metavar='<Number of Users>')
 args = parser.parse_args()
