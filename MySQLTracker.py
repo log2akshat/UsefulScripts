@@ -105,6 +105,7 @@ subprocess.call(["clear"])
 
 # Function to show the processes of the given database.
 def show_process_list():
+    """Function to show current connections on MySQL."""
     LOGGER.debug("Showinng current connections on MySQL..")
     mysqlCmd = subprocess.Popen(["mysqladmin -u " + DB_USER + " -h" + DBHOST + " -p'" + DB_USER_PASSWORD + "' processlist"], shell=True, stdout=subprocess.PIPE,)
     grepCmd = subprocess.Popen(['grep', DB_NAME], stdin=mysqlCmd.stdout, stdout=subprocess.PIPE,)
@@ -118,7 +119,7 @@ def show_process_list():
 
 # Start taking the databases backup..
 def MySQL_status():
-    # Function for taking the database backups.
+    """Function for taking the database backups."""
     #dumpcmd = "mysqladmin -u " + DB_USER + " -h" + DBHOST + " -p'" + DB_USER_PASSWORD + "' status extended-status "
     dumpcmd = "mysqladmin -u " + DB_USER + " -h" + DBHOST + " -p'" + DB_USER_PASSWORD + "' status "
     print "\n\n+----------+------+-------------------+------------- MySQL STATUS - STARTS ---------+------------+------------+------------------+----------+"
