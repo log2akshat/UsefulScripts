@@ -107,23 +107,23 @@ subprocess.call(["clear"])
 def show_process_list():
     """Function to show current connections on MySQL."""
     LOGGER.debug("Showinng current connections on MySQL..")
-    mysqlCmd = subprocess.Popen(["mysqladmin -u " + DB_USER + " -h" + DBHOST + " -p'" + DB_USER_PASSWORD + "' processlist"], shell=True, stdout=subprocess.PIPE,)
-    grepCmd = subprocess.Popen(['grep', DB_NAME], stdin=mysqlCmd.stdout, stdout=subprocess.PIPE,)
-    mysqlCmd.stdout.close()
-    currentProcesses = str(grepCmd.communicate()[0]).strip()
+    mysql_cmd = subprocess.Popen(["mysqladmin -u " + DB_USER + " -h" + DBHOST + " -p'" + DB_USER_PASSWORD + "' processlist"], shell=True, stdout=subprocess.PIPE,)
+    grep_cmd = subprocess.Popen(['grep', DB_NAME], stdin=mysql_cmd.stdout, stdout=subprocess.PIPE,)
+    mysql_cmd.stdout.close()
+    current_processes = str(grep_cmd.communicate()[0]).strip()
     print "+-----+------+-------------------+----------+---------+-------+-------+------------------+----------+"
     print "| Id  | User | Host              | db       | Command | Time  | State | Info             | Progress |"
     print "+-----+------+-------------------+----------+---------+-------+-------+------------------+----------+"
-    print currentProcesses + "\n"
+    print current_processes + "\n"
 
 
 # Start taking the databases backup..
 def MySQL_status():
     """Function for taking the database backups."""
-    #dumpcmd = "mysqladmin -u " + DB_USER + " -h" + DBHOST + " -p'" + DB_USER_PASSWORD + "' status extended-status "
-    dumpcmd = "mysqladmin -u " + DB_USER + " -h" + DBHOST + " -p'" + DB_USER_PASSWORD + "' status "
+    #dump_cmd = "mysqladmin -u " + DB_USER + " -h" + DBHOST + " -p'" + DB_USER_PASSWORD + "' status extended-status "
+    dump_cmd = "mysqladmin -u " + DB_USER + " -h" + DBHOST + " -p'" + DB_USER_PASSWORD + "' status "
     print "\n\n+----------+------+-------------------+------------- MySQL STATUS - STARTS ---------+------------+------------+------------------+----------+"
-    os.system(dumpcmd)
+    os.system(dump_cmd)
     print "+----------+------+-------------------+------------- MySQL STATUS - ENDS -----------+------------+------------+------------------+----------+\n\n"
     show_process_list()
 
