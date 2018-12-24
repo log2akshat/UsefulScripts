@@ -118,7 +118,7 @@ def show_process_list():
 
 
 # Start taking the databases backup..
-def MySQL_status():
+def mysql_status():
     """Function for taking the database backups."""
     #dump_cmd = "mysqladmin -u " + DB_USER + " -h" + DBHOST + " -p'" + DB_USER_PASSWORD + "' status extended-status "
     dump_cmd = "mysqladmin -u " + DB_USER + " -h" + DBHOST + " -p'" + DB_USER_PASSWORD + "' status "
@@ -130,4 +130,4 @@ def MySQL_status():
 
 # Executing the script.
 if __name__ == "__main__":
-    MySQL_status()
+    mysql_status()
