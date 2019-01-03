@@ -96,7 +96,7 @@ def text_file_location():
         text_file_loc = TEXT_FILE
     else:
         text_file_loc = '/tmp/TestingMigrationSummary.txt'
-    LOGGER.debug("Temporary File : %s", str(text_file_loc))
+    LOGGER.debug("Temporary File: %s", str(text_file_loc))
     return text_file_loc
 
 ## =========> Command line arguments parsing -- ends <========= ##
@@ -164,7 +164,7 @@ def main():
         try:
             os.remove(str(text_file_location()))
         except OSError, exception:
-            LOGGER.error("Error : %s - %s", (exception.filename, exception.strerror))
+            LOGGER.error("Error: %s - %s", exception.filename, exception.strerror)
 
     cwd = os.getcwd()
     os.chdir(cwd)
