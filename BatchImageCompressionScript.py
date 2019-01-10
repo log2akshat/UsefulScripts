@@ -58,56 +58,57 @@ parser.add_argument('-q', '--quality', help='Quality of the Image to retain.', r
 parser.add_argument('-f', '--filename', help='Desired output file name.', metavar='<Output file names>')
 parser.add_argument('-l', '--log_file', help='Path of the log file.', metavar='<Log File>')
 parser.add_argument('-ls', '--logging_onoff', help='Logging status On/Off', metavar='<Logging on/off>', type=lambda x: is_valid_logging_status(parser, x))
-args = parser.parse_args()
+ARGS = parser.parse_args()
 
 ## =========> Command line arguments parsing -- ends <========= ##
 
 subprocess.call('clear')
 
 ## =========> Logging Configurations -- starts <========= ##
-loggerFile = args.log_file
-loggingStatus = args.logging_onoff
+LOGGER_FILE = ARGS.log_file
+LOGGING_STATUS = ARGS.logging_onoff
 
-if not loggerFile:
-    Log_File = '/tmp/BatchImageCompression.log'
+if not LOGGER_FILE:
+    LOG_FILE = '/tmp/BatchImageCompression.log'
 else:
-    Log_File = loggerFile + ".log"
+    LOG_FILE = LOGGER_FILE + ".log"
 
 # create logger
-logger = logging.getLogger('BIC')
-logger.setLevel(logging.DEBUG)
+LOGGER = logging.getLogger('BIC')
+LOGGER.setLevel(logging.DEBUG)
 
 # Turning logging on or off
-if loggingStatus:
+if LOGGING_STATUS:
     LOGGER.disabled = bool(LOGGING_STATUS == 'off')
 else:
-    logger.disabled = False
+    LOGGER.disabled = False
 
 # add a file handler
-fileHandler = logging.FileHandler(Log_File)
-fileHandler.setLevel(logging.DEBUG)
+FILE_HANDLER = logging.FileHandler(LOG_FILE)
+FILE_HANDLER.setLevel(logging.DEBUG)
 
 # create console handler and set level to debug
-consoleHandler = logging.StreamHandler()
-consoleHandler.setLevel(logging.DEBUG)
+CONSOLE_HANDLER = logging.StreamHandler()
+CONSOLE_HANDLER.setLevel(logging.DEBUG)
 
 # create formatter
-formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+FORMATTER = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 
 # add formatter to handlers
-fileHandler.setFormatter(formatter)
-consoleHandler.setFormatter(formatter)
+FILE_HANDLER.setFormatter(FORMATTER)
+CONSOLE_HANDLER.setFormatter(FORMATTER)
 
 # add ch to logger
-logger.addHandler(fileHandler)
-logger.addHandler(consoleHandler)
+LOGGER.addHandler(FILE_HANDLER)
+LOGGER.addHandler(CONSOLE_HANDLER)
 
 ## =========> Logging Configurations -- ends <========= ##
 
-filepath = args.source_directory
-targetDir = args.target_directory
-outfileName = args.filename
-quality = args.quality
+
+filepath = ARGS.source_directory
+targetDir = ARGS.target_directory
+outfileName = ARGS.filename
+quality = ARGS.quality
 tmpFile = '/tmp/batchIM.txt'
 devnull = open('/dev/null', 'w')
 
