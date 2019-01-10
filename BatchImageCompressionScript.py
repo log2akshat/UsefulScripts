@@ -14,6 +14,8 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+"""Batch image compression utility."""
+
 import os
 import csv
 import logging
@@ -49,7 +51,7 @@ def is_valid_logging_status(parser, arg):
     
 	
 ## =========> Command line arguments parsing -- starts <========= ##
-parser = argparse.ArgumentParser(description='Batch image conversion utility. For running this program you need to have imagemagick installed on your machine.')
+parser = argparse.ArgumentParser(description='Batch image compression utility. For running this program you need to have imagemagick installed on your machine.')
 parser.add_argument('-s', '--source_directory', help='Directory to read input files.', required=True, metavar='<Source Directory>', type=lambda x: is_valid_directory(parser, x))
 parser.add_argument('-t', '--target_directory', help='Directory to save output files.', required=True, metavar='<Target Directory>', type=lambda x: is_target_directory(x))
 parser.add_argument('-q', '--quality', help='Quality of the Image to retain.', required=True, metavar='<Image Quality>')
