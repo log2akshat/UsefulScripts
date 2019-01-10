@@ -26,9 +26,8 @@ def is_valid_directory(parser, arg):
     "Function for checking specfied directory exists or not."
     if not os.path.isdir(arg):
         parser.error('The directory {} does not exist!'.format(arg))
-    else:
-        # File exists so return the directory
-        return arg
+    # File exists so return the directory
+    return arg
 
 def is_target_directory(arg):
     "Function for checking specfied directory exists or not."
@@ -39,16 +38,14 @@ def is_target_directory(arg):
         	return arg
         except:
         	parser.error('The directory {} does not exist and unable to create for you, please create it manually!'.format(arg))
-    else:
-        # File exists so return the directory
-        return arg
+    # File exists so return the directory
+    return arg
 
 def is_valid_loggingStatus(parser, arg):
     "Function for checking logging status is valid or not."
     if not (arg == 'on' or arg == 'off'):
         parser.error('{} is not a valid input for turning logging on or off! Please specify \"on\" for turning logging on and \"off\" for turning logging off.'.format(arg))
-    else:
-        return arg
+    return arg
     
 	
 ## =========> Command line arguments parsing -- starts <========= ##
