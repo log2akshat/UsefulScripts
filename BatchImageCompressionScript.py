@@ -112,7 +112,6 @@ devnull = open('/dev/null', 'w')
 
 def processingFile():
     '''Function to create a temporary file for processing.'''
-    file = []
     filterCall = subprocess.Popen(['ls', filepath], stdout=subprocess.PIPE)
     #tailCmd = subprocess.Popen(['tail', '-n+2'], stdin=filterCall.stdout, stdout=subprocess.PIPE)
     if platform.system() == "Darwin":
