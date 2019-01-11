@@ -132,8 +132,6 @@ def main():
     i = 0
     counter = 1
     fileName = ""
-    pathfile = open(tmpFile, 'r')
-    file = pathfile.read().splitlines()
     with open(tmpFile, 'r') as f:
 	reader = csv.reader(f, delimiter=' ')
 	for row in reader:
