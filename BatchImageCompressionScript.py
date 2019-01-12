@@ -128,6 +128,7 @@ def processingFile():
 
 
 def main():
+    """Main function"""
     processingFile()
     i = 0
     counter = 1
