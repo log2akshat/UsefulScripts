@@ -36,10 +36,10 @@ def is_target_directory(parser, arg):
     if not os.path.isdir(arg):
         print('The directory %s does not exist!, so creating it for you..' % arg)
         try:
-        	subprocess.call(['mkdir', '-p', arg])
-        	return arg
+            subprocess.call(['mkdir', '-p', arg])
+            return arg
         except:
-        	parser.error('The directory {} does not exist and unable to create for you, please create it manually!'.format(arg))
+            parser.error('The directory {} does not exist and unable to create for you, please create it manually!'.format(arg))
     # File exists so return the directory
     return arg
 
@@ -134,8 +134,8 @@ def main():
     counter = 1
     fileName = ""
     with open(tmpFile, 'r') as f:
-	reader = csv.reader(f, delimiter=' ')
-	for row in reader:
+        reader = csv.reader(f, delimiter=' ')
+        for row in reader:
             pathRow = row[0:]
             length = len(pathRow)
             if i < length:
