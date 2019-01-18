@@ -48,8 +48,8 @@ def is_valid_logging_status(parser, arg):
     if not (arg == 'on' or arg == 'off'):
         parser.error('{} is not a valid input for turning logging on or off! Please specify \"on\" for turning logging on and \"off\" for turning logging off.'.format(arg))
     return arg
-    
-	
+
+
 ## =========> Command line arguments parsing -- starts <========= ##
 PARSER = argparse.ArgumentParser(description='Batch image compression utility. For running this program you need to have imagemagick installed on your machine.')
 PARSER.add_argument('-s', '--source_directory', help='Directory to read input files.', required=True, metavar='<Source Directory>', type=lambda x: is_valid_directory(PARSER, x))
