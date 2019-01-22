@@ -105,24 +105,24 @@ LOGGER.addHandler(CONSOLE_HANDLER)
 ## =========> Logging Configurations -- ends <========= ##
 
 
-filepath = ARGS.source_directory
-targetDir = ARGS.target_directory
-outfileName = ARGS.filename
-quality = ARGS.quality
-tmpFile = '/tmp/batchIM.txt'
-devnull = open('/dev/null', 'w')
+FILEPATH = ARGS.source_directory
+TARGET_DIR = ARGS.target_directory
+OUT_FILENAME = ARGS.filename
+QUALITY = ARGS.quality
+TMP_FILE = '/tmp/batchIM.txt'
+DEV_NULL = open('/dev/null', 'w')
 
 
 def processingFile():
     '''Function to create a temporary file for processing.'''
-    filterCall = subprocess.Popen(['ls', filepath], stdout=subprocess.PIPE)
+    filterCall = subprocess.Popen(['ls', FILEPATH], stdout=subprocess.PIPE)
     #tailCmd = subprocess.Popen(['tail', '-n+2'], stdin=filterCall.stdout, stdout=subprocess.PIPE)
     if platform.system() == "Darwin":
         sortCmd = subprocess.Popen(['sort', '-f'], stdin=filterCall.stdout, stdout=subprocess.PIPE)
     elif platform.system() == "Linux":
         sortCmd = subprocess.Popen(['sort', '--version-sort', '-f'], stdin=filterCall.stdout, stdout=subprocess.PIPE)
     #awkCmd = subprocess.Popen(['awk', '{print substr($0,index($0,$9))}'], stdin=tailCmd.stdout, stdout=subprocess.PIPE)
-    teeCmd = subprocess.Popen(['tee', tmpFile], stdin=sortCmd.stdout, stdout=devnull)
+    teeCmd = subprocess.Popen(['tee', TMP_FILE], stdin=sortCmd.stdout, stdout=DEV_NULL)
     sortCmd.stdout.close()
     teeCmd.communicate()
 
@@ -133,7 +133,7 @@ def main():
     i = 0
     counter = 1
     fileName = ""
-    with open(tmpFile, 'r') as f:
+    with open(TMP_FILE, 'r') as f:
         reader = csv.reader(f, delimiter=' ')
         for row in reader:
             pathRow = row[0:]
@@ -143,12 +143,12 @@ def main():
                     fileName = fileName + " " + pathRow[i]
                     i = i + 1
             fileName = fileName.strip()
-            imgpath = filepath + fileName
+            imgpath = FILEPATH + fileName
             LOGGER.info("Resizing Image : %s..", imgpath)
-            if outfileName:
-                subprocess.call(['convert', imgpath, '-quality', quality, str(targetDir) + '/' + str(outfileName) + ' ' + str(counter) + '.jpg'])
+            if OUT_FILENAME:
+                subprocess.call(['convert', imgpath, '-quality', QUALITY, str(TARGET_DIR) + '/' + str(OUT_FILENAME) + ' ' + str(counter) + '.jpg'])
             else:
-                subprocess.call(['convert', imgpath, '-quality', quality, str(targetDir) + '/' + fileName])
+                subprocess.call(['convert', imgpath, '-quality', QUALITY, str(TARGET_DIR) + '/' + fileName])
             i = 0
             fileName = ""
             counter = counter + 1
