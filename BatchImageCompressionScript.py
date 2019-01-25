@@ -113,7 +113,7 @@ TMP_FILE = '/tmp/batchIM.txt'
 DEV_NULL = open('/dev/null', 'w')
 
 
-def processingFile():
+def processing_file():
     '''Function to create a temporary file for processing.'''
     filterCall = subprocess.Popen(['ls', FILEPATH], stdout=subprocess.PIPE)
     #tailCmd = subprocess.Popen(['tail', '-n+2'], stdin=filterCall.stdout, stdout=subprocess.PIPE)
@@ -129,7 +129,7 @@ def processingFile():
 
 def main():
     """Main function"""
-    processingFile()
+    processing_file()
     i = 0
     counter = 1
     fileName = ""
