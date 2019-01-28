@@ -115,16 +115,16 @@ DEV_NULL = open('/dev/null', 'w')
 
 def processing_file():
     '''Function to create a temporary file for processing.'''
-    filterCall = subprocess.Popen(['ls', FILEPATH], stdout=subprocess.PIPE)
-    #tailCmd = subprocess.Popen(['tail', '-n+2'], stdin=filterCall.stdout, stdout=subprocess.PIPE)
+    filter_call = subprocess.Popen(['ls', FILEPATH], stdout=subprocess.PIPE)
+    #tailCmd = subprocess.Popen(['tail', '-n+2'], stdin=filter_call.stdout, stdout=subprocess.PIPE)
     if platform.system() == "Darwin":
-        sortCmd = subprocess.Popen(['sort', '-f'], stdin=filterCall.stdout, stdout=subprocess.PIPE)
+        sort_cmd = subprocess.Popen(['sort', '-f'], stdin=filter_call.stdout, stdout=subprocess.PIPE)
     elif platform.system() == "Linux":
-        sortCmd = subprocess.Popen(['sort', '--version-sort', '-f'], stdin=filterCall.stdout, stdout=subprocess.PIPE)
+        sort_cmd = subprocess.Popen(['sort', '--version-sort', '-f'], stdin=filter_call.stdout, stdout=subprocess.PIPE)
     #awkCmd = subprocess.Popen(['awk', '{print substr($0,index($0,$9))}'], stdin=tailCmd.stdout, stdout=subprocess.PIPE)
-    teeCmd = subprocess.Popen(['tee', TMP_FILE], stdin=sortCmd.stdout, stdout=DEV_NULL)
-    sortCmd.stdout.close()
-    teeCmd.communicate()
+    tee_cmd = subprocess.Popen(['tee', TMP_FILE], stdin=sort_cmd.stdout, stdout=DEV_NULL)
+    sort_cmd.stdout.close()
+    tee_cmd.communicate()
 
 
 def main():
@@ -132,25 +132,25 @@ def main():
     processing_file()
     i = 0
     counter = 1
-    fileName = ""
+    file_name = ""
     with open(TMP_FILE, 'r') as f:
         reader = csv.reader(f, delimiter=' ')
         for row in reader:
-            pathRow = row[0:]
-            length = len(pathRow)
+            path_row = row[0:]
+            length = len(path_row)
             if i < length:
-                for x in pathRow:
-                    fileName = fileName + " " + pathRow[i]
+                for x in path_row:
+                    file_name = file_name + " " + path_row[i]
                     i = i + 1
-            fileName = fileName.strip()
-            imgpath = FILEPATH + fileName
+            file_name = file_name.strip()
+            imgpath = FILEPATH + file_name
             LOGGER.info("Resizing Image : %s..", imgpath)
             if OUT_FILENAME:
                 subprocess.call(['convert', imgpath, '-quality', QUALITY, str(TARGET_DIR) + '/' + str(OUT_FILENAME) + ' ' + str(counter) + '.jpg'])
             else:
-                subprocess.call(['convert', imgpath, '-quality', QUALITY, str(TARGET_DIR) + '/' + fileName])
+                subprocess.call(['convert', imgpath, '-quality', QUALITY, str(TARGET_DIR) + '/' + file_name])
             i = 0
-            fileName = ""
+            file_name = ""
             counter = counter + 1
 
 
