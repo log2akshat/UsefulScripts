@@ -134,8 +134,8 @@ def main():
     i = 0
     counter = 1
     file_name = ""
-    with open(TMP_FILE, 'r') as f:
-        reader = csv.reader(f, delimiter=' ')
+    with open(TMP_FILE, 'r') as tmp_file:
+        reader = csv.reader(tmp_file, delimiter=' ')
         for row in reader:
             path_row = row[0:]
             length = len(path_row)
