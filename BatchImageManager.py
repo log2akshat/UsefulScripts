@@ -66,11 +66,11 @@ def is_valid_loggingStatus(parser, arg):
 ## =========> Command line arguments parsing -- starts <========= ##
 parser = argparse.ArgumentParser(description='[Purpose - This script is useful in a situation where we want to run a compression only on specific camera make but not on others and later want to do some manual image processing using tools like gimp on some camera make images and also at the same time we also want to maintain the sequence of the images based on their capturing time not based on the image modification.]\n\n\n**********************************************************************\nThis script will copy the images from the specified directory and all of its sub-directory to the target directory. The target directory will be the provided on the command line argument; but the final destination will be targetDir/CameraManufacurer__CameraModel/unixTimeStamp_CameraMake.JPG\nn**********************************************************************\nBatch Image Manager is an advaced version of the Batch Image Compression utility. For running this program you need to have exif tool and imagemagick installed on your machine. This program is used for mixing the various images taken from different camera make based on their capturing time in ascending order and rename each image on thir unix timestamp.\n\nIf compression option is selected as OFF then this script wil not create any sub-directories based on camera make just it will arrange the pictures based on their capturing time. \n\n\n\t', formatter_class=RawTextHelpFormatter)
 parser.add_argument('-i', '--info', help='Information about the Camera make and Model', metavar='<Camera Information>')
-parser.add_argument('-s','--source_directory', help='Directory to read input files.', required=True, metavar='<Source Directory>', type=lambda x: is_valid_directory(parser, x))
-parser.add_argument('-t','--target_directory', help='Directory to save output files.', required=True, metavar='<Target Directory>', type=lambda x: is_target_directory(x))
-parser.add_argument('-cmp','--compression', help='Compression On/Off', required=True, metavar='<Compression on/off>', type=lambda x: is_valid_option(parser, x))
-parser.add_argument('-clq','--compressionQuality', help='Quality of the Image to retain for specific Camera make [Image Quality range is 1-100].', metavar='<CameraMake_#ImageQuality Eg.: Canon100D_#90>')
-parser.add_argument('-l','--log_file', help='Path of the log file.', metavar='<Log File>')
+parser.add_argument('-s', '--source_directory', help='Directory to read input files.', required=True, metavar='<Source Directory>', type=lambda x: is_valid_directory(parser, x))
+parser.add_argument('-t', '--target_directory', help='Directory to save output files.', required=True, metavar='<Target Directory>', type=lambda x: is_target_directory(x))
+parser.add_argument('-cmp', '--compression', help='Compression On/Off', required=True, metavar='<Compression on/off>', type=lambda x: is_valid_option(parser, x))
+parser.add_argument('-clq', '--compressionQuality', help='Quality of the Image to retain for specific Camera make [Image Quality range is 1-100].', metavar='<CameraMake_#ImageQuality Eg.: Canon100D_#90>')
+parser.add_argument('-l', '--log_file', help='Path of the log file.', metavar='<Log File>')
 parser.add_argument('-ls', '--logging_onoff', help='Logging status On/Off', metavar='<Logging on/off>', type=lambda x: is_valid_loggingStatus(parser, x))
 args = parser.parse_args()
 
@@ -134,7 +134,7 @@ devnull = open('/dev/null', 'w')
 
 def timestampQuery(imageName):
     '''Function for returning the Image capturing time unix timestamp'''
-    exifCmd = subprocess.Popen(['exif', '-x', imageName],stdout=subprocess.PIPE)
+    exifCmd = subprocess.Popen(['exif', '-x', imageName], stdout=subprocess.PIPE)
     grepCmd = subprocess.Popen(['grep', 'Date_and_Time__Original'], stdin=exifCmd.stdout, stdout=subprocess.PIPE)
     cutCmd1 = subprocess.Popen(['cut', '-d', '>', '-f2'], stdin=grepCmd.stdout, stdout=subprocess.PIPE)
     cutCmd2 = subprocess.Popen(['cut', '-d', '<', '-f1'], stdin=cutCmd1.stdout, stdout=subprocess.PIPE)
@@ -147,13 +147,13 @@ def timestampQuery(imageName):
 
 def camMakeQuery(imageName):
     '''Function for returning the camera Make and Model'''
-    exifCmd = subprocess.Popen(['exif', '-x', imageName],stdout=subprocess.PIPE)
+    exifCmd = subprocess.Popen(['exif', '-x', imageName], stdout=subprocess.PIPE)
     grepCmd = subprocess.Popen(['grep', 'Manufacturer'], stdin=exifCmd.stdout, stdout=subprocess.PIPE)
     cutCmd1 = subprocess.Popen(['cut', '-d', '>', '-f2'], stdin=grepCmd.stdout, stdout=subprocess.PIPE)
     cutCmd2 = subprocess.Popen(['cut', '-d', '<', '-f1'], stdin=cutCmd1.stdout, stdout=subprocess.PIPE)
     cutCmd1.stdout.close()
     camManufacturer = cutCmd2.communicate()[0].split("\n")[0]
-    exifCmdModel = subprocess.Popen(['exif', '-x', imageName],stdout=subprocess.PIPE)
+    exifCmdModel = subprocess.Popen(['exif', '-x', imageName], stdout=subprocess.PIPE)
     grepCmdModel = subprocess.Popen(['grep', 'Model'], stdin=exifCmdModel.stdout, stdout=subprocess.PIPE)
     cutCmd1Model = subprocess.Popen(['cut', '-d', '>', '-f2'], stdin=grepCmdModel.stdout, stdout=subprocess.PIPE)
     cutCmd2Model = subprocess.Popen(['cut', '-d', '<', '-f1'], stdin=cutCmd1Model.stdout, stdout=subprocess.PIPE)
