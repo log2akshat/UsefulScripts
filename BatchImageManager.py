@@ -206,7 +206,7 @@ def validateUserCompressionInput():
 
 
 def main():
-    ## Start execution of the main program
+    """Start execution of the main program."""
     if compression == 'off':
         copyAllImages(sourceDir)
     else:
