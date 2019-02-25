@@ -179,7 +179,7 @@ def copyAllImages(srcDir):
                     raise
             ## Start copying and renaming
             finalImage = imgDestination + "/" + str(unixTimeStamp) + "_" + camera + ".JPG"
-            logger.info("Copying and Renaming Image : %s to %s" % (imageName, finalImage))
+            logger.info("Copying and Renaming Image : %s to %s", imageName, finalImage)
             shutil.copy2(imageName, finalImage)
 
 
