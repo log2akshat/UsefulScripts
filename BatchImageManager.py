@@ -70,61 +70,57 @@ parser.add_argument('-cmp', '--compression', help='Compression On/Off', required
 parser.add_argument('-clq', '--compressionQuality', help='Quality of the Image to retain for specific Camera make [Image Quality range is 1-100].', metavar='<CameraMake_#ImageQuality Eg.: Canon100D_#90>')
 parser.add_argument('-l', '--log_file', help='Path of the log file.', metavar='<Log File>')
 parser.add_argument('-ls', '--logging_onoff', help='Logging status On/Off', metavar='<Logging on/off>', type=lambda x: is_valid_loggingStatus(parser, x))
-args = parser.parse_args()
-
+ARGS = parser.parse_args()
 
 ## =========> Command line arguments parsing -- ends <========= ##
 
 subprocess.call('clear')
 
 ## =========> Logging Configurations -- starts <========= ##
-loggerFile = args.log_file
-loggingStatus = args.logging_onoff
+LOGGER_FILE = ARGS.log_file
+LOGGING_STATUS = ARGS.logging_onoff
 
-if not loggerFile:
-    Log_File = '/tmp/BatchImageManager.log'
+if not LOGGER_FILE:
+    LOG_FILE = '/tmp/BatchImageManager.log'
 else:
-    Log_File = loggerFile + ".log"
+    LOG_FILE = LOGGER_FILE + ".log"
 
 # create logger
-logger = logging.getLogger('BIMamager')
-logger.setLevel(logging.DEBUG)
+LOGGER = logging.getLogger('BIMamager')
+LOGGER.setLevel(logging.DEBUG)
 
 # Turning logging on or off
-if loggingStatus:
-    if loggingStatus == 'off':
-        logger.disabled = True
-    else:
-        logger.disabled = False
+if LOGGING_STATUS:
+    LOGGER.disabled = bool(LOGGING_STATUS == 'off')
 else:
-    logger.disabled = False
+    LOGGER.disabled = False
 
 # add a file handler
-fileHandler = logging.FileHandler(Log_File)
-fileHandler.setLevel(logging.DEBUG)
+FILE_HANDLER = logging.FileHandler(LOG_FILE)
+FILE_HANDLER.setLevel(logging.DEBUG)
 
 # create console handler and set level to debug
-consoleHandler = logging.StreamHandler()
-consoleHandler.setLevel(logging.DEBUG)
+CONSOLE_HANDLER = logging.StreamHandler()
+CONSOLE_HANDLER.setLevel(logging.DEBUG)
 
 # create formatter
-formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+FORMATTER = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 
 # add formatter to handlers
-fileHandler.setFormatter(formatter)
-consoleHandler.setFormatter(formatter)
+FILE_HANDLER.setFormatter(FORMATTER)
+CONSOLE_HANDLER.setFormatter(FORMATTER)
 
 # add ch to logger
-logger.addHandler(fileHandler)
-logger.addHandler(consoleHandler)
+LOGGER.addHandler(FILE_HANDLER)
+LOGGER.addHandler(CONSOLE_HANDLER)
 
 ## =========> Logging Configurations -- ends <========= ##
 
-info = args.info
-sourceDir = args.source_directory
-targetDir = args.target_directory
-compression = args.compression
-compQuality = args.compressionQuality
+info = ARGS.info
+sourceDir = ARGS.source_directory
+targetDir = ARGS.target_directory
+compression = ARGS.compression
+compQuality = ARGS.compressionQuality
 tmpFile = '/tmp/batchIMv2.txt'
 devnull = open('/dev/null', 'w')
 
@@ -179,7 +175,7 @@ def copyAllImages(srcDir):
                     raise
             ## Start copying and renaming
             finalImage = imgDestination + "/" + str(unixTimeStamp) + "_" + camera + ".JPG"
-            logger.info("Copying and Renaming Image : %s to %s", imageName, finalImage)
+            LOGGER.info("Copying and Renaming Image : %s to %s", imageName, finalImage)
             shutil.copy2(imageName, finalImage)
 
 
