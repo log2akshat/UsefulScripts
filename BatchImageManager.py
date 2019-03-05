@@ -25,7 +25,7 @@ import subprocess
 from datetime import datetime
 import argparse
 from argparse import RawTextHelpFormatter
-
+from __future__ import print_function
 
 # Command line argument validation functions...
 def is_valid_directory(parser, arg):
@@ -190,7 +190,7 @@ def validateUserCompressionInput():
             if not compInput:
                 raise ValueError("There wasn't any input!")
             else:
-                print "You have entered: ", compInput
+                print("You have entered: ", compInput)
                 break
         except ValueError as e:
             print(e)
