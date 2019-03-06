@@ -16,6 +16,7 @@
 
 """Script to run a compression only on specific camera make but not on others"""
 
+from __future__ import print_function
 import os
 import time
 import errno
@@ -25,7 +26,6 @@ import subprocess
 from datetime import datetime
 import argparse
 from argparse import RawTextHelpFormatter
-from __future__ import print_function
 
 # Command line argument validation functions...
 def is_valid_directory(parser, arg):
