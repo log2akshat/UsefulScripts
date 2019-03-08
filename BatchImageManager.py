@@ -138,7 +138,7 @@ def timestampQuery(imageName):
     return int(time.mktime(formatTime.timetuple()))
 
 
-def camMakeQuery(imageName):
+def cam_make_query(imageName):
     '''Function for returning the camera Make and Model'''
     exifCmd = subprocess.Popen(['exif', '-x', imageName], stdout=subprocess.PIPE)
     grepCmd = subprocess.Popen(['grep', 'Manufacturer'], stdin=exifCmd.stdout, stdout=subprocess.PIPE)
@@ -165,7 +165,7 @@ def copyAllImages(srcDir):
             imageName = os.path.join(dirnames, filename)
             #print imageName
             unixTimeStamp = timestampQuery(imageName)
-            camera = camMakeQuery(imageName)
+            camera = cam_make_query(imageName)
             imgDestination = targetDir + "/" + camera
             ## Create destination directory if not present
             try:
