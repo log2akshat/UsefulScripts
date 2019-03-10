@@ -117,12 +117,12 @@ LOGGER.addHandler(CONSOLE_HANDLER)
 ## =========> Logging Configurations -- ends <========= ##
 
 info = ARGS.info
-sourceDir = ARGS.source_directory
-targetDir = ARGS.target_directory
-compression = ARGS.compression
-compQuality = ARGS.compressionQuality
-tmpFile = '/tmp/batchIMv2.txt'
-devnull = open('/dev/null', 'w')
+SOURCE_DIR = ARGS.source_directory
+TARGET_DIR = ARGS.target_directory
+COMPRESSION = ARGS.compression
+COMP_QUALITY = ARGS.compressionQuality
+TMP_FILE = '/tmp/batchIMv2.txt'
+DEVNULL = open('/dev/null', 'w')
 
 
 def timestampQuery(imageName):
@@ -166,7 +166,7 @@ def copyAllImages(srcDir):
             #print imageName
             unixTimeStamp = timestampQuery(imageName)
             camera = cam_make_query(imageName)
-            imgDestination = targetDir + "/" + camera
+            imgDestination = TARGET_DIR + "/" + camera
             ## Create destination directory if not present
             try:
                 os.makedirs(imgDestination)
@@ -198,10 +198,10 @@ def validateUserCompressionInput():
 
 def main():
     """Start execution of the main program."""
-    if compression == 'off':
-        copyAllImages(sourceDir)
+    if COMPRESSION == 'off':
+        copyAllImages(SOURCE_DIR)
     else:
-        copyAllImages(sourceDir)
+        copyAllImages(SOURCE_DIR)
         validateUserCompressionInput()
 
 
