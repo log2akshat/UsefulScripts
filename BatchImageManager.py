@@ -157,7 +157,7 @@ def cam_make_query(imageName):
 
 
 
-def copyAllImages(srcDir):
+def copy_all_images(srcDir):
     '''Function for copying all the files from the source directory and sub-directories to target directory.'''
     for dirnames, subdirnames, filenames in os.walk(srcDir):
         # Copy all files.
@@ -199,9 +199,9 @@ def validateUserCompressionInput():
 def main():
     """Start execution of the main program."""
     if COMPRESSION == 'off':
-        copyAllImages(SOURCE_DIR)
+        copy_all_images(SOURCE_DIR)
     else:
-        copyAllImages(SOURCE_DIR)
+        copy_all_images(SOURCE_DIR)
         validateUserCompressionInput()
 
 
