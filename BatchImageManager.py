@@ -138,15 +138,15 @@ def timestampQuery(imageName):
     return int(time.mktime(formatTime.timetuple()))
 
 
-def cam_make_query(imageName):
+def cam_make_query(image_name):
     '''Function for returning the camera Make and Model'''
-    exifCmd = subprocess.Popen(['exif', '-x', imageName], stdout=subprocess.PIPE)
+    exifCmd = subprocess.Popen(['exif', '-x', image_name], stdout=subprocess.PIPE)
     grepCmd = subprocess.Popen(['grep', 'Manufacturer'], stdin=exifCmd.stdout, stdout=subprocess.PIPE)
     cutCmd1 = subprocess.Popen(['cut', '-d', '>', '-f2'], stdin=grepCmd.stdout, stdout=subprocess.PIPE)
     cutCmd2 = subprocess.Popen(['cut', '-d', '<', '-f1'], stdin=cutCmd1.stdout, stdout=subprocess.PIPE)
     cutCmd1.stdout.close()
     camManufacturer = cutCmd2.communicate()[0].split("\n")[0]
-    exifCmdModel = subprocess.Popen(['exif', '-x', imageName], stdout=subprocess.PIPE)
+    exifCmdModel = subprocess.Popen(['exif', '-x', image_name], stdout=subprocess.PIPE)
     grepCmdModel = subprocess.Popen(['grep', 'Model'], stdin=exifCmdModel.stdout, stdout=subprocess.PIPE)
     cutCmd1Model = subprocess.Popen(['cut', '-d', '>', '-f2'], stdin=grepCmdModel.stdout, stdout=subprocess.PIPE)
     cutCmd2Model = subprocess.Popen(['cut', '-d', '<', '-f1'], stdin=cutCmd1Model.stdout, stdout=subprocess.PIPE)
@@ -157,9 +157,9 @@ def cam_make_query(imageName):
 
 
 
-def copy_all_images(srcDir):
+def copy_all_images(src_dir):
     '''Function for copying all the files from the source directory and sub-directories to target directory.'''
-    for dirnames, subdirnames, filenames in os.walk(srcDir):
+    for dirnames, subdirnames, filenames in os.walk(src_dir):
         # Copy all files.
         for filename in filenames:
             imageName = os.path.join(dirnames, filename)
