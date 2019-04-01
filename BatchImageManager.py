@@ -174,9 +174,9 @@ def copy_all_images(src_dir):
                 if e.errno != errno.EEXIST:
                     raise
             ## Start copying and renaming
-            finalImage = imgDestination + "/" + str(unixTimeStamp) + "_" + camera + ".JPG"
-            LOGGER.info("Copying and Renaming Image : %s to %s", imageName, finalImage)
-            shutil.copy2(imageName, finalImage)
+            final_image = imgDestination + "/" + str(unixTimeStamp) + "_" + camera + ".JPG"
+            LOGGER.info("Copying and Renaming Image : %s to %s", imageName, final_image)
+            shutil.copy2(imageName, final_image)
 
 
 imputCompString = "\n================================================================================================================\nPlease enter which directory images needs to be compressed and the quality level in the following format:\n\n\t\t\t\t*********************************\n\t\t\t\t  <DirectoyName_#qQualityLevel>\n\t\t\t\t*********************************\nEg.: Canon__Canon EOS 100D_#q90\n\nIn case you want to run compression on multiple directories please enter in csv format\nEg.: Canon__Canon EOS 100D_#q90, SAMSUNG__GT-I9100_q81\n\n================================================================================================================\n\nEnter your input: "
