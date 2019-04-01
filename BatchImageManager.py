@@ -116,7 +116,7 @@ LOGGER.addHandler(CONSOLE_HANDLER)
 
 ## =========> Logging Configurations -- ends <========= ##
 
-info = ARGS.info
+INFO = ARGS.info
 SOURCE_DIR = ARGS.source_directory
 TARGET_DIR = ARGS.target_directory
 COMPRESSION = ARGS.compression
