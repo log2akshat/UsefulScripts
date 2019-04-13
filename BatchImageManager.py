@@ -125,7 +125,7 @@ TMP_FILE = '/tmp/batchIMv2.txt'
 DEVNULL = open('/dev/null', 'w')
 
 
-def timestampQuery(imageName):
+def timestamp_query(imageName):
     '''Function for returning the Image capturing time unix timestamp'''
     exifCmd = subprocess.Popen(['exif', '-x', imageName], stdout=subprocess.PIPE)
     grepCmd = subprocess.Popen(['grep', 'Date_and_Time__Original'], stdin=exifCmd.stdout, stdout=subprocess.PIPE)
@@ -164,7 +164,7 @@ def copy_all_images(src_dir):
         for filename in filenames:
             imageName = os.path.join(dirnames, filename)
             #print imageName
-            unixTimeStamp = timestampQuery(imageName)
+            unixTimeStamp = timestamp_query(imageName)
             camera = cam_make_query(imageName)
             imgDestination = TARGET_DIR + "/" + camera
             ## Create destination directory if not present
