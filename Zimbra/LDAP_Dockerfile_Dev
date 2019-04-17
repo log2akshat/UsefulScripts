@@ -1,0 +1,24 @@
+ARG DOCKER_REPO_NS
+ARG DOCKER_BUILD_TAG
+FROM ${DOCKER_REPO_NS}/zmc-base:${DOCKER_BUILD_TAG}
+
+WORKDIR /tmp
+RUN apt-get install -y zimbra-ldap
+
+WORKDIR /opt/zimbra
+RUN rm -rf /opt/zimbra/lib/jars/zimbrastore.jar
+COPY mailbox/zimbrastore.jar /opt/zimbra/lib/jars/zimbrastore.jar
+
+COPY common/Zimbra/TaskDispatch.pm common/lib/perl5/Zimbra/TaskDispatch.pm
+COPY common/Zimbra/DockerLib.pm common/lib/perl5/Zimbra/DockerLib.pm
+COPY ldap/healthcheck.py healthcheck.py
+COPY common/logtailer.py logtailer.py
+COPY ldap/entry-point.py /entry-point.py
+RUN chmod +x /entry-point.py \
+    && chmod +x healthcheck.py \
+    && chmod +x logtailer.py \
+    && chmod 444 /opt/zimbra/lib/jars/zimbrastore.jar \
+    && chown root:root /opt/zimbra/lib/jars/zimbrastore.jar
+
+ENTRYPOINT python -u /entry-point.py
+EXPOSE 389 5000
