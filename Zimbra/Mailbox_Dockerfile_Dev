@@ -2,18 +2,7 @@ ARG DOCKER_REPO_NS
 ARG DOCKER_BUILD_TAG
 FROM ${DOCKER_REPO_NS}/zmc-base:${DOCKER_BUILD_TAG}
 
-WORKDIR /tmp
-RUN apt-get install -y zimbra-store zimbra-imapd zimbra-spell zimbra-apache
-
-# special post install fixes
-RUN rm -f /opt/zimbra/common/sbin/mysqld                                                           # FIXME: mysql.server should not be required with zimbra-store
-RUN sed -i -e '/^\(START\|STOP\)_ORDER/ { s/\s\?mysql.server\s\?//; }' /opt/zimbra/bin/zmstorectl  # FIXME: mysql.server should not be required with zimbra-store
-
 WORKDIR /opt/zimbra
-
-RUN install -o zimbra -g zimbra -m 755 -d /opt/zimbra/conf/storemanager.d
-RUN install -o zimbra -g zimbra -m 755 -d /opt/zimbra/lib/ext/zimberg
-RUN curl -k -L -o /opt/zimbra/lib/ext/zimberg/zimberg_store_manager-0.1.6.jar https://s3.amazonaws.com/docker.zimbra.com/assets/zimberg_store_manager-0.1.6.jar && chmod 444 /opt/zimbra/lib/ext/zimberg/zimberg_store_manager-0.1.6.jar
 
 RUN rm -rf /opt/zimbra/lib/jars/zimbracommon.jar
 RUN rm -rf /opt/zimbra/lib/jars/zimbrastore.jar
@@ -24,21 +13,38 @@ COPY common/Zimbra/TaskDispatch.pm common/lib/perl5/Zimbra/TaskDispatch.pm
 COPY common/Zimbra/DockerLib.pm common/lib/perl5/Zimbra/DockerLib.pm
 COPY common/healthcheck.py healthcheck.py
 COPY common/logtailer.py logtailer.py
+COPY common/init_timeout.sh init_timeout.sh
 COPY mailbox/entry-point.pl entry-point.pl
-COPY mailbox/healthcheck.py mailbox_healthcheck.py
-COPY mailbox/healthcheck_touchpoint healthcheck_touchpoint
-RUN chmod +x entry-point.pl \
-    && chmod +x healthcheck.py \
-    && chmod +x logtailer.py \
-    && chmod +x mailbox_healthcheck.py \
-    && chown zimbra:zimbra healthcheck_touchpoint \
-    && chmod +w healthcheck_touchpoint \
+COPY mailbox/probe_liveness.py mailbox_probe_liveness.py
+COPY mailbox/probe_readiness.py mailbox_probe_readiness.py
+COPY --chown=zimbra:zimbra mailbox/healthcheck_touchpoint healthcheck_touchpoint
+
+RUN apt-get install -y zimbra-store zimbra-imapd zimbra-spell zimbra-apache \
+    # special post install fixes
+    # FIXME: mysql.server should not be required with zimbra-store
+    && rm -f /opt/zimbra/common/sbin/mysqld \
+    && sed -i -e '/^\(START\|STOP\)_ORDER/ { s/\s\?mysql.server\s\?//; }' /opt/zimbra/bin/zmstorectl \
+    && install -o zimbra -g zimbra -m 755 -d /opt/zimbra/conf/storemanager.d \
+    && install -o zimbra -g zimbra -m 755 -d /opt/zimbra/lib/ext/zimberg \
+    && curl -k -L -o /opt/zimbra/lib/ext/zimberg/zimberg_store_manager-0.3.0.jar \
+       https://s3.amazonaws.com/docker.zimbra.com/assets/zimberg_store_manager-0.3.0.jar \
+    && chmod 444 /opt/zimbra/lib/ext/zimberg/zimberg_store_manager-0.3.0.jar \
+    && chmod 555 \
+        entry-point.pl \
+        init_timeout.sh \
+        healthcheck.py \
+        logtailer.py \
+        mailbox_probe_liveness.py \
+        mailbox_probe_readiness.py \
+    && chmod 600 healthcheck_touchpoint \
+    && perl -c entry-point.pl \
     && chmod 444 /opt/zimbra/lib/jars/zimbracommon.jar \
     && chown root:root /opt/zimbra/lib/jars/zimbracommon.jar \
     && chmod 444 /opt/zimbra/lib/jars/zimbrastore.jar \
     && chown root:root /opt/zimbra/lib/jars/zimbrastore.jar
 
-RUN perl -c entry-point.pl
+RUN mkdir -p /opt/zimbra/lib/ext/saml2sp && \
+    curl -s -k -o /opt/zimbra/lib/ext/saml2sp/saml2sp.jar 'https://s3.amazonaws.com/docker.zimbra.com/assets/saml2sp_zimbra8.jar'
 
 ENTRYPOINT ./entry-point.pl
-EXPOSE 110 143 993 995 80 443 8080 8443 7071 7073
+EXPOSE 7110 7143 7993 7995 8080 8443 7071 7073
