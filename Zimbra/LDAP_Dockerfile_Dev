@@ -6,17 +6,26 @@ WORKDIR /tmp
 RUN apt-get install -y zimbra-ldap
 
 WORKDIR /opt/zimbra
+
+RUN rm -rf /opt/zimbra/lib/jars/zimbracommon.jar
 RUN rm -rf /opt/zimbra/lib/jars/zimbrastore.jar
+COPY mailbox/zimbracommon.jar /opt/zimbra/lib/jars/zimbracommon.jar
 COPY mailbox/zimbrastore.jar /opt/zimbra/lib/jars/zimbrastore.jar
 
 COPY common/Zimbra/TaskDispatch.pm common/lib/perl5/Zimbra/TaskDispatch.pm
 COPY common/Zimbra/DockerLib.pm common/lib/perl5/Zimbra/DockerLib.pm
 COPY ldap/healthcheck.py healthcheck.py
+COPY ldap/probe-readiness.sh probe-readiness.sh
+COPY ldap/probe-liveness.sh probe-liveness.sh
 COPY common/logtailer.py logtailer.py
 COPY ldap/entry-point.py /entry-point.py
 RUN chmod +x /entry-point.py \
     && chmod +x healthcheck.py \
     && chmod +x logtailer.py \
+    && chmod +x probe-readiness.sh \
+    && chmod +x probe-liveness.sh \
+    && chmod 444 /opt/zimbra/lib/jars/zimbracommon.jar \
+    && chown root:root /opt/zimbra/lib/jars/zimbracommon.jar \
     && chmod 444 /opt/zimbra/lib/jars/zimbrastore.jar \
     && chown root:root /opt/zimbra/lib/jars/zimbrastore.jar
 
