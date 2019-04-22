@@ -125,9 +125,9 @@ TMP_FILE = '/tmp/batchIMv2.txt'
 DEVNULL = open('/dev/null', 'w')
 
 
-def timestamp_query(imageName):
+def timestamp_query(image_name):
     '''Function for returning the Image capturing time unix timestamp'''
-    exifCmd = subprocess.Popen(['exif', '-x', imageName], stdout=subprocess.PIPE)
+    exifCmd = subprocess.Popen(['exif', '-x', image_name], stdout=subprocess.PIPE)
     grepCmd = subprocess.Popen(['grep', 'Date_and_Time__Original'], stdin=exifCmd.stdout, stdout=subprocess.PIPE)
     cutCmd1 = subprocess.Popen(['cut', '-d', '>', '-f2'], stdin=grepCmd.stdout, stdout=subprocess.PIPE)
     cutCmd2 = subprocess.Popen(['cut', '-d', '<', '-f1'], stdin=cutCmd1.stdout, stdout=subprocess.PIPE)
@@ -162,10 +162,9 @@ def copy_all_images(src_dir):
     for dirnames, subdirnames, filenames in os.walk(src_dir):
         # Copy all files.
         for filename in filenames:
-            imageName = os.path.join(dirnames, filename)
-            #print imageName
-            unixTimeStamp = timestamp_query(imageName)
-            camera = cam_make_query(imageName)
+            image_name = os.path.join(dirnames, filename)
+            unixTimeStamp = timestamp_query(image_name)
+            camera = cam_make_query(image_name)
             imgDestination = TARGET_DIR + "/" + camera
             ## Create destination directory if not present
             try:
@@ -175,8 +174,8 @@ def copy_all_images(src_dir):
                     raise
             ## Start copying and renaming
             final_image = imgDestination + "/" + str(unixTimeStamp) + "_" + camera + ".JPG"
-            LOGGER.info("Copying and Renaming Image : %s to %s", imageName, final_image)
-            shutil.copy2(imageName, final_image)
+            LOGGER.info("Copying and Renaming Image : %s to %s", image_name, final_image)
+            shutil.copy2(image_name, final_image)
 
 
 imputCompString = "\n================================================================================================================\nPlease enter which directory images needs to be compressed and the quality level in the following format:\n\n\t\t\t\t*********************************\n\t\t\t\t  <DirectoyName_#qQualityLevel>\n\t\t\t\t*********************************\nEg.: Canon__Canon EOS 100D_#q90\n\nIn case you want to run compression on multiple directories please enter in csv format\nEg.: Canon__Canon EOS 100D_#q90, SAMSUNG__GT-I9100_q81\n\n================================================================================================================\n\nEnter your input: "
