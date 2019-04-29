@@ -178,14 +178,14 @@ def copy_all_images(src_dir):
             shutil.copy2(image_name, final_image)
 
 
-imputCompString = "\n================================================================================================================\nPlease enter which directory images needs to be compressed and the quality level in the following format:\n\n\t\t\t\t*********************************\n\t\t\t\t  <DirectoyName_#qQualityLevel>\n\t\t\t\t*********************************\nEg.: Canon__Canon EOS 100D_#q90\n\nIn case you want to run compression on multiple directories please enter in csv format\nEg.: Canon__Canon EOS 100D_#q90, SAMSUNG__GT-I9100_q81\n\n================================================================================================================\n\nEnter your input: "
+INPUT_COMP_STRING = "\n================================================================================================================\nPlease enter which directory images needs to be compressed and the quality level in the following format:\n\n\t\t\t\t*********************************\n\t\t\t\t  <DirectoyName_#qQualityLevel>\n\t\t\t\t*********************************\nEg.: Canon__Canon EOS 100D_#q90\n\nIn case you want to run compression on multiple directories please enter in csv format\nEg.: Canon__Canon EOS 100D_#q90, SAMSUNG__GT-I9100_q81\n\n================================================================================================================\n\nEnter your input: "
 
 
 def validate_user_compression_input():
     '''Function for validating user input for compressing images inside specific directories.'''
     while True:
         try:
-            compInput = raw_input(imputCompString)
+            compInput = raw_input(INPUT_COMP_STRING)
             if not compInput:
                 raise ValueError("There wasn't any input!")
             else:
