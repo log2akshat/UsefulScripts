@@ -165,15 +165,15 @@ def copy_all_images(src_dir):
             image_name = os.path.join(dirnames, filename)
             unixTimeStamp = timestamp_query(image_name)
             camera = cam_make_query(image_name)
-            imgDestination = TARGET_DIR + "/" + camera
+            img_destination = TARGET_DIR + "/" + camera
             ## Create destination directory if not present
             try:
-                os.makedirs(imgDestination)
+                os.makedirs(img_destination)
             except OSError as e:
                 if e.errno != errno.EEXIST:
                     raise
             ## Start copying and renaming
-            final_image = imgDestination + "/" + str(unixTimeStamp) + "_" + camera + ".JPG"
+            final_image = img_destination + "/" + str(unixTimeStamp) + "_" + camera + ".JPG"
             LOGGER.info("Copying and Renaming Image : %s to %s", image_name, final_image)
             shutil.copy2(image_name, final_image)
 
