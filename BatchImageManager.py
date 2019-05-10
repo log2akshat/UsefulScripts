@@ -127,33 +127,33 @@ DEVNULL = open('/dev/null', 'w')
 
 def timestamp_query(image_name):
     '''Function for returning the Image capturing time unix timestamp'''
-    exifCmd = subprocess.Popen(['exif', '-x', image_name], stdout=subprocess.PIPE)
-    grepCmd = subprocess.Popen(['grep', 'Date_and_Time__Original'], stdin=exifCmd.stdout, stdout=subprocess.PIPE)
-    cutCmd1 = subprocess.Popen(['cut', '-d', '>', '-f2'], stdin=grepCmd.stdout, stdout=subprocess.PIPE)
-    cutCmd2 = subprocess.Popen(['cut', '-d', '<', '-f1'], stdin=cutCmd1.stdout, stdout=subprocess.PIPE)
-    cutCmd1.stdout.close()
-    captureTime = cutCmd2.communicate()[0].split("\n")[0]
+    exif_cmd = subprocess.Popen(['exif', '-x', image_name], stdout=subprocess.PIPE)
+    grep_cmd = subprocess.Popen(['grep', 'Date_and_Time__Original'], stdin=exif_cmd.stdout, stdout=subprocess.PIPE)
+    cut_cmd1 = subprocess.Popen(['cut', '-d', '>', '-f2'], stdin=grep_cmd.stdout, stdout=subprocess.PIPE)
+    cut_cmd2 = subprocess.Popen(['cut', '-d', '<', '-f1'], stdin=cut_cmd1.stdout, stdout=subprocess.PIPE)
+    cut_cmd1.stdout.close()
+    capture_time = cut_cmd2.communicate()[0].split("\n")[0]
     #print captureTime
-    formatTime = datetime.strptime(captureTime, "%Y:%m:%d %H:%M:%S")
-    return int(time.mktime(formatTime.timetuple()))
+    format_time = datetime.strptime(capture_time, "%Y:%m:%d %H:%M:%S")
+    return int(time.mktime(format_time.timetuple()))
 
 
 def cam_make_query(image_name):
     '''Function for returning the camera Make and Model'''
-    exifCmd = subprocess.Popen(['exif', '-x', image_name], stdout=subprocess.PIPE)
-    grepCmd = subprocess.Popen(['grep', 'Manufacturer'], stdin=exifCmd.stdout, stdout=subprocess.PIPE)
-    cutCmd1 = subprocess.Popen(['cut', '-d', '>', '-f2'], stdin=grepCmd.stdout, stdout=subprocess.PIPE)
-    cutCmd2 = subprocess.Popen(['cut', '-d', '<', '-f1'], stdin=cutCmd1.stdout, stdout=subprocess.PIPE)
-    cutCmd1.stdout.close()
-    camManufacturer = cutCmd2.communicate()[0].split("\n")[0]
-    exifCmdModel = subprocess.Popen(['exif', '-x', image_name], stdout=subprocess.PIPE)
-    grepCmdModel = subprocess.Popen(['grep', 'Model'], stdin=exifCmdModel.stdout, stdout=subprocess.PIPE)
-    cutCmd1Model = subprocess.Popen(['cut', '-d', '>', '-f2'], stdin=grepCmdModel.stdout, stdout=subprocess.PIPE)
-    cutCmd2Model = subprocess.Popen(['cut', '-d', '<', '-f1'], stdin=cutCmd1Model.stdout, stdout=subprocess.PIPE)
-    cutCmd1Model.stdout.close()
-    camModel = cutCmd2Model.communicate()[0].split("\n")[0]
-    camDir = camManufacturer + "__" + camModel
-    return camDir
+    exif_cmd = subprocess.Popen(['exif', '-x', image_name], stdout=subprocess.PIPE)
+    grep_cmd = subprocess.Popen(['grep', 'Manufacturer'], stdin=exif_cmd.stdout, stdout=subprocess.PIPE)
+    cut_cmd1 = subprocess.Popen(['cut', '-d', '>', '-f2'], stdin=grep_cmd.stdout, stdout=subprocess.PIPE)
+    cut_cmd2 = subprocess.Popen(['cut', '-d', '<', '-f1'], stdin=cut_cmd1.stdout, stdout=subprocess.PIPE)
+    cut_cmd1.stdout.close()
+    cam_manufacturer = cut_cmd2.communicate()[0].split("\n")[0]
+    exif_cmd_model = subprocess.Popen(['exif', '-x', image_name], stdout=subprocess.PIPE)
+    grep_cmd_model = subprocess.Popen(['grep', 'Model'], stdin=exif_cmd_model.stdout, stdout=subprocess.PIPE)
+    cut_cmd1_model = subprocess.Popen(['cut', '-d', '>', '-f2'], stdin=grep_cmd_model.stdout, stdout=subprocess.PIPE)
+    cut_cmd2_model = subprocess.Popen(['cut', '-d', '<', '-f1'], stdin=cut_cmd1_model.stdout, stdout=subprocess.PIPE)
+    cut_cmd1_model.stdout.close()
+    cam_model = cut_cmd2_model.communicate()[0].split("\n")[0]
+    cam_dir = cam_manufacturer + "__" + cam_model
+    return cam_dir
 
 
 
