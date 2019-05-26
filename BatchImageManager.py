@@ -169,8 +169,8 @@ def copy_all_images(src_dir):
             ## Create destination directory if not present
             try:
                 os.makedirs(img_destination)
-            except OSError as e:
-                if e.errno != errno.EEXIST:
+            except OSError as exp:
+                if exp.errno != errno.EEXIST:
                     raise
             ## Start copying and renaming
             final_image = img_destination + "/" + str(unix_time_stamp) + "_" + camera + ".JPG"
