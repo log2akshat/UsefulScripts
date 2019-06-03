@@ -191,8 +191,8 @@ def validate_user_compression_input():
             else:
                 print("You have entered: ", comp_input)
                 break
-        except ValueError as e:
-            print(e)
+        except ValueError as exp:
+            print(exp)
 
 
 def main():
