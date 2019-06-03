@@ -127,7 +127,7 @@ def allFilePaths():
 
 
 def main():
-    slashCount = 0
+    slash_count = 0
     conversionPath = ""
     srcDirModified = srcDir
     for audioSongPath in allFilePaths():
@@ -135,10 +135,10 @@ def main():
         #print os.path.dirname(audioSongPath)
         if srcDir.endswith('/'):
             srcDirModified = srcDir[:-1]
-            slashCount = srcDirModified.count('/')
+            slash_count = srcDirModified.count('/')
             groups =  os.path.dirname(audioSongPath).split('/') # Retrieving the full path from a path except filename
             # Comparing and removing the source directory path.
-            conversionPath = targetDir + "/" + '/'.join(groups[slashCount:])
+            conversionPath = targetDir + "/" + '/'.join(groups[slash_count:])
             if not os.path.exists(conversionPath): # Create conversion path directory if it doesn't exists.
                 logger.info("Going to create %s subdirectory.." % conversionPath)
                 os.makedirs(conversionPath)
