@@ -129,13 +129,13 @@ def allFilePaths():
 def main():
     slash_count = 0
     conversionPath = ""
-    srcDirModified = srcDir
+    src_dir_modified = srcDir
     for audioSongPath in allFilePaths():
         songName =  os.path.basename(audioSongPath).split(".mp4")[0]
         #print os.path.dirname(audioSongPath)
         if srcDir.endswith('/'):
-            srcDirModified = srcDir[:-1]
-            slash_count = srcDirModified.count('/')
+            src_dir_modified = srcDir[:-1]
+            slash_count = src_dir_modified.count('/')
             groups =  os.path.dirname(audioSongPath).split('/') # Retrieving the full path from a path except filename
             # Comparing and removing the source directory path.
             conversionPath = targetDir + "/" + '/'.join(groups[slash_count:])
