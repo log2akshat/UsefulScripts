@@ -104,11 +104,11 @@ srcDir = os.path.join(args.source_directory, '')
 targetDir = args.target_directory
 
 
-def mp3Conversion(songPath, conversionPath, songName):
+def mp3Conversion(songPath, conversion_path, song_name):
     '''Function to convert the mp4 song to a mp3 file.'''
-    song = conversionPath + "/" +  songName + ".mp3"
+    song = conversion_path + "/" +  song_name + ".mp3"
     logger.info("Going to convert %s song.." % song)
-    cmd = subprocess.Popen(['ffmpeg', '-i', songPath, '-codec:a', 'libmp3lame', '-qscale:a', '2', conversionPath + "/" + songName + '.mp3'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    cmd = subprocess.Popen(['ffmpeg', '-i', songPath, '-codec:a', 'libmp3lame', '-qscale:a', '2', conversion_path + "/" + song_name + '.mp3'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     tee = subprocess.Popen(['tee', '-a', Log_File], stdin=cmd.stdout)
     cmd.stdout.close()
     tee.communicate()
@@ -128,21 +128,21 @@ def allFilePaths():
 
 def main():
     slash_count = 0
-    conversionPath = ""
+    conversion_path = ""
     src_dir_modified = srcDir
     for audioSongPath in allFilePaths():
-        songName =  os.path.basename(audioSongPath).split(".mp4")[0]
+        song_name =  os.path.basename(audioSongPath).split(".mp4")[0]
         #print os.path.dirname(audioSongPath)
         if srcDir.endswith('/'):
             src_dir_modified = srcDir[:-1]
             slash_count = src_dir_modified.count('/')
             groups =  os.path.dirname(audioSongPath).split('/') # Retrieving the full path from a path except filename
             # Comparing and removing the source directory path.
-            conversionPath = targetDir + "/" + '/'.join(groups[slash_count:])
-            if not os.path.exists(conversionPath): # Create conversion path directory if it doesn't exists.
-                logger.info("Going to create %s subdirectory.." % conversionPath)
-                os.makedirs(conversionPath)
-        mp3Conversion(audioSongPath, conversionPath, songName)
+            conversion_path = targetDir + "/" + '/'.join(groups[slash_count:])
+            if not os.path.exists(conversion_path): # Create conversion path directory if it doesn't exists.
+                logger.info("Going to create %s subdirectory.." % conversion_path)
+                os.makedirs(conversion_path)
+        mp3Conversion(audioSongPath, conversion_path, song_name)
 
               
         
