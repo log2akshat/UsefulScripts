@@ -100,7 +100,7 @@ logger.addHandler(consoleHandler)
 
 ## =========> Logging Configurations -- ends <========= ##
 
-srcDir = os.path.join(args.source_directory, '')
+SRC_DIR = os.path.join(args.source_directory, '')
 targetDir = args.target_directory
 
 
@@ -118,7 +118,7 @@ def mp3Conversion(songPath, conversion_path, song_name):
 def allFilePaths():
     '''Function to get list of all the files in the source directories.'''
     filePaths = []
-    for root, directories, files in os.walk(srcDir):
+    for root, directories, files in os.walk(SRC_DIR):
         for filename in files:
             filepath = os.path.join(root, filename)
             filePaths.append(filepath)
@@ -129,12 +129,12 @@ def allFilePaths():
 def main():
     slash_count = 0
     conversion_path = ""
-    src_dir_modified = srcDir
+    src_dir_modified = SRC_DIR
     for audioSongPath in allFilePaths():
         song_name =  os.path.basename(audioSongPath).split(".mp4")[0]
         #print os.path.dirname(audioSongPath)
-        if srcDir.endswith('/'):
-            src_dir_modified = srcDir[:-1]
+        if SRC_DIR.endswith('/'):
+            src_dir_modified = SRC_DIR[:-1]
             slash_count = src_dir_modified.count('/')
             groups =  os.path.dirname(audioSongPath).split('/') # Retrieving the full path from a path except filename
             # Comparing and removing the source directory path.
