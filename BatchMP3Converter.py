@@ -130,19 +130,19 @@ def main():
     slash_count = 0
     conversion_path = ""
     src_dir_modified = SRC_DIR
-    for audioSongPath in allFilePaths():
-        song_name =  os.path.basename(audioSongPath).split(".mp4")[0]
-        #print os.path.dirname(audioSongPath)
+    for audio_song_path in allFilePaths():
+        song_name =  os.path.basename(audio_song_path).split(".mp4")[0]
+        #print os.path.dirname(audio_song_path)
         if SRC_DIR.endswith('/'):
             src_dir_modified = SRC_DIR[:-1]
             slash_count = src_dir_modified.count('/')
-            groups =  os.path.dirname(audioSongPath).split('/') # Retrieving the full path from a path except filename
+            groups =  os.path.dirname(audio_song_path).split('/') # Retrieving the full path from a path except filename
             # Comparing and removing the source directory path.
             conversion_path = targetDir + "/" + '/'.join(groups[slash_count:])
             if not os.path.exists(conversion_path): # Create conversion path directory if it doesn't exists.
                 logger.info("Going to create %s subdirectory.." % conversion_path)
                 os.makedirs(conversion_path)
-        mp3Conversion(audioSongPath, conversion_path, song_name)
+        mp3Conversion(audio_song_path, conversion_path, song_name)
 
               
         
