@@ -104,7 +104,7 @@ SRC_DIR = os.path.join(args.source_directory, '')
 targetDir = args.target_directory
 
 
-def mp3Conversion(songPath, conversion_path, song_name):
+def mp3_conversion(songPath, conversion_path, song_name):
     '''Function to convert the mp4 song to a mp3 file.'''
     song = conversion_path + "/" +  song_name + ".mp3"
     logger.info("Going to convert %s song.." % song)
@@ -142,7 +142,7 @@ def main():
             if not os.path.exists(conversion_path): # Create conversion path directory if it doesn't exists.
                 logger.info("Going to create %s subdirectory.." % conversion_path)
                 os.makedirs(conversion_path)
-        mp3Conversion(audio_song_path, conversion_path, song_name)
+        mp3_conversion(audio_song_path, conversion_path, song_name)
 
               
         
