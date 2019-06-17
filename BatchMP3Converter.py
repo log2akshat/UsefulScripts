@@ -115,7 +115,7 @@ def mp3_conversion(songPath, conversion_path, song_name):
 
     
 
-def allFilePaths():
+def all_file_paths():
     '''Function to get list of all the files in the source directories.'''
     filePaths = []
     for root, directories, files in os.walk(SRC_DIR):
@@ -130,7 +130,7 @@ def main():
     slash_count = 0
     conversion_path = ""
     src_dir_modified = SRC_DIR
-    for audio_song_path in allFilePaths():
+    for audio_song_path in all_file_paths():
         song_name =  os.path.basename(audio_song_path).split(".mp4")[0]
         #print os.path.dirname(audio_song_path)
         if SRC_DIR.endswith('/'):
