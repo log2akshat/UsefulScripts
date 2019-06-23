@@ -104,11 +104,11 @@ SRC_DIR = os.path.join(args.source_directory, '')
 targetDir = args.target_directory
 
 
-def mp3_conversion(songPath, conversion_path, song_name):
+def mp3_conversion(song_path, conversion_path, song_name):
     '''Function to convert the mp4 song to a mp3 file.'''
     song = conversion_path + "/" +  song_name + ".mp3"
     logger.info("Going to convert %s song.." % song)
-    cmd = subprocess.Popen(['ffmpeg', '-i', songPath, '-codec:a', 'libmp3lame', '-qscale:a', '2', conversion_path + "/" + song_name + '.mp3'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    cmd = subprocess.Popen(['ffmpeg', '-i', song_path, '-codec:a', 'libmp3lame', '-qscale:a', '2', conversion_path + "/" + song_name + '.mp3'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     tee = subprocess.Popen(['tee', '-a', Log_File], stdin=cmd.stdout)
     cmd.stdout.close()
     tee.communicate()
