@@ -107,7 +107,7 @@ logger.addHandler(consoleHandler)
 ## =========> Logging Configurations -- ends <========= ##
 
 SRC_DIR = os.path.join(args.source_directory, '')
-targetDir = args.target_directory
+TARGET_DIR = args.target_directory
 
 
 def mp3_conversion(song_path, conversion_path, song_name):
@@ -144,7 +144,7 @@ def main():
             slash_count = src_dir_modified.count('/')
             groups =  os.path.dirname(audio_song_path).split('/') # Retrieving the full path from a path except filename
             # Comparing and removing the source directory path.
-            conversion_path = targetDir + "/" + '/'.join(groups[slash_count:])
+            conversion_path = TARGET_DIR + "/" + '/'.join(groups[slash_count:])
             if not os.path.exists(conversion_path): # Create conversion path directory if it doesn't exists.
                 logger.info("Going to create %s subdirectory.." % conversion_path)
                 os.makedirs(conversion_path)
