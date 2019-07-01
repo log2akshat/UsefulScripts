@@ -78,10 +78,7 @@ logger.setLevel(logging.DEBUG)
 
 # Turning logging on or off
 if loggingStatus:
-    if loggingStatus == 'off':
-        logger.disabled = True
-    else:
-        logger.disabled = False
+    logger.disabled = bool(loggingStatus == 'off')
 else:
     logger.disabled = False
 
