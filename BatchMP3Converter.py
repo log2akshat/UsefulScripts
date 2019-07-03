@@ -17,10 +17,8 @@
 
 import os
 import sys
-import csv
 import logging
 import argparse
-import platform
 import subprocess
 
 # Command line argument validation functions...
