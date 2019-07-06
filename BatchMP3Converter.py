@@ -128,6 +128,7 @@ def all_file_paths():
 
 
 def main():
+    '''Main function'''
     slash_count = 0
     conversion_path = ""
     src_dir_modified = SRC_DIR
