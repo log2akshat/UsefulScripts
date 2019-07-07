@@ -52,9 +52,9 @@ def is_valid_logging_status(parser, arg):
 	
 ## =========> Command line arguments parsing -- starts <========= ##
 parser = argparse.ArgumentParser(description='Batch mp4 to mp3 conversion utility. For running this program you need to have FFMPEG with mp3 codecs installed on your machine.')
-parser.add_argument('-s','--source_directory', help='Directory to read input video files.', required=True, metavar='<Source Directory>', type=lambda x: is_valid_directory(parser, x))
-parser.add_argument('-t','--target_directory', help='Directory to save output converted mp3 files.', required=True, metavar='<Target Directory>', type=lambda x: is_target_directory(x))
-parser.add_argument('-l','--log_file', help='Path of the log file.', metavar='<Log File>')
+parser.add_argument('-s', '--source_directory', help='Directory to read input video files.', required=True, metavar='<Source Directory>', type=lambda x: is_valid_directory(parser, x))
+parser.add_argument('-t', '--target_directory', help='Directory to save output converted mp3 files.', required=True, metavar='<Target Directory>', type=lambda x: is_target_directory(x))
+parser.add_argument('-l', '--log_file', help='Path of the log file.', metavar='<Log File>')
 parser.add_argument('-ls', '--logging_onoff', help='Logging status On/Off', metavar='<Logging on/off>', type=lambda x: is_valid_logging_status(parser, x))
 args = parser.parse_args()
 
@@ -133,12 +133,12 @@ def main():
     conversion_path = ""
     src_dir_modified = SRC_DIR
     for audio_song_path in all_file_paths():
-        song_name =  os.path.basename(audio_song_path).split(".mp4")[0]
+        song_name = os.path.basename(audio_song_path).split(".mp4")[0]
         #print os.path.dirname(audio_song_path)
         if SRC_DIR.endswith('/'):
             src_dir_modified = SRC_DIR[:-1]
             slash_count = src_dir_modified.count('/')
-            groups =  os.path.dirname(audio_song_path).split('/') # Retrieving the full path from a path except filename
+            groups = os.path.dirname(audio_song_path).split('/') # Retrieving the full path from a path except filename
             # Comparing and removing the source directory path.
             conversion_path = TARGET_DIR + "/" + '/'.join(groups[slash_count:])
             if not os.path.exists(conversion_path): # Create conversion path directory if it doesn't exists.
