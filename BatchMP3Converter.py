@@ -14,6 +14,7 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+"""Script for converting mp4 to mp3 in batch mode."""
 
 import os
 import sys
