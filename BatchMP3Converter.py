@@ -119,12 +119,12 @@ def mp3_conversion(song_path, conversion_path, song_name):
 
 def all_file_paths():
     '''Function to get list of all the files in the source directories.'''
-    filePaths = []
+    file_paths = []
     for root, directories, files in os.walk(SRC_DIR):
         for filename in files:
             filepath = os.path.join(root, filename)
-            filePaths.append(filepath)
-    return filePaths
+            file_paths.append(filepath)
+    return file_paths
 
 
 
