@@ -43,14 +43,14 @@ def is_target_directory(arg):
     else:
         # File exists so return the directory
         return arg
-	
+
 def is_valid_logging_status(parser, arg):
     "Function for checking logging status is valid or not."
     if not (arg == 'on' or arg == 'off'):
         parser.error('{} is not a valid input for turning logging on or off! Please specify \"on\" for turning logging on and \"off\" for turning logging off.'.format(arg))
     return arg
 
-	
+
 ## =========> Command line arguments parsing -- starts <========= ##
 parser = argparse.ArgumentParser(description='Batch mp4 to mp3 conversion utility. For running this program you need to have FFMPEG with mp3 codecs installed on your machine.')
 parser.add_argument('-s', '--source_directory', help='Directory to read input video files.', required=True, metavar='<Source Directory>', type=lambda x: is_valid_directory(parser, x))
@@ -115,7 +115,6 @@ def mp3_conversion(song_path, conversion_path, song_name):
     cmd.stdout.close()
     tee.communicate()
 
-    
 
 def all_file_paths():
     '''Function to get list of all the files in the source directories.'''
@@ -125,7 +124,6 @@ def all_file_paths():
             filepath = os.path.join(root, filename)
             file_paths.append(filepath)
     return file_paths
-
 
 
 def main():
@@ -147,8 +145,6 @@ def main():
                 os.makedirs(conversion_path)
         mp3_conversion(audio_song_path, conversion_path, song_name)
 
-              
-        
+
 if __name__ == "__main__":
     main()
-    
