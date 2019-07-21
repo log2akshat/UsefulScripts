@@ -57,14 +57,14 @@ parser.add_argument('-s', '--source_directory', help='Directory to read input vi
 parser.add_argument('-t', '--target_directory', help='Directory to save output converted mp3 files.', required=True, metavar='<Target Directory>', type=lambda x: is_target_directory(x))
 parser.add_argument('-l', '--log_file', help='Path of the log file.', metavar='<Log File>')
 parser.add_argument('-ls', '--logging_onoff', help='Logging status On/Off', metavar='<Logging on/off>', type=lambda x: is_valid_logging_status(parser, x))
-args = parser.parse_args()
+ARGS = parser.parse_args()
 
 ## =========> Command line arguments parsing -- ends <========= ##
 
 
 ## =========> Logging Configurations -- starts <========= ##
-loggerFile = args.log_file
-loggingStatus = args.logging_onoff
+loggerFile = ARGS.log_file
+loggingStatus = ARGS.logging_onoff
 
 if not loggerFile:
     Log_File = '/tmp/BatchMP3Converter.log'
@@ -102,8 +102,8 @@ logger.addHandler(consoleHandler)
 
 ## =========> Logging Configurations -- ends <========= ##
 
-SRC_DIR = os.path.join(args.source_directory, '')
-TARGET_DIR = args.target_directory
+SRC_DIR = os.path.join(ARGS.source_directory, '')
+TARGET_DIR = ARGS.target_directory
 
 
 def mp3_conversion(song_path, conversion_path, song_name):
