@@ -67,9 +67,9 @@ loggerFile = ARGS.log_file
 loggingStatus = ARGS.logging_onoff
 
 if not loggerFile:
-    Log_File = '/tmp/BatchMP3Converter.log'
+    LOG_FILE = '/tmp/BatchMP3Converter.log'
 else:
-    Log_File = loggerFile + ".log"
+    LOG_FILE = loggerFile + ".log"
 
 # create logger
 logger = logging.getLogger('BMP3C')
@@ -82,7 +82,7 @@ else:
     logger.disabled = False
 
 # add a file handler
-fileHandler = logging.FileHandler(Log_File)
+fileHandler = logging.FileHandler(LOG_FILE)
 fileHandler.setLevel(logging.DEBUG)
 
 # create console handler and set level to debug
@@ -111,7 +111,7 @@ def mp3_conversion(song_path, conversion_path, song_name):
     song = conversion_path + "/" +  song_name + ".mp3"
     logger.info("Going to convert %s song.." % song)
     cmd = subprocess.Popen(['ffmpeg', '-i', song_path, '-codec:a', 'libmp3lame', '-qscale:a', '2', conversion_path + "/" + song_name + '.mp3'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-    tee = subprocess.Popen(['tee', '-a', Log_File], stdin=cmd.stdout)
+    tee = subprocess.Popen(['tee', '-a', LOG_FILE], stdin=cmd.stdout)
     cmd.stdout.close()
     tee.communicate()
 
