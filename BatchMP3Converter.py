@@ -90,11 +90,11 @@ consoleHandler = logging.StreamHandler(sys.stdout)
 consoleHandler.setLevel(logging.DEBUG)
 
 # create formatter
-formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+FORMATTER = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 
 # add formatter to handlers
-fileHandler.setFormatter(formatter)
-consoleHandler.setFormatter(formatter)
+fileHandler.setFormatter(FORMATTER)
+consoleHandler.setFormatter(FORMATTER)
 
 # add ch to logger
 logger.addHandler(fileHandler)
