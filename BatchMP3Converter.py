@@ -63,13 +63,13 @@ ARGS = parser.parse_args()
 
 
 ## =========> Logging Configurations -- starts <========= ##
-loggerFile = ARGS.log_file
+LOGGER_FILE = ARGS.log_file
 loggingStatus = ARGS.logging_onoff
 
-if not loggerFile:
+if not LOGGER_FILE:
     LOG_FILE = '/tmp/BatchMP3Converter.log'
 else:
-    LOG_FILE = loggerFile + ".log"
+    LOG_FILE = LOGGER_FILE + ".log"
 
 # create logger
 logger = logging.getLogger('BMP3C')
