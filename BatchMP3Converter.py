@@ -64,7 +64,7 @@ ARGS = parser.parse_args()
 
 ## =========> Logging Configurations -- starts <========= ##
 LOGGER_FILE = ARGS.log_file
-loggingStatus = ARGS.logging_onoff
+LOGGING_STATUS = ARGS.logging_onoff
 
 if not LOGGER_FILE:
     LOG_FILE = '/tmp/BatchMP3Converter.log'
@@ -76,8 +76,8 @@ logger = logging.getLogger('BMP3C')
 logger.setLevel(logging.DEBUG)
 
 # Turning logging on or off
-if loggingStatus:
-    logger.disabled = bool(loggingStatus == 'off')
+if LOGGING_STATUS:
+    logger.disabled = bool(LOGGING_STATUS == 'off')
 else:
     logger.disabled = False
 
