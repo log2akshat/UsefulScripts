@@ -72,14 +72,14 @@ else:
     LOG_FILE = LOGGER_FILE + ".log"
 
 # create logger
-logger = logging.getLogger('BMP3C')
-logger.setLevel(logging.DEBUG)
+LOGGER = logging.getLogger('BMP3C')
+LOGGER.setLevel(logging.DEBUG)
 
 # Turning logging on or off
 if LOGGING_STATUS:
-    logger.disabled = bool(LOGGING_STATUS == 'off')
+    LOGGER.disabled = bool(LOGGING_STATUS == 'off')
 else:
-    logger.disabled = False
+    LOGGER.disabled = False
 
 # add a file handler
 fileHandler = logging.FileHandler(LOG_FILE)
@@ -97,8 +97,8 @@ fileHandler.setFormatter(FORMATTER)
 consoleHandler.setFormatter(FORMATTER)
 
 # add ch to logger
-logger.addHandler(fileHandler)
-logger.addHandler(consoleHandler)
+LOGGER.addHandler(fileHandler)
+LOGGER.addHandler(consoleHandler)
 
 ## =========> Logging Configurations -- ends <========= ##
 
@@ -109,7 +109,7 @@ TARGET_DIR = ARGS.target_directory
 def mp3_conversion(song_path, conversion_path, song_name):
     '''Function to convert the mp4 song to a mp3 file.'''
     song = conversion_path + "/" +  song_name + ".mp3"
-    logger.info("Going to convert %s song.." % song)
+    LOGGER.info("Going to convert %s song.." % song)
     cmd = subprocess.Popen(['ffmpeg', '-i', song_path, '-codec:a', 'libmp3lame', '-qscale:a', '2', conversion_path + "/" + song_name + '.mp3'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     tee = subprocess.Popen(['tee', '-a', LOG_FILE], stdin=cmd.stdout)
     cmd.stdout.close()
@@ -141,7 +141,7 @@ def main():
             # Comparing and removing the source directory path.
             conversion_path = TARGET_DIR + "/" + '/'.join(groups[slash_count:])
             if not os.path.exists(conversion_path): # Create conversion path directory if it doesn't exists.
-                logger.info("Going to create %s subdirectory.." % conversion_path)
+                LOGGER.info("Going to create %s subdirectory.." % conversion_path)
                 os.makedirs(conversion_path)
         mp3_conversion(audio_song_path, conversion_path, song_name)
 
