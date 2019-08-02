@@ -82,8 +82,8 @@ else:
     LOGGER.disabled = False
 
 # add a file handler
-fileHandler = logging.FileHandler(LOG_FILE)
-fileHandler.setLevel(logging.DEBUG)
+FILE_HANDLER = logging.FileHandler(LOG_FILE)
+FILE_HANDLER.setLevel(logging.DEBUG)
 
 # create console handler and set level to debug
 consoleHandler = logging.StreamHandler(sys.stdout)
@@ -93,11 +93,11 @@ consoleHandler.setLevel(logging.DEBUG)
 FORMATTER = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 
 # add formatter to handlers
-fileHandler.setFormatter(FORMATTER)
+FILE_HANDLER.setFormatter(FORMATTER)
 consoleHandler.setFormatter(FORMATTER)
 
 # add ch to logger
-LOGGER.addHandler(fileHandler)
+LOGGER.addHandler(FILE_HANDLER)
 LOGGER.addHandler(consoleHandler)
 
 ## =========> Logging Configurations -- ends <========= ##
