@@ -31,7 +31,7 @@ def is_valid_directory(parser, arg):
         # File exists so return the directory
         return arg
 
-def is_target_directory(arg):
+def is_target_directory(parser, arg):
     "Function for checking specfied directory exists or not."
     if not os.path.isdir(arg):
         print('The directory %s does not exist!, so creating it for you..' % arg)
@@ -52,12 +52,12 @@ def is_valid_logging_status(parser, arg):
 
 
 ## =========> Command line arguments parsing -- starts <========= ##
-parser = argparse.ArgumentParser(description='Batch mp4 to mp3 conversion utility. For running this program you need to have FFMPEG with mp3 codecs installed on your machine.')
-parser.add_argument('-s', '--source_directory', help='Directory to read input video files.', required=True, metavar='<Source Directory>', type=lambda x: is_valid_directory(parser, x))
-parser.add_argument('-t', '--target_directory', help='Directory to save output converted mp3 files.', required=True, metavar='<Target Directory>', type=lambda x: is_target_directory(x))
-parser.add_argument('-l', '--log_file', help='Path of the log file.', metavar='<Log File>')
-parser.add_argument('-ls', '--logging_onoff', help='Logging status On/Off', metavar='<Logging on/off>', type=lambda x: is_valid_logging_status(parser, x))
-ARGS = parser.parse_args()
+PARSER = argparse.ArgumentParser(description='Batch mp4 to mp3 conversion utility. For running this program you need to have FFMPEG with mp3 codecs installed on your machine.')
+PARSER.add_argument('-s', '--source_directory', help='Directory to read input video files.', required=True, metavar='<Source Directory>', type=lambda x: is_valid_directory(PARSER, x))
+PARSER.add_argument('-t', '--target_directory', help='Directory to save output converted mp3 files.', required=True, metavar='<Target Directory>', type=lambda x: is_target_directory(PARSER, x))
+PARSER.add_argument('-l', '--log_file', help='Path of the log file.', metavar='<Log File>')
+PARSER.add_argument('-ls', '--logging_onoff', help='Logging status On/Off', metavar='<Logging on/off>', type=lambda x: is_valid_logging_status(PARSER, x))
+ARGS = PARSER.parse_args()
 
 ## =========> Command line arguments parsing -- ends <========= ##
 
