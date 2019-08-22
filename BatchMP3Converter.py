@@ -86,19 +86,19 @@ FILE_HANDLER = logging.FileHandler(LOG_FILE)
 FILE_HANDLER.setLevel(logging.DEBUG)
 
 # create console handler and set level to debug
-consoleHandler = logging.StreamHandler(sys.stdout)
-consoleHandler.setLevel(logging.DEBUG)
+CONSOLE_HANDLER = logging.StreamHandler(sys.stdout)
+CONSOLE_HANDLER.setLevel(logging.DEBUG)
 
 # create formatter
 FORMATTER = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 
 # add formatter to handlers
 FILE_HANDLER.setFormatter(FORMATTER)
-consoleHandler.setFormatter(FORMATTER)
+CONSOLE_HANDLER.setFormatter(FORMATTER)
 
 # add ch to logger
 LOGGER.addHandler(FILE_HANDLER)
-LOGGER.addHandler(consoleHandler)
+LOGGER.addHandler(CONSOLE_HANDLER)
 
 ## =========> Logging Configurations -- ends <========= ##
 
@@ -109,7 +109,7 @@ TARGET_DIR = ARGS.target_directory
 def mp3_conversion(song_path, conversion_path, song_name):
     '''Function to convert the mp4 song to a mp3 file.'''
     song = conversion_path + "/" +  song_name + ".mp3"
-    LOGGER.info("Going to convert %s song.." % song)
+    LOGGER.info("Going to convert %s song..", song)
     cmd = subprocess.Popen(['ffmpeg', '-i', song_path, '-codec:a', 'libmp3lame', '-qscale:a', '2', conversion_path + "/" + song_name + '.mp3'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     tee = subprocess.Popen(['tee', '-a', LOG_FILE], stdin=cmd.stdout)
     cmd.stdout.close()
