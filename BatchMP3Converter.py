@@ -16,11 +16,13 @@
 
 """Script for converting mp4 to mp3 in batch mode."""
 
+
 import os
 import sys
 import logging
 import argparse
 import subprocess
+
 
 # Command line argument validation functions...
 def is_valid_directory(parser, arg):
@@ -28,6 +30,7 @@ def is_valid_directory(parser, arg):
     if not os.path.isdir(arg):
         parser.error('The directory {} does not exist!'.format(arg))
     return arg
+
 
 def is_target_directory(parser, arg):
     "Function for checking specfied directory exists or not."
@@ -41,6 +44,7 @@ def is_target_directory(parser, arg):
     else:
         # File exists so return the directory
         return arg
+
 
 def is_valid_logging_status(parser, arg):
     "Function for checking logging status is valid or not."
@@ -115,7 +119,7 @@ def mp3_conversion(song_path, conversion_path, song_name):
 
 
 def all_file_paths():
-    '''Function to get list of all the files in the source directories.'''
+    '''Function to get list of all the files in the source directories'''
     file_paths = []
     for root, directories, files in os.walk(SRC_DIR):
         for filename in files:
