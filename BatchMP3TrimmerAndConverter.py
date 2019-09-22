@@ -17,6 +17,16 @@
 """Script for trimming and converting mp4 to mp3 in batch mode."""
 """ffmpeg -ss 30 -t 70 -i inputfile.mp3 -acodec copy outputfile.mp3"""
 
+"""Create a file with all the audio files with the following format
+file '1.Kai_Po_Che.mp3'
+file '2.Muqabala.mp3'
+file '3.Bollywood_Party_Mixes.mp3'
+file '4_1.Hindi_Remix_Mashup.mp3'
+file '4_2.Hindi_Remix_Mashup.mp3'
+
+ffmpeg -f concat -safe 0 -i Songs.txt -c copy output.mp3"""
+
+
 import os
 import sys
 import logging
