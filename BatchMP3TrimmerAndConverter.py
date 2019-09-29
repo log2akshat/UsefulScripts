@@ -15,6 +15,13 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 """Script for trimming and converting mp4 to mp3 in batch mode."""
+
+import os
+import sys
+import logging
+import argparse
+import subprocess
+
 """ffmpeg -ss 30 -t 70 -i inputfile.mp3 -acodec copy outputfile.mp3"""
 
 """Create a file with all the audio files with the following format
@@ -25,14 +32,6 @@ file '4_1.Hindi_Remix_Mashup.mp3'
 file '4_2.Hindi_Remix_Mashup.mp3'
 
 ffmpeg -f concat -safe 0 -i Songs.txt -c copy output.mp3"""
-
-
-import os
-import sys
-import logging
-import argparse
-import subprocess
-
 
 # Command line argument validation functions...
 def is_valid_directory(parser, arg):
