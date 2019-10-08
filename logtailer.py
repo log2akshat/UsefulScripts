@@ -32,9 +32,7 @@ def is_valid_file(parser, arg):
     "Function for checking file exists or not."
     if not os.path.isfile(arg):
         parser.error('The file {} does not exist!'.format(arg))
-    else:
-        # File exists so return the filename
-        return arg
+    return arg
 
 
 # Command line option
