@@ -14,17 +14,10 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-"""Script for trimming and converting mp4 to mp3 in batch mode."""
+"""Script for trimming and converting mp4 to mp3 in batch mode.
+ffmpeg -ss 30 -t 70 -i inputfile.mp3 -acodec copy outputfile.mp3
 
-import os
-import sys
-import logging
-import argparse
-import subprocess
-
-"""ffmpeg -ss 30 -t 70 -i inputfile.mp3 -acodec copy outputfile.mp3"""
-
-"""Create a file with all the audio files with the following format
+Create a file with all the audio files with the following format
 file '1.Kai_Po_Che.mp3'
 file '2.Muqabala.mp3'
 file '3.Bollywood_Party_Mixes.mp3'
@@ -32,6 +25,12 @@ file '4_1.Hindi_Remix_Mashup.mp3'
 file '4_2.Hindi_Remix_Mashup.mp3'
 
 ffmpeg -f concat -safe 0 -i Songs.txt -c copy output.mp3"""
+
+import os
+import sys
+import logging
+import argparse
+import subprocess
 
 # Command line argument validation functions...
 def is_valid_directory(parser, arg):
@@ -130,7 +129,7 @@ def mp3_conversion(song_path, conversion_path, song_name):
 def all_file_paths():
     '''Function to get list of all the files in the source directories'''
     file_paths = []
-    for root, directories, files in os.walk(SRC_DIR):
+    for root, files in os.walk(SRC_DIR):
         for filename in files:
             filepath = os.path.join(root, filename)
             file_paths.append(filepath)
