@@ -9,17 +9,14 @@ RUN rm -rf /opt/zimbra/lib/jars/zimbrastore.jar
 COPY mailbox/zimbracommon.jar /opt/zimbra/lib/jars/zimbracommon.jar
 COPY mailbox/zimbrastore.jar /opt/zimbra/lib/jars/zimbrastore.jar
 
-COPY common/Zimbra/TaskDispatch.pm common/lib/perl5/Zimbra/TaskDispatch.pm
-COPY common/Zimbra/DockerLib.pm common/lib/perl5/Zimbra/DockerLib.pm
-COPY common/healthcheck.py healthcheck.py
-COPY common/logtailer.py logtailer.py
-COPY common/init_timeout.sh init_timeout.sh
-COPY mailbox/entry-point.pl entry-point.pl
-COPY mailbox/probe_liveness.py mailbox_probe_liveness.py
-COPY mailbox/probe_readiness.py mailbox_probe_readiness.py
-COPY --chown=zimbra:zimbra mailbox/healthcheck_touchpoint healthcheck_touchpoint
+COPY entry-point.pl entry-point.pl
+COPY probe_liveness.py mailbox_probe_liveness.py
+COPY install-extensions.sh install-extensions.sh
+COPY install-zimlets.sh install-zimlets.sh
+COPY --chown=zimbra:zimbra healthcheck_touchpoint healthcheck_touchpoint
+COPY --chown=zimbra:zimbra lr_check lr_check
 
-RUN apt-get install -y zimbra-store zimbra-imapd zimbra-spell zimbra-apache \
+RUN apt-get install -y zimbra-store zimbra-imapd zimbra-spell zimbra-apache python3-pip \
     # special post install fixes
     # FIXME: mysql.server should not be required with zimbra-store
     && rm -f /opt/zimbra/common/sbin/mysqld \
@@ -31,13 +28,13 @@ RUN apt-get install -y zimbra-store zimbra-imapd zimbra-spell zimbra-apache \
     && chmod 444 /opt/zimbra/lib/ext/zimberg/zimberg_store_manager-0.3.0.jar \
     && chmod 555 \
         entry-point.pl \
-        init_timeout.sh \
-        healthcheck.py \
         logtailer.py \
         mailbox_probe_liveness.py \
-        mailbox_probe_readiness.py \
     && chmod 600 healthcheck_touchpoint \
+    && pip3 install redis-py-cluster==1.3.6 requests \
     && perl -c entry-point.pl \
+    && chmod +x /opt/zimbra/install-extensions.sh \
+    && chmod +x /opt/zimbra/install-zimlets.sh \
     && chmod 444 /opt/zimbra/lib/jars/zimbracommon.jar \
     && chown root:root /opt/zimbra/lib/jars/zimbracommon.jar \
     && chmod 444 /opt/zimbra/lib/jars/zimbrastore.jar \
@@ -46,5 +43,5 @@ RUN apt-get install -y zimbra-store zimbra-imapd zimbra-spell zimbra-apache \
 RUN mkdir -p /opt/zimbra/lib/ext/saml2sp && \
     curl -s -k -o /opt/zimbra/lib/ext/saml2sp/saml2sp.jar 'https://s3.amazonaws.com/docker.zimbra.com/assets/saml2sp_zimbra8.jar'
 
-ENTRYPOINT ./entry-point.pl
-EXPOSE 7110 7143 7993 7995 8080 8443 7071 7073
+ENTRYPOINT ["./entry-point.pl"]
+EXPOSE 5000 7110 7143 7993 7995 8080 8443 7071 7073 9999
