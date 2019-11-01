@@ -31,8 +31,8 @@ def is_valid_directory(parser, arg):
 
 ## =========> Command line arguments parsing -- starts <========= ##
 parser = argparse.ArgumentParser(description='User generation utility...')
-parser.add_argument('-u','--username', help='Pattern of the username.', required=True, metavar='<Username>')
-parser.add_argument('-n','--number_of_users', help='Number of users to be created.', required=True, metavar='<Number of Users>')
+parser.add_argument('-u', '--username', help='Pattern of the username.', required=True, metavar='<Username>')
+parser.add_argument('-n', '--number_of_users', help='Number of users to be created.', required=True, metavar='<Number of Users>')
 args = parser.parse_args()
 ## =========> Command line arguments parsing -- ends <========= ##
 
