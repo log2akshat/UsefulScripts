@@ -33,12 +33,12 @@ def is_valid_directory(parser, arg):
 parser = argparse.ArgumentParser(description='User generation utility...')
 parser.add_argument('-u', '--username', help='Pattern of the username.', required=True, metavar='<Username>')
 parser.add_argument('-n', '--number_of_users', help='Number of users to be created.', required=True, metavar='<Number of Users>')
-args = parser.parse_args()
+ARGS = parser.parse_args()
 ## =========> Command line arguments parsing -- ends <========= ##
 
 # Arguments parsing
-username = args.username
-num_of_users = int(args.number_of_users)
+username = ARGS.username
+num_of_users = int(ARGS.number_of_users)
 
 def create_user():
     """Function for creating users"""
