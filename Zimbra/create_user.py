@@ -44,9 +44,9 @@ def create_user():
     """Function for creating users"""
     for i in range(num_of_users):
         if (i == num_of_users-1):
-            print username + str(i) + ",test123," + username + str(0)
+            print "%s%s,test123,%s%s" % (username, str(i), username, str(0))
         else:
-            print username + str(i) + ",test123," + username + str(i+1)
+            print "%s%s,test123,%s%s" % (username, str(i), username, str(i+1))
 
 
 def main():
