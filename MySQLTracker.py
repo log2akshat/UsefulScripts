@@ -108,10 +108,10 @@ def show_process_list():
     grep_cmd = subprocess.Popen(['grep', DB_NAME], stdin=mysql_cmd.stdout, stdout=subprocess.PIPE,)
     mysql_cmd.stdout.close()
     current_processes = str(grep_cmd.communicate()[0]).strip()
-    print "+-----+------+-------------------+----------+---------+-------+-------+------------------+----------+"
-    print "| Id  | User | Host              | db       | Command | Time  | State | Info             | Progress |"
-    print "+-----+------+-------------------+----------+---------+-------+-------+------------------+----------+"
-    print current_processes + "\n"
+    print("+-----+------+-------------------+----------+---------+-------+-------+------------------+----------+")
+    print("| Id  | User | Host              | db       | Command | Time  | State | Info             | Progress |")
+    print("+-----+------+-------------------+----------+---------+-------+-------+------------------+----------+")
+    print(current_processes + "\n")
 
 
 # Start taking the databases backup..
@@ -119,9 +119,9 @@ def mysql_status():
     """Function for taking the database backups."""
     #dump_cmd = "mysqladmin -u " + DB_USER + " -h" + DBHOST + " -p'" + DB_USER_PASSWORD + "' status extended-status "
     dump_cmd = "mysqladmin -u " + DB_USER + " -h" + DBHOST + " -p'" + DB_USER_PASSWORD + "' status "
-    print "\n\n+----------+------+-------------------+------------- MySQL STATUS - STARTS ---------+------------+------------+------------------+----------+"
+    print("\n\n+----------+------+-------------------+------------- MySQL STATUS - STARTS ---------+------------+------------+------------------+----------+")
     os.system(dump_cmd)
-    print "+----------+------+-------------------+------------- MySQL STATUS - ENDS -----------+------------+------------+------------------+----------+\n\n"
+    print("+----------+------+-------------------+------------- MySQL STATUS - ENDS -----------+------------+------------+------------------+----------+\n\n")
     show_process_list()
 
 
