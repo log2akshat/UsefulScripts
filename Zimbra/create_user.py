@@ -38,12 +38,12 @@ ARGS = parser.parse_args()
 
 # Arguments parsing
 username = ARGS.username
-num_of_users = int(ARGS.number_of_users)
+NUM_OF_USERS = int(ARGS.number_of_users)
 
 def create_user():
     """Function for creating users"""
-    for i in range(num_of_users):
-        if (i == num_of_users-1):
+    for i in range(NUM_OF_USERS):
+        if (i == NUM_OF_USERS-1):
             print("%s%s,test123,%s%s" % (username, str(i), username, str(0)))
         else:
             print("%s%s,test123,%s%s" % (username, str(i), username, str(i+1)))
