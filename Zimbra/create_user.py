@@ -50,8 +50,8 @@ def create_user():
 
 
 def main():
-   """Main Function"""
-   create_user()
+    """Main Function"""
+    create_user()
 
 
 # Executing the script.
