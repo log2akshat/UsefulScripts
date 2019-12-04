@@ -18,6 +18,7 @@
 
 """Script for creating specified number of users for Zimbra mailbox."""
 
+import os
 import argparse
 
 # Command line argument validation functions...
