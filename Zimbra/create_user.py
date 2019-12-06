@@ -42,7 +42,7 @@ NUM_OF_USERS = int(ARGS.number_of_users)
 def create_user():
     """Function for creating users"""
     for i in range(NUM_OF_USERS):
-        if (i == NUM_OF_USERS-1):
+        if i == NUM_OF_USERS-1:
             print("%s%s,test123,%s%s" % (USERNAME, str(i), USERNAME, str(0)))
         else:
             print("%s%s,test123,%s%s" % (USERNAME, str(i), USERNAME, str(i+1)))
