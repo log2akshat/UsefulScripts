@@ -29,12 +29,12 @@ def is_valid_directory(parser, arg):
     return arg
 
 ## =========> Command line arguments parsing -- starts <========= ##
-parser = argparse.ArgumentParser(description='User generation utility...')
-parser.add_argument('-u', '--username', help='Pattern of the username.', required=True,
+PARSER = argparse.ArgumentParser(description='User generation utility...')
+PARSER.add_argument('-u', '--username', help='Pattern of the username.', required=True,
                     metavar='<Username>')
-parser.add_argument('-n', '--number_of_users', help='Number of users to be created.',
+PARSER.add_argument('-n', '--number_of_users', help='Number of users to be created.',
                     required=True, metavar='<Number of Users>')
-ARGS = parser.parse_args()
+ARGS = PARSER.parse_args()
 ## =========> Command line arguments parsing -- ends <========= ##
 
 # Arguments parsing
