@@ -50,16 +50,25 @@ def is_target_directory(parser, arg):
 def is_valid_logging_status(parser, arg):
     "Function for checking logging status is valid or not."
     if not (arg == 'on' or arg == 'off'):
-        parser.error('{} is not a valid input for turning logging on or off! Please specify \"on\" for turning logging on and \"off\" for turning logging off.'.format(arg))
+        parser.error('{} is not a valid input for turning logging on or off! Please specify \
+                     \"on\" for turning logging on and \"off\" for turning logging off.'
+                     .format(arg))
     return arg
 
 
 ## =========> Command line arguments parsing -- starts <========= ##
-PARSER = argparse.ArgumentParser(description='Batch mp4 to mp3 conversion utility. For running this program you need to have FFMPEG with mp3 codecs installed on your machine.')
-PARSER.add_argument('-s', '--source_directory', help='Directory to read input video files.', required=True, metavar='<Source Directory>', type=lambda x: is_valid_directory(PARSER, x))
-PARSER.add_argument('-t', '--target_directory', help='Directory to save output converted mp3 files.', required=True, metavar='<Target Directory>', type=lambda x: is_target_directory(PARSER, x))
+PARSER = argparse.ArgumentParser(description='Batch mp4 to mp3 conversion utility. For running \
+                                 this program you need to have FFMPEG with mp3 codecs installed \
+                                 on your machine.')
+PARSER.add_argument('-s', '--source_directory', help='Directory to read input video files.',
+                    required=True, metavar='<Source Directory>',
+                    type=lambda x: is_valid_directory(PARSER, x))
+PARSER.add_argument('-t', '--target_directory', help='Place to save output converted mp3 files',
+                    required=True, metavar='<Target Directory>',
+                    type=lambda x: is_target_directory(PARSER, x))
 PARSER.add_argument('-l', '--log_file', help='Path of the log file.', metavar='<Log File>')
-PARSER.add_argument('-ls', '--logging_onoff', help='Logging status On/Off', metavar='<Logging on/off>', type=lambda x: is_valid_logging_status(PARSER, x))
+PARSER.add_argument('-ls', '--logging_onoff', help='Logging status On/Off',
+                    metavar='<Logging on/off>', type=lambda x: is_valid_logging_status(PARSER, x))
 ARGS = PARSER.parse_args()
 
 ## =========> Command line arguments parsing -- ends <========= ##
