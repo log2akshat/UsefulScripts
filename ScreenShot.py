@@ -1,5 +1,7 @@
 #!/usr/bin/python
 
+'''Script for taking Screenshots in Linux.'''
+
 import subprocess
 
 def main():
