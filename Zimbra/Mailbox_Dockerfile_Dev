@@ -6,8 +6,8 @@ WORKDIR /opt/zimbra
 
 RUN rm -rf /opt/zimbra/lib/jars/zimbracommon.jar
 RUN rm -rf /opt/zimbra/lib/jars/zimbrastore.jar
-COPY mailbox/zimbracommon.jar /opt/zimbra/lib/jars/zimbracommon.jar
-COPY mailbox/zimbrastore.jar /opt/zimbra/lib/jars/zimbrastore.jar
+COPY zimbracommon.jar /opt/zimbra/lib/jars/zimbracommon.jar
+COPY zimbrastore.jar /opt/zimbra/lib/jars/zimbrastore.jar
 
 COPY entry-point.pl entry-point.pl
 COPY probe_liveness.py mailbox_probe_liveness.py
