@@ -70,8 +70,8 @@ def main():
     """Main function to call the tail command"""
     cmd = str(cmnd_builder()).strip()
     if not cmd:
-        print "Warning: Either the config file is empty " \
-                "or the paths specified in the config file is/are incorrect!"
+        print("Warning: Either the config file is empty " \
+                "or the paths specified in the config file is/are incorrect!")
         sys.exit()
     else:
         call(['tail -F ' + cmd], shell=True)
