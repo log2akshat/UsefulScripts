@@ -114,7 +114,9 @@ subprocess.call(["clear"])
 def show_process_list():
     """Function to show current connections on MySQL."""
     LOGGER.debug("Showinng current connections on MySQL..")
-    mysql_cmd = subprocess.Popen(["mysqladmin -u " + DB_USER + " -h" + DBHOST + " -p'" + DB_USER_PASSWORD + "' processlist"], shell=True, stdout=subprocess.PIPE,)
+    mysql_cmd = subprocess.Popen(["mysqladmin -u " + DB_USER + " -h" + DBHOST + " -p'" +
+                                  DB_USER_PASSWORD + "' processlist"], shell=True,
+                                 stdout=subprocess.PIPE,)
     grep_cmd = subprocess.Popen(['grep', DB_NAME], stdin=mysql_cmd.stdout, stdout=subprocess.PIPE,)
     mysql_cmd.stdout.close()
     current_processes = str(grep_cmd.communicate()[0]).strip()
