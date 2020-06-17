@@ -22,6 +22,7 @@ import platform
 import subprocess
 import argparse
 from argparse import RawTextHelpFormatter
+from __future__ import print_function
 
 
 # Command line argument validation functions...
@@ -137,9 +138,9 @@ def main():
             else:
                 LOGGER.info("public_html directory for the user %s does not exists.", users[i])
                 unused_accounts.append(users[i])
-        print "Unused accounts : " + str(unused_accounts)
-        print "Inactive accounts : " + str(inactive_accounts)
-        print "Active accounts : " + str(active_accounts)
+        print('Unused accounts : %s' % str(unused_accounts))
+        print('Inactive accounts : %s' % str(inactive_accounts))
+        print('Active accounts : %s' % str(active_accounts))
     else:
         LOGGER.info("Number of directories and files in %s directory is/are : %s\n\n", SOURCE_DIR, num_of_files(SOURCE_DIR))
 
