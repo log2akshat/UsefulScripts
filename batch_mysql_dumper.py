@@ -29,7 +29,7 @@ import logging
 import subprocess
 import argparse
 from argparse import RawTextHelpFormatter
-import MySQLdb
+import MySQLdb # pylint: disable=import-error
 
 # MySQL Credentials
 DB_HOST = 'localhost'
