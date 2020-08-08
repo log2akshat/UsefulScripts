@@ -44,7 +44,7 @@ CURSOR.execute("SHOW DATABASES")
 
 DB_NAMES = []
 for (databaseName,) in CURSOR:
-    if not (databaseName == 'mysql' or databaseName == 'information_schema' or databaseName == 'performance_schema'):
+    if not databaseName in ('mysql', 'information_schema', 'performance_schema'):
         DB_NAMES.append(databaseName)
 
 BACKUP_DEST = '/Backup/BACKUPS/MySQLDUMPS/'
