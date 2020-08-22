@@ -56,7 +56,7 @@ def is_valid_option(parser, arg):
 
 def is_valid_logging_status(parser, arg):
     "Function for checking logging status is valid or not."
-    if not (arg == 'on' or arg == 'off'):
+    if not arg in ('on', 'off'):
         parser.error('{} is not a valid input for turning logging on or off! Please specify \"on\" for turning logging on and \"off\" for turning logging off.'.format(arg))
     return arg
 
