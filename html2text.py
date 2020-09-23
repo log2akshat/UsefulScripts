@@ -84,7 +84,7 @@ for k in unifiable.keys():
     unifiable_n[name2cp(k)] = unifiable[k]
 
 def charref(name):
-    if name[0] in ['x','X']:
+    if name[0] in ['x', 'X']:
         c = int(name[1:], 16)
     else:
         c = int(name)
