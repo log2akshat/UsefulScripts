@@ -297,7 +297,7 @@ class _html2text(HTMLParser.HTMLParser):
         self.outtext = self.outtext.join(self.outtextlist)
         
         if options.google_doc:
-            self.outtext = self.outtext.replace('&nbsp_place_holder;', ' ');
+            self.outtext = self.outtext.replace('&nbsp_place_holder;', ' ')
         
         return self.outtext
         
