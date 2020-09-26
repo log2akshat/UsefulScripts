@@ -325,7 +325,7 @@ class _html2text(HTMLParser.HTMLParser):
         for a in self.a:
             i += 1
             match = 0
-            
+ 
             if has_key(a, 'href') and a['href'] == attrs['href']:
                 if has_key(a, 'title') or has_key(attrs, 'title'):
                         if (has_key(a, 'title') and has_key(attrs, 'title') and
