@@ -602,7 +602,7 @@ class _html2text(HTMLParser.HTMLParser):
     def o(self, data, puredata=0, force=0):
         if self.abbr_data is not None: self.abbr_data += data
         
-        if not self.quiet: 
+        if not self.quiet:
             if options.google_doc:
                 # prevent white space immediately after 'begin emphasis' marks ('**' and '_')
                 lstripped_data = data.lstrip()
