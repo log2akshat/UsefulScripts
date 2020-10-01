@@ -545,7 +545,6 @@ class _html2text(HTMLParser.HTMLParser):
         if tag == 'dt' and not start: self.pbr()
         if tag == 'dd' and start: self.o('    ')
         if tag == 'dd' and not start: self.pbr()
-        
         if tag in ["ol", "ul"]:
             # Google Docs create sub lists as top level lists
             if (not self.list) and (not self.lastWasList):
