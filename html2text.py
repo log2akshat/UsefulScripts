@@ -463,7 +463,7 @@ class _html2text(HTMLParser.HTMLParser):
             self.quiet = 0 # sites like 9rules.com never close <head>
         
         if tag == "blockquote":
-            if start: 
+            if start:
                 self.p(); self.o('> ', 0, 1); self.start = 1
                 self.blockquote += 1
             else:
