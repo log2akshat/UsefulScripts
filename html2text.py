@@ -300,7 +300,7 @@ class _html2text(HTMLParser.HTMLParser):
             self.outtext = self.outtext.replace('&nbsp_place_holder;', ' ')
         
         return self.outtext
-        
+ 
     def handle_charref(self, c):
         self.o(charref(c), 1)
 
