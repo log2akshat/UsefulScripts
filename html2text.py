@@ -577,7 +577,7 @@ class _html2text(HTMLParser.HTMLParser):
                     li['num'] += 1
                     self.o(str(li['num'])+". ")
                 self.start = 1
-        
+ 
         if tag in ["table", "tr"] and start: self.p()
         if tag == 'td': self.pbr()
         
