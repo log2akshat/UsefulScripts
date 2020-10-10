@@ -290,7 +290,7 @@ class _html2text(HTMLParser.HTMLParser):
  
     def close(self):
         HTMLParser.HTMLParser.close(self)
-        
+ 
         self.pbr()
         self.o('', 0, 'end')
 
