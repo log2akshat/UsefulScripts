@@ -609,7 +609,7 @@ class _html2text(HTMLParser.HTMLParser):
                     data = lstripped_data
                 if lstripped_data != '':
                     self.drop_white_space = 0
-            
+ 
             if puredata and not self.pre:
                 data = re.sub('\s+', ' ', data)
                 if data and data[0] == ' ':
