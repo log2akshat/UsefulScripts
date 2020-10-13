@@ -461,7 +461,7 @@ class _html2text(HTMLParser.HTMLParser):
 
         if tag in ["body"]:
             self.quiet = 0 # sites like 9rules.com never close <head>
-        
+ 
         if tag == "blockquote":
             if start:
                 self.p(); self.o('> ', 0, 1); self.start = 1
