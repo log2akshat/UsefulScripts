@@ -95,6 +95,7 @@ LOGGER.addHandler(CONSOLE_HANDLER)
 
 REPOS_FILE_PATH = ARGS.repo_list_file
 CLONING_DIRECTORY = ARGS.cloning_directory
+ORG_NAME = (os.path.basename(CLONING_DIRECTORY).strip())
 DEVNULL = open('/dev/null', 'w')
 subprocess.call(['clear'])
 
@@ -107,7 +108,10 @@ def clone_repos():
             count += 1
             print("\n==================================================\n")
             LOGGER.info("Cloning Repo {}: {}\n".format(count, repo.strip()))
-            subprocess.call(['git', '-C', CLONING_DIRECTORY, 'clone', 'git@github.com:ZimbraOS/' + repo.strip() + '.git'])
+            if ORG_NAME == 'Zimbra':
+                subprocess.call(['git', '-C', CLONING_DIRECTORY, 'clone', 'git@github.com:Zimbra/' + repo.strip() + '.git'])
+            elif ORG_NAME == 'ZimbraOS':
+                subprocess.call(['git', '-C', CLONING_DIRECTORY, 'clone', 'git@github.com:ZimbraOS/' + repo.strip() + '.git'])
 
 
 def keyword_grepper():
@@ -125,7 +129,7 @@ def keyword_grepper():
 
 def main():
     '''Start execution of the main program.'''
-    #clone_repos()
+    clone_repos()
     keyword_grepper()
 
 
