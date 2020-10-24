@@ -295,7 +295,7 @@ class _html2text(HTMLParser.HTMLParser):
         self.o('', 0, 'end')
 
         self.outtext = self.outtext.join(self.outtextlist)
-        
+ 
         if options.google_doc:
             self.outtext = self.outtext.replace('&nbsp_place_holder;', ' ')
  
@@ -627,7 +627,7 @@ class _html2text(HTMLParser.HTMLParser):
             if self.pre:
                 bq += "    "
                 data = data.replace("\n", "\n"+bq)
-            
+ 
             if self.start:
                 self.space = 0
                 self.p_p = 0
