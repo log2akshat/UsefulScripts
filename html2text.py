@@ -283,7 +283,7 @@ class _html2text(HTMLParser.HTMLParser):
     def feed(self, data):
         data = data.replace("</' + 'script>", "</ignore>")
         HTMLParser.HTMLParser.feed(self, data)
-    
+ 
     def outtextf(self, s):
         self.outtextlist.append(s)
         if s: self.lastWasNL = s[-1] == '\n'
