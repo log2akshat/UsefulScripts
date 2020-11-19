@@ -279,7 +279,7 @@ class _html2text(HTMLParser.HTMLParser):
         if options.google_doc:
             del unifiable_n[name2cp('nbsp')]
             unifiable['nbsp'] = '&nbsp_place_holder;'
- 
+
     def feed(self, data):
         data = data.replace("</' + 'script>", "</ignore>")
         HTMLParser.HTMLParser.feed(self, data)
