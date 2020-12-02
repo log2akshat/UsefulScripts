@@ -519,7 +519,7 @@ class _html2text(HTMLParser.HTMLParser):
                                 a['outcount'] = self.outcount
                                 self.a.append(a)
                             self.o("][" + str(a['count']) + "]")
-        
+ 
         if tag == "img" and start and not IGNORE_IMAGES:
             if has_key(attrs, 'src'):
                 attrs['href'] = attrs['src']
