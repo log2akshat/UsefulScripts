@@ -518,8 +518,7 @@ class _html2text(HTMLParser.HTMLParser):
                                 a['count'] = self.acount
                                 a['outcount'] = self.outcount
                                 self.a.append(a)
-                            self.o("][" + str(a['count']) + "]")
- 
+                            self.o("][" + str(a['count']) + "]") 
         if tag == "img" and start and not IGNORE_IMAGES:
             if has_key(attrs, 'src'):
                 attrs['href'] = attrs['src']
@@ -561,7 +560,7 @@ class _html2text(HTMLParser.HTMLParser):
             self.lastWasList = True
         else:
             self.lastWasList = False
-        
+
         if tag == 'li':
             self.pbr()
             if start:
@@ -580,7 +579,7 @@ class _html2text(HTMLParser.HTMLParser):
 
         if tag in ["table", "tr"] and start: self.p()
         if tag == 'td': self.pbr()
-        
+
         if tag == "pre":
             if start:
                 self.startpre = 1
@@ -588,7 +587,7 @@ class _html2text(HTMLParser.HTMLParser):
             else:
                 self.pre = 0
             self.p()
-            
+
     def pbr(self):
         if self.p_p == 0: self.p_p = 1
 
@@ -597,10 +596,10 @@ class _html2text(HTMLParser.HTMLParser):
     def soft_br(self):
         self.pbr()
         self.br_toggle = '  '
-    
+
     def o(self, data, puredata=0, force=0):
         if self.abbr_data is not None: self.abbr_data += data
-        
+
         if not self.quiet:
             if options.google_doc:
                 # prevent white space immediately after 'begin emphasis' marks ('**' and '_')
@@ -609,7 +608,7 @@ class _html2text(HTMLParser.HTMLParser):
                     data = lstripped_data
                 if lstripped_data != '':
                     self.drop_white_space = 0
- 
+
             if puredata and not self.pre:
                 data = re.sub('\s+', ' ', data)
                 if data and data[0] == ' ':
@@ -620,14 +619,14 @@ class _html2text(HTMLParser.HTMLParser):
             if self.startpre:
                 #self.out(" :") #TODO: not output when already one there
                 self.startpre = 0
-            
+
             bq = (">" * self.blockquote)
             if not (force and data and data[0] == ">") and self.blockquote: bq += " "
-            
+
             if self.pre:
                 bq += "    "
                 data = data.replace("\n", "\n"+bq)
- 
+
             if self.start:
                 self.space = 0
                 self.p_p = 0
@@ -643,7 +642,7 @@ class _html2text(HTMLParser.HTMLParser):
                 self.out((self.br_toggle+'\n'+bq)*self.p_p)
                 self.space = 0
                 self.br_toggle = ''
-                
+
             if self.space:
                 if not self.lastWasNL: self.out(' ')
                 self.space = 0
@@ -663,7 +662,7 @@ class _html2text(HTMLParser.HTMLParser):
                 if self.a != newa: self.out("\n") # Don't need an extra line when nothing was done.
 
                 self.a = newa
-            
+
             if self.abbr_list and force == "end":
                 for abbr, definition in self.abbr_list.items():
                     self.out("  *[" + abbr + "]: " + definition + "\n")
@@ -679,7 +678,7 @@ class _html2text(HTMLParser.HTMLParser):
             self.style_def.update(dumb_css_parser(data))
 
         self.o(data, 1)
-    
+
     def unknown_decl(self, data): pass
 
 def wrapwrite(text):
@@ -705,7 +704,7 @@ options.ul_item_mark = '*'
 
 if __name__ == "__main__":
     baseurl = ''
-    
+
     p = optparse.OptionParser('%prog [(filename|url) [encoding]]',
                               version='%prog ' + __version__)
     p.add_option("-g", "--google-doc", action="store_true", dest="google_doc",
