@@ -132,7 +132,7 @@ def optwrap(text):
     """Wrap all paragraphs in the provided text."""
     if not BODY_WIDTH:
         return text
-    
+ 
     assert wrap, "Requires Python 2.3."
     result = ''
     newlines = 0
