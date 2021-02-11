@@ -312,11 +312,11 @@ class _html2text(HTMLParser.HTMLParser):
     
     def handle_endtag(self, tag):
         self.handle_tag(tag, None, 0)
-        
+ 
     def previousIndex(self, attrs):
         """ returns the index of certain set of attributes (of a link) in the
             self.a list
- 
+
             If the set of attributes is not found, returns None
         """
         if not has_key(attrs, 'href'): return None
