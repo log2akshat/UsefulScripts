@@ -71,10 +71,10 @@ def name2cp(k):
 unifiable = {'rsquo':"'", 'lsquo':"'", 'rdquo':'"', 'ldquo':'"',
 'copy':'(C)', 'mdash':'--', 'nbsp':' ', 'rarr':'->', 'larr':'<-', 'middot':'*',
 'ndash':'-', 'oelig':'oe', 'aelig':'ae',
-'agrave':'a', 'aacute':'a', 'acirc':'a', 'atilde':'a', 'auml':'a', 'aring':'a', 
+'agrave':'a', 'aacute':'a', 'acirc':'a', 'atilde':'a', 'auml':'a', 'aring':'a',
 'egrave':'e', 'eacute':'e', 'ecirc':'e', 'euml':'e', 
 'igrave':'i', 'iacute':'i', 'icirc':'i', 'iuml':'i',
-'ograve':'o', 'oacute':'o', 'ocirc':'o', 'otilde':'o', 'ouml':'o', 
+'ograve':'o', 'oacute':'o', 'ocirc':'o', 'otilde':'o', 'ouml':'o',
 'ugrave':'u', 'uacute':'u', 'ucirc':'u', 'uuml':'u',
 'lrm':'', 'rlm':''}
 
