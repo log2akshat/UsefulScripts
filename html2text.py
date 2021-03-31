@@ -88,7 +88,7 @@ def charref(name):
         c = int(name[1:], 16)
     else:
         c = int(name)
- 
+
     if not UNICODE_SNOB and c in unifiable_n.keys():
         return unifiable_n[c]
     else:
