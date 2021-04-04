@@ -320,7 +320,7 @@ class _html2text(HTMLParser.HTMLParser):
             If the set of attributes is not found, returns None
         """
         if not has_key(attrs, 'href'): return None
-        
+
         i = -1
         for a in self.a:
             i += 1
