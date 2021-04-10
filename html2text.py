@@ -306,7 +306,7 @@ class _html2text(HTMLParser.HTMLParser):
 
     def handle_entityref(self, c):
         self.o(entityref(c), 1)
-            
+
     def handle_starttag(self, tag, attrs):
         self.handle_tag(tag, attrs, 1)
  
