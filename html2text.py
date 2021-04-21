@@ -111,7 +111,7 @@ def entityref(c):
 
 def replaceEntities(s):
     s = s.group(1)
-    if s[0] == "#": 
+    if s[0] == "#":
         return charref(s[1:])
     else: return entityref(s)
 
