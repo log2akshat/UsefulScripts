@@ -495,7 +495,7 @@ class _html2text(HTMLParser.HTMLParser):
                     self.abbr_list[self.abbr_data] = self.abbr_title
                     self.abbr_title = None
                 self.abbr_data = ''
-        
+
         if tag == "a" and not IGNORE_ANCHORS:
             if start:
                 if has_key(attrs, 'href') and not (SKIP_INTERNAL_LINKS and attrs['href'].startswith('#')): 
