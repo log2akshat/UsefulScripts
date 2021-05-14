@@ -653,7 +653,7 @@ class _html2text(HTMLParser.HTMLParser):
                 newa = []
                 for link in self.a:
                     if self.outcount > link['outcount']:
-                        self.out("   ["+ str(link['count']) +"]: " + urlparse.urljoin(self.baseurl, link['href'])) 
+                        self.out("   ["+ str(link['count']) +"]: " + urlparse.urljoin(self.baseurl, link['href']))
                         if has_key(link, 'title'): self.out(" ("+link['title']+")")
                         self.out("\n")
                     else:
