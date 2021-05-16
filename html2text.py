@@ -399,7 +399,7 @@ class _html2text(HTMLParser.HTMLParser):
                     self.o("_")
             # space is only allowed after *all* emphasis marks
             if (bold or italic) and not self.emphasis:
-                    self.o(" ")
+                self.o(" ")
             if strikethrough:
                 self.quiet -= 1
 
