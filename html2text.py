@@ -447,7 +447,8 @@ class _html2text(HTMLParser.HTMLParser):
             else:
                 self.p()
 
-        if tag == "br" and start: self.o("  \n")
+        if tag == "br" and start:
+            self.o("  \n")
 
         if tag == "hr" and start:
             self.p()
