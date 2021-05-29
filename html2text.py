@@ -544,7 +544,8 @@ class _html2text(HTMLParser.HTMLParser):
                     self.o(alt)
                     self.o("]["+ str(attrs['count']) +"]")
 
-        if tag == 'dl' and start: self.p()
+        if tag == 'dl' and start:
+            self.p()
         if tag == 'dt' and not start: self.pbr()
         if tag == 'dd' and start: self.o('    ')
         if tag == 'dd' and not start: self.pbr()
