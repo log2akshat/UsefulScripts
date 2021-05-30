@@ -456,8 +456,10 @@ class _html2text(HTMLParser.HTMLParser):
             self.p()
 
         if tag in ["head", "style", 'script']:
-            if start: self.quiet += 1
-            else: self.quiet -= 1
+            if start:
+                self.quiet += 1
+            else:
+                self.quiet -= 1
 
         if tag == "style":
             if start: self.style += 1
