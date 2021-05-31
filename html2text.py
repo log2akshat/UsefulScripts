@@ -605,7 +605,8 @@ class _html2text(HTMLParser.HTMLParser):
         self.br_toggle = '  '
 
     def o(self, data, puredata=0, force=0):
-        if self.abbr_data is not None: self.abbr_data += data
+        if self.abbr_data is not None:
+            self.abbr_data += data
 
         if not self.quiet:
             if options.google_doc:
