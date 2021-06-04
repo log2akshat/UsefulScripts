@@ -35,8 +35,10 @@ import re
 import sys
 import codecs
 
-try: from textwrap import wrap
-except: pass
+try:
+    from textwrap import wrap
+except:
+    pass
 
 # Use Unicode characters instead of their ascii psuedo-replacements
 UNICODE_SNOB = 0
