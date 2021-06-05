@@ -464,8 +464,10 @@ class _html2text(HTMLParser.HTMLParser):
                 self.quiet -= 1
 
         if tag == "style":
-            if start: self.style += 1
-            else: self.style -= 1
+            if start:
+                self.style += 1
+            else:
+                self.style -= 1
 
         if tag in ["body"]:
             self.quiet = 0 # sites like 9rules.com never close <head>
