@@ -480,7 +480,8 @@ class _html2text(HTMLParser.HTMLParser):
                 self.blockquote -= 1
                 self.p()
 
-        if tag in ['em', 'i', 'u']: self.o("_")
+        if tag in ['em', 'i', 'u']:
+            self.o("_")
         if tag in ['strong', 'b']: self.o("**")
         if tag in ['del', 'strike']:
             if start:
