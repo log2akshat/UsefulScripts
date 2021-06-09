@@ -658,7 +658,8 @@ class _html2text(HTMLParser.HTMLParser):
                 self.br_toggle = ''
 
             if self.space:
-                if not self.lastWasNL: self.out(' ')
+                if not self.lastWasNL:
+                    self.out(' ')
                 self.space = 0
 
             if self.a and ((self.p_p == 2 and LINKS_EACH_PARAGRAPH) or force == "end"):
