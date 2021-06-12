@@ -584,7 +584,8 @@ class _html2text(HTMLParser.HTMLParser):
                 else:
                     nest_count = len(self.list)
                 self.o("  " * nest_count) #TODO: line up <ol><li>s > 9 correctly.
-                if li['name'] == "ul": self.o(options.ul_item_mark + " ")
+                if li['name'] == "ul":
+                    self.o(options.ul_item_mark + " ")
                 elif li['name'] == "ol":
                     li['num'] += 1
                     self.o(str(li['num'])+". ")
