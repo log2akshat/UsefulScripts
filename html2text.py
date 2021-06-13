@@ -577,7 +577,8 @@ class _html2text(HTMLParser.HTMLParser):
         if tag == 'li':
             self.pbr()
             if start:
-                if self.list: li = self.list[-1]
+                if self.list:
+                    li = self.list[-1]
                 else: li = {'name':'ul', 'num':0}
                 if options.google_doc:
                     nest_count = google_nest_count(tag_style)
