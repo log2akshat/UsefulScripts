@@ -554,7 +554,8 @@ class _html2text(HTMLParser.HTMLParser):
 
         if tag == 'dl' and start:
             self.p()
-        if tag == 'dt' and not start: self.pbr()
+        if tag == 'dt' and not start:
+            self.pbr()
         if tag == 'dd' and start: self.o('    ')
         if tag == 'dd' and not start: self.pbr()
         if tag in ["ol", "ul"]:
