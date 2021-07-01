@@ -607,7 +607,8 @@ class _html2text(HTMLParser.HTMLParser):
             self.p()
 
     def pbr(self):
-        if self.p_p == 0: self.p_p = 1
+        if self.p_p == 0:
+            self.p_p = 1
 
     def p(self): self.p_p = 2
 
