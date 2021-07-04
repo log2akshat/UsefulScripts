@@ -670,7 +670,8 @@ class _html2text(HTMLParser.HTMLParser):
                 self.space = 0
 
             if self.a and ((self.p_p == 2 and LINKS_EACH_PARAGRAPH) or force == "end"):
-                if force == "end": self.out("\n")
+                if force == "end":
+                    self.out("\n")
 
                 newa = []
                 for link in self.a:
