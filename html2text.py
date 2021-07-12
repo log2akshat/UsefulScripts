@@ -684,7 +684,8 @@ class _html2text(HTMLParser.HTMLParser):
                     else:
                         newa.append(link)
 
-                if self.a != newa: self.out("\n") # Don't need an extra line when nothing was done.
+                if self.a != newa:
+                    self.out("\n") # Don't need an extra line when nothing was done.
 
                 self.a = newa
 
