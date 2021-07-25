@@ -613,7 +613,8 @@ class _html2text(HTMLParser.HTMLParser):
         if self.p_p == 0:
             self.p_p = 1
 
-    def p(self): self.p_p = 2
+    def p(self):
+        self.p_p = 2
 
     def soft_br(self):
         self.pbr()
