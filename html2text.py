@@ -66,7 +66,8 @@ IGNORE_IMAGES = False
 ### Entity Nonsense ###
 
 def name2cp(k):
-    if k == 'apos': return ord("'")
+    if k == 'apos':
+        return ord("'")
     if hasattr(htmlentitydefs, "name2codepoint"): # requires Python 2.3
         return htmlentitydefs.name2codepoint[k]
     else:
