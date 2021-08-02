@@ -72,7 +72,8 @@ def name2cp(k):
         return htmlentitydefs.name2codepoint[k]
     else:
         k = htmlentitydefs.entitydefs[k]
-        if k.startswith("&#") and k.endswith(";"): return int(k[2:-1]) # not in latin-1
+        if k.startswith("&#") and k.endswith(";"):
+            return int(k[2:-1]) # not in latin-1
         return ord(codecs.latin_1_decode(k)[0])
 
 unifiable = {'rsquo':"'", 'lsquo':"'", 'rdquo':'"', 'ldquo':'"',
