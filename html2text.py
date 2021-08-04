@@ -109,7 +109,8 @@ def entityref(c):
     if not UNICODE_SNOB and c in unifiable.keys():
         return unifiable[c]
     else:
-        try: name2cp(c)
+        try:
+            name2cp(c)
         except KeyError: return "&" + c + ';'
         else:
             try:
