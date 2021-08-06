@@ -111,7 +111,8 @@ def entityref(c):
     else:
         try:
             name2cp(c)
-        except KeyError: return "&" + c + ';'
+        except KeyError:
+            return "&" + c + ';'
         else:
             try:
                 return unichr(name2cp(c))
