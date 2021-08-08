@@ -167,7 +167,8 @@ def hn(tag):
     if tag[0] == 'h' and len(tag) == 2:
         try:
             n = int(tag[1])
-            if n in range(1, 10): return n
+            if n in range(1, 10):
+                return n
         except ValueError: return 0
 
 def dumb_property_dict(style):
