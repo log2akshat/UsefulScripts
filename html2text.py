@@ -169,7 +169,8 @@ def hn(tag):
             n = int(tag[1])
             if n in range(1, 10):
                 return n
-        except ValueError: return 0
+        except ValueError:
+            return 0
 
 def dumb_property_dict(style):
     """returns a hash of css attributes"""
