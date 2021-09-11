@@ -254,7 +254,8 @@ class _html2text(HTMLParser.HTMLParser):
     def __init__(self, out=None, baseurl=''):
         HTMLParser.HTMLParser.__init__(self)
 
-        if out is None: self.out = self.outtextf
+        if out is None:
+            self.out = self.outtextf
         else: self.out = out
         self.outtextlist = [] # empty list to store output characters before they are  "joined"
         try:
