@@ -349,7 +349,8 @@ class _html2text(HTMLParser.HTMLParser):
                 else:
                     match = True
 
-            if match: return i
+            if match:
+                return i
 
     def drop_last(self, nLetters):
         if not self.quiet:
