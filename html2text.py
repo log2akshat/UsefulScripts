@@ -610,7 +610,8 @@ class _html2text(HTMLParser.HTMLParser):
 
         if tag in ["table", "tr"] and start:
             self.p()
-        if tag == 'td': self.pbr()
+        if tag == 'td':
+            self.pbr()
 
         if tag == "pre":
             if start:
