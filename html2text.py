@@ -657,7 +657,8 @@ class _html2text(HTMLParser.HTMLParser):
                 self.startpre = 0
 
             bq = (">" * self.blockquote)
-            if not (force and data and data[0] == ">") and self.blockquote: bq += " "
+            if not (force and data and data[0] == ">") and self.blockquote:
+                bq += " "
 
             if self.pre:
                 bq += "    "
