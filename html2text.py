@@ -650,7 +650,8 @@ class _html2text(HTMLParser.HTMLParser):
                 if data and data[0] == ' ':
                     self.space = 1
                     data = data[1:]
-            if not data and not force: return
+            if not data and not force:
+                return
 
             if self.startpre:
                 #self.out(" :") #TODO: not output when already one there
