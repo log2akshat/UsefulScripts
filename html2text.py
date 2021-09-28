@@ -714,7 +714,8 @@ class _html2text(HTMLParser.HTMLParser):
             self.outcount += 1
 
     def handle_data(self, data):
-        if r'\/script>' in data: self.quiet -= 1
+        if r'\/script>' in data:
+            self.quiet -= 1
 
         if self.style:
             self.style_def.update(dumb_css_parser(data))
