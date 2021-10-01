@@ -722,7 +722,8 @@ class _html2text(HTMLParser.HTMLParser):
 
         self.o(data, 1)
 
-    def unknown_decl(self, data): pass
+    def unknown_decl(self, data):
+        pass
 
 def wrapwrite(text):
     text = text.encode('utf-8')
