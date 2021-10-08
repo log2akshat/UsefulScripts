@@ -9,6 +9,7 @@ __contributors__ = ["Martin 'Joey' Schulze", "Ricardo Reyes", "Kevin Jay North"]
 #   Support decoded entities with unifiable.
 
 import optparse
+import re
 try:
     True
 except NameError:
@@ -32,7 +33,6 @@ try: #Python3
     import urllib.request as urllib
 except:
     import urllib
-import re
 import sys
 import codecs
 
