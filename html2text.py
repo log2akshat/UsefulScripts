@@ -11,6 +11,7 @@ __contributors__ = ["Martin 'Joey' Schulze", "Ricardo Reyes", "Kevin Jay North"]
 import optparse
 import re
 import sys
+import codecs
 try:
     True
 except NameError:
@@ -34,7 +35,6 @@ try: #Python3
     import urllib.request as urllib
 except:
     import urllib
-import codecs
 
 try:
     from textwrap import wrap
