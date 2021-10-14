@@ -29,8 +29,8 @@ try:
     import HTMLParser
 except ImportError: #Python3
     import html.entities as htmlentitydefs
-    import urllib.parse as urlparse
     import html.parser as HTMLParser
+    import urllib.parse as urlparse
 try: #Python3
     import urllib.request as urllib
 except:
