@@ -180,10 +180,10 @@ def dumb_property_dict(style):
 def dumb_css_parser(data):
     """returns a hash of css selectors, each of which contains a hash of css attributes"""
     # remove @import sentences
-    importIndex = data.find('@import')
-    while importIndex != -1:
-        data = data[0:importIndex] + data[data.find(';', importIndex) + 1:]
-        importIndex = data.find('@import')
+    import_index = data.find('@import')
+    while import_index != -1:
+        data = data[0:import_index] + data[data.find(';', import_index) + 1:]
+        import_index = data.find('@import')
 
     # parse the css. reverted from dictionary compehension in order to support older pythons
     elements = [x.split('{') for x in data.split('}') if '{' in x.strip()]
