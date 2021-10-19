@@ -595,18 +595,18 @@ class _html2text(HTMLParser.HTMLParser):
             self.pbr()
             if start:
                 if self.list:
-                    li = self.list[-1]
-                else: li = {'name':'ul', 'num':0}
+                    my_list = self.list[-1]
+                else: my_list = {'name':'ul', 'num':0}
                 if options.google_doc:
                     nest_count = google_nest_count(tag_style)
                 else:
                     nest_count = len(self.list)
                 self.o("  " * nest_count) #TODO: line up <ol><li>s > 9 correctly.
-                if li['name'] == "ul":
+                if my_list['name'] == "ul":
                     self.o(options.ul_item_mark + " ")
-                elif li['name'] == "ol":
-                    li['num'] += 1
-                    self.o(str(li['num'])+". ")
+                elif my_list['name'] == "ol":
+                    my_list['num'] += 1
+                    self.o(str(my_list['num'])+". ")
                 self.start = 1
 
         if tag in ["table", "tr"] and start:
