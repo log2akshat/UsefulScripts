@@ -734,10 +734,10 @@ def wrapwrite(text):
         sys.stdout.write(text)
 
 def html2text_file(html, out=wrapwrite, baseurl=''):
-    h = _html2text(out, baseurl)
-    h.feed(html)
-    h.feed("")
-    return h.close()
+    html_2_text = _html2text(out, baseurl)
+    html_2_text.feed(html)
+    html_2_text.feed("")
+    return html_2_text.close()
 
 def html2text(html, baseurl=''):
     return optwrap(html2text_file(html, None, baseurl))
