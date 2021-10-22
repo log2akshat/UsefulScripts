@@ -658,13 +658,13 @@ class _html2text(HTMLParser.HTMLParser):
                 #self.out(" :") #TODO: not output when already one there
                 self.startpre = 0
 
-            bq = (">" * self.blockquote)
+            block_quote = (">" * self.blockquote)
             if not (force and data and data[0] == ">") and self.blockquote:
-                bq += " "
+                block_quote += " "
 
             if self.pre:
-                bq += "    "
-                data = data.replace("\n", "\n"+bq)
+                block_quote += "    "
+                data = data.replace("\n", "\n"+block_quote)
 
             if self.start:
                 self.space = 0
@@ -678,7 +678,7 @@ class _html2text(HTMLParser.HTMLParser):
                 self.space = 0
 
             if self.p_p:
-                self.out((self.br_toggle+'\n'+bq)*self.p_p)
+                self.out((self.br_toggle+'\n'+block_quote)*self.p_p)
                 self.space = 0
                 self.br_toggle = ''
 
