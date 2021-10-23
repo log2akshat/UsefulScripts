@@ -119,7 +119,7 @@ def entityref(c):
             except NameError: #Python3
                 return chr(name2cp(c))
 
-def replaceEntities(s):
+def replace_entities(s):
     s = s.group(1)
     if s[0] == "#":
         return charref(s[1:])
@@ -128,7 +128,7 @@ def replaceEntities(s):
 
 r_unescape = re.compile(r"&(#?[xX]?(?:[0-9a-fA-F]+|\w{1,8}));")
 def unescape(s):
-    return r_unescape.sub(replaceEntities, s)
+    return r_unescape.sub(replace_entities, s)
 
 ### End Entity Nonsense ###
 
