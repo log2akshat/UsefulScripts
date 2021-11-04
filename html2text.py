@@ -328,7 +328,7 @@ class _html2text(HTMLParser.HTMLParser):
     def handle_endtag(self, tag):
         self.handle_tag(tag, None, 0)
 
-    def previousIndex(self, attrs):
+    def previous_index(self, attrs):
         """ returns the index of certain set of attributes (of a link) in the
             self.a list
 
@@ -535,7 +535,7 @@ class _html2text(HTMLParser.HTMLParser):
                         if INLINE_LINKS:
                             self.o("](" + a['href'] + ")")
                         else:
-                            i = self.previousIndex(a)
+                            i = self.previous_index(a)
                             if i is not None:
                                 a = self.a[i]
                             else:
@@ -553,7 +553,7 @@ class _html2text(HTMLParser.HTMLParser):
                     self.o(alt)
                     self.o("]("+ attrs['href'] +")")
                 else:
-                    i = self.previousIndex(attrs)
+                    i = self.previous_index(attrs)
                     if i is not None:
                         attrs = self.a[i]
                     else:
