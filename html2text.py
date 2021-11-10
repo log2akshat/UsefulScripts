@@ -277,7 +277,7 @@ class _html2text(HTMLParser.HTMLParser):
         self.startpre = 0
         self.code = False
         self.br_toggle = ''
-        self.lastWasNL = 0
+        self.last_was_nl = 0
         self.lastWasList = False
         self.style = 0
         self.style_def = {}
@@ -301,7 +301,7 @@ class _html2text(HTMLParser.HTMLParser):
     def outtextf(self, s):
         self.outtextlist.append(s)
         if s:
-            self.lastWasNL = s[-1] == '\n'
+            self.last_was_nl = s[-1] == '\n'
 
     def close(self):
         HTMLParser.HTMLParser.close(self)
@@ -683,7 +683,7 @@ class _html2text(HTMLParser.HTMLParser):
                 self.br_toggle = ''
 
             if self.space:
-                if not self.lastWasNL:
+                if not self.last_was_nl:
                     self.out(' ')
                 self.space = 0
 
