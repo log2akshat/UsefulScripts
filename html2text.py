@@ -93,17 +93,17 @@ for k in unifiable.keys():
 
 def charref(name):
     if name[0] in ['x', 'X']:
-        c = int(name[1:], 16)
+        char = int(name[1:], 16)
     else:
-        c = int(name)
+        char = int(name)
 
-    if not UNICODE_SNOB and c in unifiable_n.keys():
-        return unifiable_n[c]
+    if not UNICODE_SNOB and char in unifiable_n.keys():
+        return unifiable_n[char]
     else:
         try:
-            return unichr(c)
+            return unichr(char)
         except NameError: #Python3
-            return chr(c)
+            return chr(char)
 
 def entityref(c):
     if not UNICODE_SNOB and c in unifiable.keys():
