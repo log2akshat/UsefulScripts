@@ -105,19 +105,19 @@ def charref(name):
         except NameError: #Python3
             return chr(char)
 
-def entityref(c):
-    if not UNICODE_SNOB and c in unifiable.keys():
-        return unifiable[c]
+def entityref(char):
+    if not UNICODE_SNOB and char in unifiable.keys():
+        return unifiable[char]
     else:
         try:
-            name2cp(c)
+            name2cp(char)
         except KeyError:
-            return "&" + c + ';'
+            return "&" + char + ';'
         else:
             try:
-                return unichr(name2cp(c))
+                return unichr(name2cp(char))
             except NameError: #Python3
-                return chr(name2cp(c))
+                return chr(name2cp(char))
 
 def replace_entities(s):
     s = s.group(1)
