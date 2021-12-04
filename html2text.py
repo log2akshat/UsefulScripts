@@ -278,7 +278,7 @@ class _html2text(HTMLParser.HTMLParser):
         self.code = False
         self.br_toggle = ''
         self.last_was_nl = 0
-        self.lastWasList = False
+        self.last_was_list = False
         self.style = 0
         self.style_def = {}
         self.tag_stack = []
@@ -576,7 +576,7 @@ class _html2text(HTMLParser.HTMLParser):
             self.pbr()
         if tag in ["ol", "ul"]:
             # Google Docs create sub lists as top level lists
-            if (not self.list) and (not self.lastWasList):
+            if (not self.list) and (not self.last_was_list):
                 self.p()
             if start:
                 if options.google_doc:
@@ -588,9 +588,9 @@ class _html2text(HTMLParser.HTMLParser):
             else:
                 if self.list:
                     self.list.pop()
-            self.lastWasList = True
+            self.last_was_list = True
         else:
-            self.lastWasList = False
+            self.last_was_list = False
 
         if tag == 'li':
             self.pbr()
