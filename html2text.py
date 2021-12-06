@@ -353,9 +353,9 @@ class _html2text(HTMLParser.HTMLParser):
             if match:
                 return i
 
-    def drop_last(self, nLetters):
+    def drop_last(self, n_letters):
         if not self.quiet:
-            self.outtext = self.outtext[:-nLetters]
+            self.outtext = self.outtext[:-n_letters]
 
     def handle_emphasis(self, start, tag_style, parent_style):
         """handles various text emphases"""
