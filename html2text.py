@@ -444,7 +444,7 @@ class _html2text(HTMLParser.HTMLParser):
                     parent_style = self.tag_stack[-1][2]
 
         if hn(tag):
-            self.p()
+            self.paragraph()
             if start:
                 self.inheader = True
                 self.o(hn(tag)*"#" + ' ')
@@ -455,19 +455,19 @@ class _html2text(HTMLParser.HTMLParser):
         if tag in ['p', 'div']:
             if options.google_doc:
                 if start and google_has_height(tag_style):
-                    self.p()
+                    self.paragraph()
                 else:
                     self.soft_br()
             else:
-                self.p()
+                self.paragraph()
 
         if tag == "br" and start:
             self.o("  \n")
 
         if tag == "hr" and start:
-            self.p()
+            self.paragraph()
             self.o("* * *")
-            self.p()
+            self.paragraph()
 
         if tag in ["head", "style", 'script']:
             if start:
@@ -486,12 +486,12 @@ class _html2text(HTMLParser.HTMLParser):
 
         if tag == "blockquote":
             if start:
-                self.p(); self.o('> ', 0, 1)
+                self.paragraph(); self.o('> ', 0, 1)
                 self.start = 1
                 self.blockquote += 1
             else:
                 self.blockquote -= 1
-                self.p()
+                self.paragraph()
 
         if tag in ['em', 'i', 'u']:
             self.o("_")
@@ -567,7 +567,7 @@ class _html2text(HTMLParser.HTMLParser):
                     self.o("]["+ str(attrs['count']) +"]")
 
         if tag == 'dl' and start:
-            self.p()
+            self.paragraph()
         if tag == 'dt' and not start:
             self.pbr()
         if tag == 'dd' and start:
@@ -577,7 +577,7 @@ class _html2text(HTMLParser.HTMLParser):
         if tag in ["ol", "ul"]:
             # Google Docs create sub lists as top level lists
             if (not self.list) and (not self.last_was_list):
-                self.p()
+                self.paragraph()
             if start:
                 if options.google_doc:
                     list_style = google_list_style(tag_style)
@@ -611,7 +611,7 @@ class _html2text(HTMLParser.HTMLParser):
                 self.start = 1
 
         if tag in ["table", "tr"] and start:
-            self.p()
+            self.paragraph()
         if tag == 'td':
             self.pbr()
 
@@ -621,13 +621,13 @@ class _html2text(HTMLParser.HTMLParser):
                 self.pre = 1
             else:
                 self.pre = 0
-            self.p()
+            self.paragraph()
 
     def pbr(self):
         if self.p_p == 0:
             self.p_p = 1
 
-    def p(self):
+    def paragraph(self):
         self.p_p = 2
 
     def soft_br(self):
