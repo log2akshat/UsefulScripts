@@ -164,7 +164,7 @@ def optwrap(text):
                 newlines += 1
     return result
 
-def hn(tag):
+def hn_tag(tag):
     if tag[0] == 'h' and len(tag) == 2:
         try:
             n = int(tag[1])
@@ -443,11 +443,11 @@ class _html2text(HTMLParser.HTMLParser):
                 if self.tag_stack:
                     parent_style = self.tag_stack[-1][2]
 
-        if hn(tag):
+        if hn_tag(tag):
             self.paragraph()
             if start:
                 self.inheader = True
-                self.o(hn(tag)*"#" + ' ')
+                self.o(hn_tag(tag)*"#" + ' ')
             else:
                 self.inheader = False
                 return # prevent redundant emphasis marks on headers
