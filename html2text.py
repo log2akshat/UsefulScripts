@@ -18,10 +18,10 @@ except NameError:
     setattr(__builtins__, 'True', 1)
     setattr(__builtins__, 'False', 0)
 
-def has_key(x, y):
-    if hasattr(x, 'has_key'):
-        return x.has_key(y)
-    else: return y in x
+def has_key(arg1, arg2):
+    if hasattr(arg1, 'has_key'):
+        return arg1.has_key(arg2)
+    else: return arg2 in arg1
 
 try:
     import htmlentitydefs
