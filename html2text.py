@@ -8,10 +8,10 @@ __contributors__ = ["Martin 'Joey' Schulze", "Ricardo Reyes", "Kevin Jay North"]
 # TODO:
 #   Support decoded entities with unifiable.
 
-import optparse
 import re
 import sys
 import codecs
+import optparse
 try:
     True
 except NameError:
