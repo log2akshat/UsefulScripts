@@ -21,7 +21,7 @@ except NameError:
 def has_key(arg1, arg2):
     if hasattr(arg1, 'has_key'):
         return arg1.has_key(arg2)
-    else: return arg2 in arg1
+    return arg2 in arg1
 
 try:
     import htmlentitydefs
