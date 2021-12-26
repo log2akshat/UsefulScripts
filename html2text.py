@@ -123,8 +123,7 @@ def replace_entities(s):
     s = s.group(1)
     if s[0] == "#":
         return charref(s[1:])
-    else:
-        return entityref(s)
+    return entityref(s)
 
 r_unescape = re.compile(r"&(#?[xX]?(?:[0-9a-fA-F]+|\w{1,8}));")
 def unescape(s):
