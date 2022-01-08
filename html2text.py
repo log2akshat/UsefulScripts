@@ -70,11 +70,10 @@ def name2cp(k):
         return ord("'")
     if hasattr(htmlentitydefs, "name2codepoint"): # requires Python 2.3
         return htmlentitydefs.name2codepoint[k]
-    else:
-        k = htmlentitydefs.entitydefs[k]
-        if k.startswith("&#") and k.endswith(";"):
-            return int(k[2:-1]) # not in latin-1
-        return ord(codecs.latin_1_decode(k)[0])
+    k = htmlentitydefs.entitydefs[k]
+    if k.startswith("&#") and k.endswith(";"):
+        return int(k[2:-1]) # not in latin-1
+    return ord(codecs.latin_1_decode(k)[0])
 
 unifiable = {'rsquo':"'", 'lsquo':"'", 'rdquo':'"', 'ldquo':'"',
 'copy':'(C)', 'mdash':'--', 'nbsp':' ', 'rarr':'->', 'larr':'<-', 'middot':'*',
