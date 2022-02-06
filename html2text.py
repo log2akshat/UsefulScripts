@@ -98,11 +98,10 @@ def charref(name):
 
     if not UNICODE_SNOB and char in unifiable_n.keys():
         return unifiable_n[char]
-    else:
-        try:
-            return unichr(char)
-        except NameError: #Python3
-            return chr(char)
+    try:
+        return unichr(char)
+    except NameError: #Python3
+        return chr(char)
 
 def entityref(char):
     if not UNICODE_SNOB and char in unifiable.keys():
