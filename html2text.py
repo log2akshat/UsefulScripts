@@ -245,8 +245,7 @@ def list_numbering_start(attrs):
     """extract numbering from list element attributes"""
     if 'start' in attrs:
         return int(attrs['start']) - 1
-    else:
-        return 0
+    return 0
 
 class _html2text(HTMLParser.HTMLParser):
     def __init__(self, out=None, baseurl=''):
