@@ -131,7 +131,7 @@ def unescape(s):
 def onlywhite(line):
     """Return true if the line does only consist of whitespace characters."""
     for c in line:
-        if c is not ' ' and c is not '  ':
+        if c != ' ' and c != '  ':
             return c is ' '
     return line
 
