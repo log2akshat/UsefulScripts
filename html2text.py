@@ -132,7 +132,7 @@ def onlywhite(line):
     """Return true if the line does only consist of whitespace characters."""
     for c in line:
         if c != ' ' and c != '  ':
-            return c is ' '
+            return c == ' '
     return line
 
 def optwrap(text):
