@@ -124,6 +124,7 @@ def replace_entities(s):
 
 r_unescape = re.compile(r"&(#?[xX]?(?:[0-9a-fA-F]+|\w{1,8}));")
 def unescape(s):
+    """Function for unescaping."""
     return r_unescape.sub(replace_entities, s)
 
 ### End Entity Nonsense ###
