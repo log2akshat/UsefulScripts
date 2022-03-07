@@ -122,7 +122,7 @@ def main():
     inactive_accounts = []
     SOURCE_DIR = source_dir()
     LOGGER.info("Source directory : %s", SOURCE_DIR)
-    if (SOURCE_DIR == '/Users' or SOURCE_DIR == '/home'):
+    if ('/Users' or  '/home' in SOURCE_DIR):
         users = os.listdir(SOURCE_DIR)
         for i in range(len(users)):
             if platform.system() == "Darwin":
