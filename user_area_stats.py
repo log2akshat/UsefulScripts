@@ -16,13 +16,13 @@
 
 '''Script for finding the number of files in a given directory and if the source directory is not specified on the CLI then it will give the number of files in the public_html user area and also tells if a user does not have public_html directory.'''
 
+from __future__ import print_function
 import os
 import logging
 import platform
 import subprocess
 import argparse
 from argparse import RawTextHelpFormatter
-from __future__ import print_function
 
 
 # Command line argument validation functions...
