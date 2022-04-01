@@ -103,7 +103,8 @@ CONSOLE_HANDLER = logging.StreamHandler(sys.stdout)
 CONSOLE_HANDLER.setLevel(logging.DEBUG)
 
 # create formatter
-FORMATTER = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+FORMATTER = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+                               datefmt='%m/%d/%Y %I:%M:%S %p')
 
 # add formatter to handlers
 FILE_HANDLER.setFormatter(FORMATTER)
