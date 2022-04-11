@@ -154,7 +154,8 @@ def main():
             groups = os.path.dirname(audio_song_path).split('/')
             # Comparing and removing the source directory path.
             conversion_path = TARGET_DIR + "/" + '/'.join(groups[slash_count:])
-            if not os.path.exists(conversion_path): # Create conversion path directory if it doesn't exists.
+            # Create conversion path directory if it doesn't exists.
+            if not os.path.exists(conversion_path):
                 LOGGER.info("Going to create %s subdirectory..", conversion_path)
                 os.makedirs(conversion_path)
         mp3_conversion(audio_song_path, conversion_path, song_name)
