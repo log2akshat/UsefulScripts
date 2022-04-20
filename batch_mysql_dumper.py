@@ -20,7 +20,8 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-"""This script will take the databse dump of the databases define in the array and save it in the defined directory."""
+"""This script will take the databse dump of the databases
+define in the array and save it in the defined directory."""
 
 import os
 import time
