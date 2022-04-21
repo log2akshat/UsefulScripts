@@ -123,7 +123,9 @@ def db_dump():
     """Function for taking the database backups."""
     for database in range(len(DB_NAMES)):
         LOGGER.info("Taking Backup of : %s database..", DB_NAMES[database])
-        dump_cmd = "mysqldump -u " + DB_USER + " -h" + DB_HOST + " -p'" + DB_USER_PASSWORD + "' " + DB_NAMES[database] + " > " + BACKUPAREA + "/" + DB_NAMES[database] + ".sql"
+        dump_cmd = "mysqldump -u " + DB_USER + " -h" + DB_HOST + " -p'" \
+                    + DB_USER_PASSWORD + "' " + DB_NAMES[database] + " > " \
+                    + BACKUPAREA + "/" + DB_NAMES[database] + ".sql"
         try:
             os.system(dump_cmd)
         except MySQLdb.Error as exp:
