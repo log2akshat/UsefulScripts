@@ -188,9 +188,6 @@ def validate_user_compression_input():
             comp_input = raw_input(INPUT_COMP_STRING)
             if not comp_input:
                 raise ValueError("There wasn't any input!")
-            else:
-                print("You have entered: ", comp_input)
-                break
         except ValueError as exp:
             print(exp)
 
