@@ -103,7 +103,7 @@ def source_dir():
         LOGGER.info("Operating System detected : Mac")
         src_dir = "/Users"
     elif platform.system() == "Linux":
-        LOGGER.info("Operating System detected : Mac")
+        LOGGER.info("Operating System detected : Linux")
         src_dir = "/home"
     return src_dir
 
