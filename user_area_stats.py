@@ -41,7 +41,8 @@ def is_valid_logging_status(parser, arg):
 
 ## =========> Command line arguments parsing -- starts <========= ##
 PARSER = argparse.ArgumentParser(description='Purpose - This script is useful for finding the number of files in a given directory and if the source directory is not specified on the CLI then it will give the number of files in the public_html user area and also tells if a user does not have public_html directory.', formatter_class=RawTextHelpFormatter)
-PARSER.add_argument('-s', '--source_directory', help='Directory to read input files.', metavar='<Source Directory>', type=lambda x: is_valid_directory(PARSER, x))
+PARSER.add_argument('-s', '--source_directory', help='Directory to read input files.',
+                     metavar='<Source Directory>', type=lambda x: is_valid_directory(PARSER, x))
 PARSER.add_argument('-l', '--log_file', help='Path of the log file.', metavar='<Log File>')
 PARSER.add_argument('-ls', '--logging_onoff', help='Logging status On/Off', metavar='<Logging on/off>', type=lambda x: is_valid_logging_status(PARSER, x))
 ARGS = PARSER.parse_args()
