@@ -125,7 +125,7 @@ def main():
     LOGGER.info("Source directory : %s", SOURCE_DIR)
     if ('/Users' or  '/home' in SOURCE_DIR):
         users = os.listdir(SOURCE_DIR)
-        for i in range(len(users)):
+        for i in enumerate(users):
             if platform.system() == "Darwin":
                 scan_dir = "/Users/" + users[i] + "/public_html"
             elif platform.system() == "Linux":
