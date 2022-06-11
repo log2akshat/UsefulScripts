@@ -121,10 +121,10 @@ def main():
     unused_accounts = []
     active_accounts = []
     inactive_accounts = []
-    SOURCE_DIR = source_dir()
-    LOGGER.info("Source directory : %s", SOURCE_DIR)
-    if SOURCE_DIR in ('/Users', '/home'):
-        users = os.listdir(SOURCE_DIR)
+    src_dir = source_dir()
+    LOGGER.info("Source directory : %s", src_dir)
+    if src_dir in ('/Users', '/home'):
+        users = os.listdir(src_dir)
         for i in enumerate(users):
             if platform.system() == "Darwin":
                 scan_dir = "/Users/" + users[i] + "/public_html"
@@ -143,7 +143,7 @@ def main():
         print('Inactive accounts : %s' % str(inactive_accounts))
         print('Active accounts : %s' % str(active_accounts))
     else:
-        LOGGER.info("Number of directories and files in %s directory is/are : %s\n\n", SOURCE_DIR, num_of_files(SOURCE_DIR))
+        LOGGER.info("Number of directories and files in %s directory is/are : %s\n\n", src_dir, num_of_files(src_dir))
 
 
 # Executing the script.
