@@ -44,7 +44,8 @@ PARSER = argparse.ArgumentParser(description='Purpose - This script is useful fo
 PARSER.add_argument('-s', '--source_directory', help='Directory to read input files.',
                      metavar='<Source Directory>', type=lambda x: is_valid_directory(PARSER, x))
 PARSER.add_argument('-l', '--log_file', help='Path of the log file.', metavar='<Log File>')
-PARSER.add_argument('-ls', '--logging_onoff', help='Logging status On/Off', metavar='<Logging on/off>', type=lambda x: is_valid_logging_status(PARSER, x))
+PARSER.add_argument('-ls', '--logging_onoff', help='Logging status On/Off',
+                     metavar='<Logging on/off>', type=lambda x: is_valid_logging_status(PARSER, x))
 ARGS = PARSER.parse_args()
 
 
