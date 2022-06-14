@@ -144,7 +144,8 @@ def main():
         print('Inactive accounts : %s' % str(inactive_accounts))
         print('Active accounts : %s' % str(active_accounts))
     else:
-        LOGGER.info("Number of directories and files in %s directory is/are : %s\n\n", src_dir, num_of_files(src_dir))
+        LOGGER.info("Number of directories and files in %s directory is/are : %s\n\n",
+                     src_dir, num_of_files(src_dir))
 
 
 # Executing the script.
