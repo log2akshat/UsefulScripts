@@ -30,7 +30,8 @@ import logging
 import subprocess
 import argparse
 from argparse import RawTextHelpFormatter
-import MySQLdb
+#import MySQLdb
+import mysql.connector
 
 # MySQL Credentials
 DB_HOST = 'localhost'
@@ -38,7 +39,7 @@ DB_USER = 'root'
 DB_USER_PASSWORD = 'XXXXXXXXXXX'
 
 # Create the connection
-CONNECTION = MySQLdb.connect(host=DB_HOST, user=DB_USER, passwd=DB_USER_PASSWORD)
+CONNECTION = mysql.connector.connect(host=DB_HOST, user=DB_USER, passwd=DB_USER_PASSWORD)
 
 CURSOR = CONNECTION.cursor()     # get the cursor
 CURSOR.execute("SHOW DATABASES")
@@ -129,7 +130,7 @@ def db_dump():
                     + BACKUPAREA + "/" + DB_NAMES[database] + ".sql"
         try:
             os.system(dump_cmd)
-        except MySQLdb.Error as exp:
+        except mysql.connector.Error as exp:
             LOGGER.error('MySQL Error: %s', exp)
     LOGGER.info("Backup Finished.")
     subprocess.call(['tar', 'zcvf', BACKUPAREA+".tar.gz", BACKUPAREA])
