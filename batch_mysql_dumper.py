@@ -30,7 +30,6 @@ import logging
 import subprocess
 import argparse
 from argparse import RawTextHelpFormatter
-#import MySQLdb
 import mysql.connector
 
 # MySQL Credentials
