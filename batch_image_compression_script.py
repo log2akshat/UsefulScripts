@@ -55,7 +55,8 @@ def is_valid_logging_status(parser, arg):
 PARSER = argparse.ArgumentParser(description='Batch image compression utility. For running this program you need to have imagemagick installed on your machine.')
 PARSER.add_argument('-s', '--source_directory', help='Directory to read input files.', required=True, metavar='<Source Directory>', type=lambda x: is_valid_directory(PARSER, x))
 PARSER.add_argument('-t', '--target_directory', help='Directory to save output files.', required=True, metavar='<Target Directory>', type=lambda x: is_target_directory(PARSER, x))
-PARSER.add_argument('-q', '--quality', help='Quality of the Image to retain.', required=True, metavar='<Image Quality>')
+PARSER.add_argument('-q', '--quality', help='Quality of the Image to retain.', required=True,
+                     metavar='<Image Quality>')
 PARSER.add_argument('-f', '--filename', help='Desired output file name.', metavar='<Output file names>')
 PARSER.add_argument('-l', '--log_file', help='Path of the log file.', metavar='<Log File>')
 PARSER.add_argument('-ls', '--logging_onoff', help='Logging status On/Off', metavar='<Logging on/off>', type=lambda x: is_valid_logging_status(PARSER, x))
