@@ -45,7 +45,8 @@ PARSER.add_argument('-s', '--source_directory', help='Directory to read input fi
 PARSER.add_argument('-f', '--filename', help='Desired output file name.',
                      required=True, metavar='<Output file names>')
 PARSER.add_argument('-l', '--log_file', help='Path of the log file.', metavar='<Log File>')
-PARSER.add_argument('-ls', '--logging_onoff', help='Logging status On/Off', metavar='<Logging on/off>', type=lambda x: is_valid_logging_status(PARSER, x))
+PARSER.add_argument('-ls', '--logging_onoff', help='Logging status On/Off',
+                     metavar='<Logging on/off>', type=lambda x: is_valid_logging_status(PARSER, x))
 ARGS = PARSER.parse_args()
 ## =========> Command line arguments parsing -- ends <========= ##
 
