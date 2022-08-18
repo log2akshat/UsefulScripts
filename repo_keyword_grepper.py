@@ -121,7 +121,7 @@ def keyword_grepper():
     with open(REPOS_FILE_PATH, 'r') as open_repo_file:
         repos_name = open_repo_file.readlines()
         for repo in repos_name:
-            print("\n===================================================================================================")
+            print("\n============================================================================")
             LOGGER.info("Processing repo {}".format(repo.strip()))
             KEYWORDS = ['Master', 'Slave', 'Blacklist', 'Whitelist', 'White hat', 'Black hat']
             for keyword in KEYWORDS:
