@@ -68,7 +68,9 @@ PARSER.add_argument('-i', '--info', help='Information about the Camera make and 
 PARSER.add_argument('-s', '--source_directory', help='Directory to read input files',
                      required=True, metavar='<Source Directory>',
                      type=lambda x: is_valid_directory(PARSER, x))
-PARSER.add_argument('-t', '--target_directory', help='Directory to save output files.', required=True, metavar='<Target Directory>', type=lambda x: is_target_directory(PARSER, x))
+PARSER.add_argument('-t', '--target_directory', help='Directory to save output files.',
+                     required=True, metavar='<Target Directory>',
+                     type=lambda x: is_target_directory(PARSER, x))
 PARSER.add_argument('-cmp', '--compression', help='Compression On/Off', required=True,
                      metavar='<Compression on/off>', type=lambda x: is_valid_option(PARSER, x))
 PARSER.add_argument('-clq', '--compressionQuality', help='Quality of the Image to retain for specific Camera make [Image Quality range is 1-100].', metavar='<CameraMake_#ImageQuality Eg.: Canon100D_#90>')
