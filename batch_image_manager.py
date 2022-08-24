@@ -73,7 +73,9 @@ PARSER.add_argument('-t', '--target_directory', help='Directory to save output f
                      type=lambda x: is_target_directory(PARSER, x))
 PARSER.add_argument('-cmp', '--compression', help='Compression On/Off', required=True,
                      metavar='<Compression on/off>', type=lambda x: is_valid_option(PARSER, x))
-PARSER.add_argument('-clq', '--compressionQuality', help='Quality of the Image to retain for specific Camera make [Image Quality range is 1-100].', metavar='<CameraMake_#ImageQuality Eg.: Canon100D_#90>')
+PARSER.add_argument('-clq', '--compressionQuality', help='Quality of the Image to retain for \n\
+specific Camera make [Image Quality range is 1-100]',
+                     metavar='<CameraMake_#ImageQuality Eg.: Canon100D_#90>')
 PARSER.add_argument('-l', '--log_file', help='Path of the log file.', metavar='<Log File>')
 PARSER.add_argument('-ls', '--logging_onoff', help='Logging status On/Off',
                     metavar='<Logging on/off>', type=lambda x: is_valid_logging_status(PARSER, x))
