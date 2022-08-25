@@ -167,7 +167,8 @@ def cam_make_query(image_name):
 
 
 def copy_all_images(src_dir):
-    '''Function for copying all the files from the source directory and sub-directories to target directory.'''
+    '''Function for copying all the files from the source directory and sub-directories to
+       target directory.'''
     for dirnames, filenames in os.walk(src_dir):
         # Copy all files.
         for filename in filenames:
