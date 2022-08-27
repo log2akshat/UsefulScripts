@@ -50,7 +50,9 @@ def is_target_directory(parser, arg):
 def is_valid_option(parser, arg):
     "Function for checking option is on or off."
     if not arg in ('on', 'off'):
-        parser.error('{} is not a valid input for turning option on or off! Please specify \"on\" for turning the option on and \"off\" for turning it off.'.format(arg))
+        parser.error('{} is not a valid input for turning option on or off! \
+                      Please specify \"on\" for turning the option on and \"off\" \
+                      for turning it off.'.format(arg))
     return arg
 
 
