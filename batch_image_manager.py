@@ -43,7 +43,8 @@ def is_target_directory(parser, arg):
             subprocess.call(['mkdir', '-p', arg])
             return arg
         except IOError as ioexp:
-            parser.error('The directory {} does not exist and unable to create for you, please create it manually!'.format(arg), ioexp)
+            parser.error('The directory {} does not exist and unable to create for you, \
+                          please create it manually!'.format(arg), ioexp)
     return arg
 
 
