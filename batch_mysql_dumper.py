@@ -62,7 +62,12 @@ def is_valid_logging_status(parser, arg):
     return arg
 
 ## =========> Command line arguments parsing -- starts <========= ##
-PARSER = argparse.ArgumentParser(description='*********************************************************************************************************\n********************** |MySQLDumper - MySQL DB Dumping Utility.| **********************\n*********************************************************************************************************\n\n* This script will do the following task.\n\n* It will take the databse dump of the databases define in the array and save it in the defined directory.', formatter_class=RawTextHelpFormatter)
+PARSER = argparse.ArgumentParser(description='\
+************************************************************************************************\n\
+********************** |MySQLDumper - MySQL DB Dumping Utility | **********************\n\
+************************************************************************************************\n\
+\n* This script will do the following task.\n\n* It will take the databse dump of the databases \
+define in the array and save it in the defined directory.', formatter_class=RawTextHelpFormatter)
 PARSER.add_argument('-l', '--log_file', help='Path of the log file.', metavar='<Log File>')
 PARSER.add_argument('-ls', '--logging_onoff', help='Logging status On/Off',
                      metavar='<Logging on/off>', type=lambda x: is_valid_logging_status(PARSER, x))
