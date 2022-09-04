@@ -40,7 +40,8 @@ def is_target_directory(parser, arg):
             subprocess.call(['mkdir', '-p', arg])
             return arg
         except:
-            parser.error('The directory {} does not exist and unable to create for you, please create it manually!'.format(arg))
+            parser.error('The directory {} does not exist and unable to create for you, \
+                          please create it manually!'.format(arg))
     # File exists so return the directory
     return arg
 
