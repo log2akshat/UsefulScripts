@@ -66,7 +66,7 @@ PARSER.add_argument('-t', '--target_directory', help='Directory to save output f
                       type=lambda x: is_target_directory(PARSER, x))
 PARSER.add_argument('-q', '--quality', help='Quality of the Image to retain.', required=True,
                      metavar='<Image Quality>')
-PARSER.add_argument('-f', '--filename', help='Desired output filename', metavar='<Output filenames>')
+PARSER.add_argument('-f', '--filename', help='Output filename', metavar='<Output filenames>')
 PARSER.add_argument('-l', '--log_file', help='Path of the log file.', metavar='<Log File>')
 PARSER.add_argument('-ls', '--logging_onoff', help='Logging status On/Off',
                       metavar='<Logging on/off>', type=lambda x: is_valid_logging_status(PARSER, x))
