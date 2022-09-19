@@ -159,7 +159,8 @@ def main():
             imgpath = FILEPATH + file_name
             LOGGER.info("Resizing Image : %s..", imgpath)
             if OUT_FILENAME:
-                subprocess.call(['convert', imgpath, '-quality', QUALITY, str(TARGET_DIR) + '/' + str(OUT_FILENAME) + ' ' + str(counter) + '.jpg'])
+                subprocess.call(['convert', imgpath, '-quality', QUALITY, str(TARGET_DIR) + '/'
+                                  + str(OUT_FILENAME) + ' ' + str(counter) + '.jpg'])
             else:
                 subprocess.call(['convert', imgpath, '-quality', QUALITY, str(TARGET_DIR) + '/' + file_name])
             i = 0
