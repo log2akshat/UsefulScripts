@@ -112,7 +112,8 @@ def clone_repos():
             print("\n==================================================\n")
             LOGGER.info("Cloning Repo {}: {}\n".format(count, repo.strip()))
             if ORG_NAME == 'Zimbra':
-                subprocess.call(['git', '-C', CLONING_DIRECTORY, 'clone', 'git@github.com:Zimbra/' + repo.strip() + '.git'])
+                subprocess.call(['git', '-C', CLONING_DIRECTORY, 'clone', 'git@github.com:Zimbra/'
+                                  + repo.strip() + '.git'])
             elif ORG_NAME == 'ZimbraOS':
                 subprocess.call(['git', '-C', CLONING_DIRECTORY, 'clone', 'git@github.com:ZimbraOS/' + repo.strip() + '.git'])
 
