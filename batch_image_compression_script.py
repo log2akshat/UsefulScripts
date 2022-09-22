@@ -162,7 +162,8 @@ def main():
                 subprocess.call(['convert', imgpath, '-quality', QUALITY, str(TARGET_DIR) + '/'
                                   + str(OUT_FILENAME) + ' ' + str(counter) + '.jpg'])
             else:
-                subprocess.call(['convert', imgpath, '-quality', QUALITY, str(TARGET_DIR) + '/' + file_name])
+                subprocess.call(['convert', imgpath, '-quality', QUALITY, str(TARGET_DIR) + '/'
+                                  + file_name])
             i = 0
             file_name = ""
             counter = counter + 1
