@@ -135,7 +135,6 @@ def processing_file():
     elif platform.system() == "Linux":
         sort_cmd = subprocess.Popen(['sort', '--version-sort', '-f'],
                                       stdin=filter_call.stdout, stdout=subprocess.PIPE)
-    #awkCmd = subprocess.Popen(['awk', '{print substr($0,index($0,$9))}'], stdin=tailCmd.stdout, stdout=subprocess.PIPE)
     tee_cmd = subprocess.Popen(['tee', TMP_FILE], stdin=sort_cmd.stdout, stdout=DEV_NULL)
     sort_cmd.stdout.close()
     tee_cmd.communicate()
