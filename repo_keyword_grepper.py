@@ -128,7 +128,8 @@ def keyword_grepper():
             KEYWORDS = ['Master', 'Slave', 'Blacklist', 'Whitelist', 'White hat', 'Black hat']
             for keyword in KEYWORDS:
                 LOGGER.info('\nGrepping keyword - {} in the repo {}'.format(keyword, repo.strip()))
-                subprocess.call(['grep', '-inR', keyword, os.path.abspath(CLONING_DIRECTORY) + '/' + repo.strip()])
+                subprocess.call(['grep', '-inR', keyword, os.path.abspath(CLONING_DIRECTORY) + '/'
+                                  + repo.strip()])
 
 
 def main():
