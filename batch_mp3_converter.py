@@ -43,9 +43,7 @@ def is_target_directory(parser, arg):
             print(exp)
             parser.error('The directory {} does not exist and unable to create for you, please \
                          create it manually!'.format(arg))
-    else:
-        # File exists so return the directory
-        return arg
+    return arg
 
 
 def is_valid_logging_status(parser, arg):
