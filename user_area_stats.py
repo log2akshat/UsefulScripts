@@ -14,7 +14,9 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-'''Script for finding the number of files in a given directory and if the source directory is not specified on the CLI then it will give the number of files in the public_html user area and also tells if a user does not have public_html directory.'''
+'''Script for finding the number of files in a given directory and if the source \
+directory is not specified on the CLI then it will give the number of files in the \
+public_html user area and also tells if a user does not have public_html directory.'''
 
 from __future__ import print_function
 import os
