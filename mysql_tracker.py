@@ -129,7 +129,7 @@ def show_process_list():
 # Start taking the databases backup..
 def mysql_status():
     """Function for taking the database backups."""
-    #dump_cmd = "mysqladmin -u " + DB_USER + " -h" + DBHOST + " -p'" + DB_USER_PASSWORD + "' status extended-status "
+    # status options => status, extended-status
     dump_cmd = "mysqladmin -u " + DB_USER + " -h" + DBHOST + " -p'" + DB_USER_PASSWORD + "' status "
     print("\n\n+++++ MySQL STATUS - STARTS +++++")
     os.system(dump_cmd)
