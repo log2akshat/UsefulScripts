@@ -115,7 +115,8 @@ def clone_repos():
                 subprocess.call(['git', '-C', CLONING_DIRECTORY, 'clone', 'git@github.com:Zimbra/'
                                   + repo.strip() + '.git'])
             elif ORG_NAME == 'ZimbraOS':
-                subprocess.call(['git', '-C', CLONING_DIRECTORY, 'clone', 'git@github.com:ZimbraOS/' + repo.strip() + '.git'])
+                subprocess.call(['git', '-C', CLONING_DIRECTORY, 'clone',
+                                 'git@github.com:ZimbraOS/' + repo.strip() + '.git'])
 
 
 def keyword_grepper():
