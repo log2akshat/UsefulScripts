@@ -221,7 +221,7 @@ def validate_user_compression_input():
     '''Function for validating user input for compressing images inside specific directories.'''
     while True:
         try:
-            comp_input = raw_input(INPUT_COMP_STRING)
+            comp_input = input(INPUT_COMP_STRING)
             if not comp_input:
                 raise ValueError("There wasn't any input!")
         except ValueError as exp:
