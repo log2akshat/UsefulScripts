@@ -101,7 +101,8 @@ DEVNULL = open('/dev/null', 'w')
 def tmp_file():
     '''Function for listing and sorting the files.'''
     filter_call = subprocess.Popen(['ls', FILEPATH], stdout=subprocess.PIPE)
-    sort_cmd = subprocess.Popen(['sort', '--version-sort', '-f'], stdin=filter_call.stdout, stdout=subprocess.PIPE)
+    sort_cmd = subprocess.Popen(['sort', '--version-sort', '-f'],
+                                 stdin=filter_call.stdout, stdout=subprocess.PIPE)
     subprocess.Popen(['tee', TMP_FILE], stdin=sort_cmd.stdout, stdout=DEVNULL)
     sort_cmd.stdout.close()
     subprocess.call(['cat', 'tmpfile'])
