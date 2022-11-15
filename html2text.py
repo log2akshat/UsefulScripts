@@ -33,7 +33,7 @@ except ImportError: #Python3
     import urllib.parse as urlparse
 try: #Python3
     import urllib.request as urllib
-except:
+except ImportError:
     import urllib
 
 try:
