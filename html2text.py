@@ -521,7 +521,8 @@ class _html2text(HTMLParser.HTMLParser):
 
         if tag == "a" and not IGNORE_ANCHORS:
             if start:
-                if has_key(attrs, 'href') and not (SKIP_INTERNAL_LINKS and attrs['href'].startswith('#')):
+                if has_key(attrs, 'href') and not \
+                    (SKIP_INTERNAL_LINKS and attrs['href'].startswith('#')):
                     self.astack.append(attrs)
                     self.o("[")
                 else:
