@@ -154,17 +154,15 @@ COMP_QUALITY = ARGS.compressionQuality
 TMP_FILE = '/tmp/batchIMv2.txt'
 DEVNULL = open('/dev/null', 'w')
 
-
 def timestamp_query(image_name):
     '''Function for returning the Image capturing time unix timestamp'''
     exif_cmd = subprocess.Popen(['exif', '-x', image_name], stdout=subprocess.PIPE)
-    grep_cmd = subprocess.Popen(['grep', 'Date_and_Time__Original'],
-               stdin=exif_cmd.stdout, stdout=subprocess.PIPE)
+    grep_cmd = subprocess.Popen(['grep', 'Date_and_Time__Original'], stdin=exif_cmd.stdout, stdout=subprocess.PIPE)
     cut_cmd1 = subprocess.Popen(['cut', '-d', '>', '-f2'], stdin=grep_cmd.stdout, stdout=subprocess.PIPE)
     cut_cmd2 = subprocess.Popen(['cut', '-d', '<', '-f1'], stdin=cut_cmd1.stdout, stdout=subprocess.PIPE)
     cut_cmd1.stdout.close()
     capture_time = cut_cmd2.communicate()[0].split("\n")[0]
-    #print captureTime
+    # print captureTime
     format_time = datetime.strptime(capture_time, "%Y:%m:%d %H:%M:%S")
     return int(time.mktime(format_time.timetuple()))
 
