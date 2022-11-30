@@ -127,7 +127,7 @@ def main():
             ext_name = os.path.basename(file_name).split(".")[1]
             imgpath = FILEPATH + "/" + file_name
             LOGGER.info("Renaming file %s", imgpath)
-            os.rename(imgpath, FILEPATH + "/" + OUT_FILENAME + " (" + str(counter) + ")." + ext_name)
+            os.rename(imgpath, FILEPATH + "/" + OUT_FILENAME + " (" +str(counter)+ ")." + ext_name)
             i = 0
             file_name = ""
             counter = counter + 1
