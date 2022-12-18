@@ -55,6 +55,15 @@ def is_valid_logging_status(parser, arg):
     return arg
 
 
+def is_valid_quiet_option(parser, arg):
+    if not arg in ('on', 'off'):
+        parser.error('\n\n\t{} is not a valid input for turning quiet mode on or off!\n\
+                     \r\tPlease specify "on\" for turning quiet mode on and \"off\" for \n\
+                     \r\tturning it off.\n'
+                     .format(arg))
+    return arg
+
+
 ## =========> Command line arguments parsing -- starts <========= ##
 PARSER = argparse.ArgumentParser(description='Batch mp4 to mp3 conversion utility. For running \
                                  this program you need to have FFMPEG with mp3 codecs installed \
@@ -66,7 +75,7 @@ PARSER.add_argument('-t', '--target_directory', help='Place to save output conve
                     required=True, metavar='<Target Directory>',
                     type=lambda x: is_target_directory(PARSER, x))
 PARSER.add_argument('-q', '--quiet_mode', help='Quiet mode On/Off', metavar='<Quiet mode on/off>',
-                    type=lambda x: is_valid_logging_status(PARSER, x))
+                    type=lambda x: is_valid_quiet_option(PARSER, x))
 PARSER.add_argument('-l', '--log_file', help='Path of the log file.', metavar='<Log File>')
 PARSER.add_argument('-ls', '--logging_onoff', help='Logging status On/Off',
                     metavar='<Logging on/off>', type=lambda x: is_valid_logging_status(PARSER, x))
