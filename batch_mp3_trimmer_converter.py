@@ -127,6 +127,7 @@ LOGGER.addHandler(CONSOLE_HANDLER)
 
 SRC_DIR = os.path.join(ARGS.source_directory, '')
 TARGET_DIR = ARGS.target_directory
+QUIET_MODE = ARGS.quiet_mode
 
 
 def mp3_conversion(song_path, conversion_path, song_name):
