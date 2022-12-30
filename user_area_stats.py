@@ -38,9 +38,9 @@ def is_valid_directory(parser, arg):
 def is_valid_logging_status(parser, arg):
     "Function for checking logging status is valid or not."
     if not arg in ('on', 'off'):
-        parser.error('{} is not a valid input for turning logging on or off! \
-                      Please specify \"on\" for turning logging on and \"off\" \
-                      for turning logging off.'.format(arg))
+        parser.error('\n\n\t{} is not a valid input for turning logging on/off! Please specify \n\
+                     \r\t\"on\" for turning logging on and \"off\" for turning logging off. \n'
+                     .format(arg))
     return arg
 
 ## =========> Command line arguments parsing -- starts <========= ##
