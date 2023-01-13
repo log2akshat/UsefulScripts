@@ -36,7 +36,7 @@ import subprocess
 def is_valid_directory(parser, arg):
     "Function for checking specfied directory exists or not."
     if not os.path.isdir(arg):
-        parser.error('The directory {} does not exist!'.format(arg))
+        parser.error('\n\n\tThe directory {} does not exist!'.format(arg))
     return arg
 
 
