@@ -31,7 +31,7 @@ from argparse import RawTextHelpFormatter
 def is_valid_file(parser, arg):
     "Function for checking file exists or not."
     if not os.path.isfile(arg):
-        parser.error('The file {} does not exist!'.format(arg))
+        parser.error('\n\n\tThe file {} does not exist!'.format(arg))
     return arg
 
 
