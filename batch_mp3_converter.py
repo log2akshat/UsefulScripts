@@ -35,7 +35,7 @@ def is_valid_directory(parser, arg):
 def is_target_directory(parser, arg):
     "Function for checking specfied directory exists or not."
     if not os.path.isdir(arg):
-        print('The directory %s does not exist!, so creating it for you..' % arg)
+        print('\n\n\tThe directory %s does not exist!, so creating it for you..' % arg)
         try:
             subprocess.call(['mkdir', '-p', arg])
             return arg
