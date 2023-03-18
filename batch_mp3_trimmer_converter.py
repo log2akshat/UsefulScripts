@@ -56,6 +56,7 @@ def is_target_directory(parser, arg):
 
 
 def is_valid_quiet_option(parser, arg):
+    "Function for checking quiet mode input is valid or not."
     if not arg in ('on', 'off'):
         parser.error('\n\n\t{} is not a valid input for turning quiet mode on or off!\n\
                      \r\tPlease specify "on\" for turning quiet mode on and \"off\" for \n\
