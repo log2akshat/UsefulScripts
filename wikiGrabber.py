@@ -1,7 +1,7 @@
-import wikipedia
+import wikipedia as wiki
 
-page_content = wikipedia.page("Jupiter").content
+page_content = wiki.page("Jupiter").content
 print(page_content)
 
-search_results = wikipedia.search("Mars")
+search_results = wiki.search("Mars")
 print(search_results)
