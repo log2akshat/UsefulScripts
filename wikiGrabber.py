@@ -1,9 +1,9 @@
 import wikipedia as wiki
 
-print("Please select from the menu what you want to do..")
-print("Option 1: Type 1 if you want the content from the wiki for the specified keyword")
-print("Option 2: Type 2 if you want to search the content in the wiki for the specified keyword")
-selected_option=input("Please select your option: ")
+print("Please select from the menu what you want to do.")
+print("Please type 1 if you want to receive content from the wiki for the specified keyword")
+print("Please type 2 if you want to search the content in the wiki for the specified keyword")
+selected_option=input("Please enter your choice: ")
 
 if (selected_option == str(1)):
     page_content=input("Please enter the content you want from the wiki from the wiki: ")
