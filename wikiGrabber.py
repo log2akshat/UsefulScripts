@@ -1,3 +1,5 @@
+#!/bin/python
+
 import wikipedia as wiki
 
 print("Please select from the menu what you want to do.")
